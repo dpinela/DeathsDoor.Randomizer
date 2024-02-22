@@ -1,10 +1,12 @@
 using Bep = BepInEx;
 using AGM = DDoor.AlternativeGameModes;
 using RC = RandomizerCore;
+using IC = DDoor.ItemChanger;
 
 namespace DDoor.Randomizer;
 
 [Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.0.0.0")]
+[Bep.BepInDependency("deathsdoor.itemchanger", "1.1")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
     public void Start()
@@ -51,11 +53,13 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                     monitor
                 );
                 var placements = rando.Run()[0][0];
+                var data = IC.SaveData.Open();
                 foreach (var p in placements)
                 {
-                    var itemName = p.Item.Name;
-                    var locName = p.Location.Name;
-                    Logger.LogInfo($"{itemName} @ {locName}");
+                    data.Place(
+                        item: p.Item.Name.Replace("_", " "),
+                        location: p.Location.Name.Replace("_", " ")
+                    );
                 }
             }
             catch (System.Exception err)

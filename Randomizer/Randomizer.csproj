@@ -145,6 +145,9 @@
     <Reference Include="RandomizerCore">
       <HintPath>$(LocalRefs)/RandomizerCore.dll</HintPath>
     </Reference>
+    <Reference Include="ItemChanger">
+      <HintPath>$(LocalRefs)/ItemChanger.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
