@@ -1,0 +1,70 @@
+lvl_hallofdoors[bus_overridespawn]:
+    NONE
+
+lvl_hallofdoors[sdoor_covenant]:
+    lvl_hallofdoors[sdoor_covenant] | Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door
+
+lvl_hallofdoors[sdoor_betty]:
+    lvl_hallofdoors[sdoor_betty] | Hall_of_Doors_Lobby + Betty's_Lair_Door
+
+lvl_hallofdoors[sdoor_sailor]:
+    lvl_hallofdoors[sdoor_sailor] | Hall_of_Doors_Lobby + Stranded_Sailor_Door
+
+lvl_hallofdoors[sdoor_fortress]:
+    lvl_hallofdoors[sdoor_fortress] | Hall_of_Doors_Lobby + Castle_Lockstone_Door
+
+lvl_hallofdoors[sdoor_mountaintops]:
+    lvl_hallofdoors[sdoor_mountaintops] | Hall_of_Doors_Lobby + Old_Watchtowers_Door
+
+lvl_hallofdoors[sdoor_forest_dung]:
+    lvl_hallofdoors[sdoor_forest_dung] | Hall_of_Doors_Lobby + Mushroom_Dungeon_Door
+
+lvl_hallofdoors[sdoor_frogboss]:
+    lvl_hallofdoors[sdoor_frogboss] | Hall_of_Doors_Lobby + Throne_of_the_Frog_King_Door
+
+lvl_hallofdoors[sdoor_forest]:
+    lvl_hallofdoors[sdoor_forest] | Hall_of_Doors_Lobby + Overgrown_Ruins_Door
+
+lvl_hallofdoors[sdoor_swamp]:
+    lvl_hallofdoors[sdoor_swamp] | Hall_of_Doors_Lobby + Flooded_Fortress_Door
+
+lvl_hallofdoors[sdoor_graveyard]:
+    lvl_hallofdoors[sdoor_graveyard] | Hall_of_Doors_Lobby + Lost_Cemetery_Door
+
+lvl_hallofdoors[sdoor_tutorial]:
+    lvl_hallofdoors[sdoor_tutorial] | Hall_of_Doors_Lobby + Grove_of_Spirits_Door
+
+lvl_hallofdoors[sdoor_grandmaboss]:
+    lvl_hallofdoors[sdoor_grandmaboss] | Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door
+
+lvl_hallofdoors[sdoor_mansion]:
+    lvl_hallofdoors[sdoor_mansion] | Hall_of_Doors_Lobby + Ceramic_Manor_Door
+
+lvl_hallofdoors[sdoor_basementromp]:
+    lvl_hallofdoors[sdoor_basementromp] | Hall_of_Doors_Lobby + Inner_Furnace_Door
+
+lvl_hallofdoors[sdoor_gardens]:
+    lvl_hallofdoors[sdoor_gardens] | Hall_of_Doors_Lobby + Estate_of_the_Urn_Witch_Door
+
+lvl_hallofdoors[hod_anc_forest]:
+    NONE
+
+lvl_hallofdoors[hod_anc_fortress]:
+    NONE
+
+lvl_hallofdoors[hod_anc_mansion]:
+    NONE
+
+lvl_hallofdoors[avarice_hod_anc_forest]:
+    lvl_hallofdoors[avarice_hod_anc_forest] |
+    lvl_hallofdoors[hod_anc_forest] |
+    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+
+lvl_hallofdoors[avarice_hod_anc_fortress]:
+    lvl_hallofdoors[avarice_hod_anc_fortress] |
+    lvl_hallofdoors[hod_anc_fortress] |
+    Hall_of_Doors_Lobby + Hookshot
+
+lvl_hallofdoors[avarice_hod_anc_mansion]:
+    lvl_hallofdoors[avarice_hod_anc_mansion] |
+    lvl_hallofdoors[hod_anc_mansion]

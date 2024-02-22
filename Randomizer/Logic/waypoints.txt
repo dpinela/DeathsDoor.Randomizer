@@ -1,0 +1,23 @@
+Hall_of_Doors_Lobby:
+    lvl_hallofdoors[bus_overridespawn] |
+    lvl_hallofdoors[sdoor_covenant] |
+    lvl_hallofdoors[sdoor_betty] |
+    lvl_hallofdoors[sdoor_sailor] |
+    lvl_hallofdoors[sdoor_fortress] |
+    lvl_hallofdoors[sdoor_mountaintops] |
+    lvl_hallofdoors[sdoor_forest_dung] |
+    lvl_hallofdoors[sdoor_frogboss] |
+    lvl_hallofdoors[sdoor_forest] |
+    lvl_hallofdoors[sdoor_swamp] |
+    lvl_hallofdoors[sdoor_graveyard] |
+    lvl_hallofdoors[sdoor_tutorial] |
+    lvl_hallofdoors[sdoor_grandmaboss] |
+    lvl_hallofdoors[sdoor_mansion] |
+    lvl_hallofdoors[sdoor_basementromp] |
+    lvl_hallofdoors[sdoor_gardens] |
+    lvl_hallofdoors[hod_anc_forest] + Fire + Bomb_Exit_Lever |
+    lvl_hallofdoors[hod_anc_fortress] + Fire |
+    lvl_hallofdoors[hod_anc_mansion] + Fire |
+    lvl_hallofdoors[avarice_hod_anc_forest] + Fire + Bomb_Exit_Lever |
+    lvl_hallofdoors[avarice_hod_anc_fortress] + Fire |
+    lvl_hallofdoors[avarice_hod_anc_mansion] + Fire

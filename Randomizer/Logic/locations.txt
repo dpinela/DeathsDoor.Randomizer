@@ -1,0 +1,104 @@
+Camp_of_the_Free_Crows_Door:
+    Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door
+
+Betty's_Lair_Door:
+    Hall_of_Doors_Lobby + Betty's_Lair_Door
+
+Stranded_Sailor_Door:
+    Hall_of_Doors_Lobby + Stranded_Sailor_Door
+
+Castle_Lockstone_Door:
+    Hall_of_Doors_Lobby + Castle_Lockstone_Door
+
+Old_Watchtowers_Door:
+    Hall_of_Doors_Lobby + Old_Watchtowers_Door
+
+Mushroom_Dungeon_Door:
+    Hall_of_Doors_Lobby + Mushroom_Dungeon_Door
+
+Throne_of_the_Frog_King_Door:
+    Hall_of_Doors_Lobby + Throne_of_the_Frog_King_Door
+
+Overgrown_Ruins_Door:
+    Hall_of_Doors_Lobby + Overgrown_Ruins_Door
+
+Flooded_Fortress_Door:
+    Hall_of_Doors_Lobby + Flooded_Fortress_Door
+
+Lost_Cemetery_Door:
+    Hall_of_Doors_Lobby + Lost_Cemetery_Door
+
+Grove_of_Spirits_Door:
+    Hall_of_Doors_Lobby + Grove_of_Spirits_Door
+
+The_Urn_Witch's_Laboratory_Door:
+    Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door
+
+Ceramic_Manor_Door:
+    Hall_of_Doors_Lobby + Ceramic_Manor_Door
+
+Inner_Furnace_Door:
+    Hall_of_Doors_Lobby + Inner_Furnace_Door
+
+Estate_of_the_Urn_Witch_Door:
+    Hall_of_Doors_Lobby + Estate_of_the_Urn_Witch_Door
+
+Discarded_Umbrella:
+    Hall_of_Doors_Lobby
+
+Surveillance_Device:
+    Hall_of_Doors_Lobby + Bomb
+
+Soul_Orb-Bomb_Secret:
+    Hall_of_Doors_Lobby + Bomb
+
+Soul_Orb-Fire_Return_Upper:
+    (lvl_hallofdoors[avarice_hod_anc_mansion] |
+     lvl_hallofdoors[hod_anc_mansion]) +
+    Fire
+
+Soul_Orb-Fire_Return_Lower:
+    (lvl_hallofdoors[avarice_hod_anc_mansion] |
+     lvl_hallofdoors[hod_anc_mansion]) +
+    Fire
+
+Fire_Avarice:
+    lvl_hallofdoors[avarice_hod_anc_mansion] |
+    lvl_hallofdoors[hod_anc_mansion]
+
+Bomb_Exit_Lever:
+    lvl_hallofdoors[avarice_hod_anc_forest] + Bomb |
+    lvl_hallofdoors[hod_anc_forest] + Bomb |
+    Hall_of_Doors_Lobby + Bomb_Exit_Lever
+
+Soul_Orb-Bomb_Return:
+    lvl_hallofdoors[avarice_hod_anc_forest] + Bomb |
+    lvl_hallofdoors[hod_anc_forest] + Bomb |
+    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+
+Bomb_Avarice:
+    lvl_hallofdoors[avarice_hod_anc_forest] |
+    lvl_hallofdoors[hod_anc_forest] |
+    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+
+Ancient_Door_Scale_Model:
+    Hall_of_Doors_Lobby + Fire
+
+Soul_Orb-Fire_Secret:
+    Hall_of_Doors_Lobby + Fire
+
+Soul_Orb-Hookshot_Return:
+    lvl_hallofdoors[avarice_hod_anc_fortress] + Hookshot |
+    lvl_hallofdoors[hod_anc_fortress] + Hookshot |
+    Hall_of_Doors_Lobby + Hookshot
+
+Hookshot_Avarice:
+    lvl_hallofdoors[avarice_hod_anc_fortress] |
+    lvl_hallofdoors[hod_anc_fortress] |
+    Hall_of_Doors_Lobby + Hookshot
+
+Soul_Orb-Hookshot_Secret:
+    Hall_of_Doors_Lobby + Hookshot
+
+Modern_Door_Scale_Model:
+    Hall_of_Doors_Lobby + Hookshot
