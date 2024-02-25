@@ -21,3 +21,6 @@ Hall_of_Doors_Lobby:
     lvl_hallofdoors[avarice_hod_anc_forest] + Fire + Bomb_Exit_Lever |
     lvl_hallofdoors[avarice_hod_anc_fortress] + Fire |
     lvl_hallofdoors[avarice_hod_anc_mansion] + Fire
+
+Grove_of_Spirits:
+    lvl_Tutorial[sdoor_tutorial] | lvl_Tutorial[tdoor_gy]

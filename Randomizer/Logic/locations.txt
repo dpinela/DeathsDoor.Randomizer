@@ -1,6 +1,7 @@
 Camp_of_the_Free_Crows_Door:
     Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door
 
+// these all theed the other side added in
 Betty's_Lair_Door:
     Hall_of_Doors_Lobby + Betty's_Lair_Door
 
@@ -29,7 +30,8 @@ Lost_Cemetery_Door:
     Hall_of_Doors_Lobby + Lost_Cemetery_Door
 
 Grove_of_Spirits_Door:
-    Hall_of_Doors_Lobby + Grove_of_Spirits_Door
+    Hall_of_Doors_Lobby + Grove_of_Spirits_Door |
+    Grove_of_Spirits
 
 The_Urn_Witch's_Laboratory_Door:
     Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door
@@ -102,3 +104,6 @@ Soul_Orb-Hookshot_Secret:
 
 Modern_Door_Scale_Model:
     Hall_of_Doors_Lobby + Hookshot
+
+Makeshift_Soul_Key:
+    Grove_of_Spirits + Hookshot

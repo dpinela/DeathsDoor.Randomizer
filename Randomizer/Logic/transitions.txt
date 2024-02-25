@@ -1,3 +1,5 @@
+// Hall of Doors
+
 lvl_hallofdoors[bus_overridespawn]:
     NONE
 
@@ -68,3 +70,189 @@ lvl_hallofdoors[avarice_hod_anc_fortress]:
 lvl_hallofdoors[avarice_hod_anc_mansion]:
     lvl_hallofdoors[avarice_hod_anc_mansion] |
     lvl_hallofdoors[hod_anc_mansion]
+
+// Grove of Spirits
+
+lvl_Tutorial[sdoor_tutorial]:
+    Grove_of_Spirits
+
+lvl_Tutorial[tdoor_gy]:
+    Grove_of_Spirits
+
+// placeholders with incomplete logic
+
+// Lost Cemetery
+
+lvl_Graveyard[sdoor_graveyard]:
+    NONE
+
+lvl_Graveyard[tdoor_gy]:
+    NONE
+
+lvl_Graveyard[d_graveyardtocrypt]:
+    NONE
+
+lvl_Graveyard[d_graveyardtosailorcaves]:
+    NONE
+
+lvl_Graveyard[forest_buggy]:
+    NONE
+
+// Crypt
+
+lvlConnect_Graveyard_Gardens[d_graveyardtocrypt]:
+    NONE
+
+lvlConnect_Graveyard_Gardens[d_crypttogardens]:
+    NONE
+
+// Estate of the Urn Witch
+
+lvl_GrandmaGardens[sdoor_gardens]:
+    NONE
+
+lvl_GrandmaGardens[d_crypttogardens]:
+    NONE
+
+lvl_GrandmaGardens[d_gardenstomansion]:
+    NONE
+
+// Ceramic Manor
+
+lvl_GrandmaMansion[sdoor_mansion]:
+    NONE
+
+lvl_GrandmaMansion[hod_anc_mansion]:
+    NONE
+
+lvl_GrandmaMansion[d_gardenstomansion]:
+    NONE
+
+lvl_GrandmaMansion[d_mansiontobasement]:
+    NONE
+
+// Furnace Observation Rooms
+
+lvlConnect_Mansion_Basement[d_mansiontobasement]:
+    NONE
+
+lvlConnect_Mansion_Basement[d_basementtoromp]:
+    NONE
+
+// Inner Furnace
+
+lvl_GrandmaBasement[sdoor_basementromp]:
+    NONE
+
+lvl_GrandmaBasement[d_basementtoromp]:
+    NONE
+
+lvl_GrandmaBasement[d_basementtoboss]:
+    NONE
+
+// The Urn Witch's Laboratory
+
+boss_grandma[sdoor_grandmaboss]:
+    NONE
+
+boss_grandma[d_basementtoboss]:
+    NONE
+
+// Cemetery -> Sailor
+
+lvlconnect_graveyard_sailor[d_graveyardtosailorcaves]:
+    NONE
+
+lvlconnect_graveyard_sailor[d_connecttosailor]:
+    NONE
+
+// Stranded Sailor
+
+lvl_SailorMountain[sdoor_sailor]:
+    NONE
+
+lvl_SailorMountain[d_connecttosailor]:
+    NONE
+
+lvl_SailorMountain[d_sailortofortress]:
+    NONE
+
+// Castle Lockstone
+
+lvl_frozenfortress[sdoor_fortress]:
+    NONE
+
+lvl_frozenfortress[hod_anc_fortress]:
+    NONE
+
+lvl_frozenfortress[d_sailortofortress]:
+    NONE
+
+lvl_frozenfortress[d_fortresstoroof]:
+    NONE
+
+// Camp of the Free Crows
+
+lvlConnect_Fortress_Mountaintops[sdoor_covenant]:
+    NONE
+
+lvlConnect_Fortress_Mountaintops[d_fortresstoroof]:
+    NONE
+
+lvlConnect_Fortress_Mountaintops[d_CrowCavestoMountaintops]:
+    NONE
+
+// Old Watchtowers
+
+lvl_mountaintops[sdoor_mountaintops]:
+    NONE
+
+lvl_mountaintops[d_CrowCavestoMountaintops]:
+    NONE
+
+lvl_mountaintops[d_mountaintopstobetty]:
+    NONE
+
+// Betty's Lair
+
+boss_betty[sdoor_betty]:
+    NONE
+
+boss_betty[d_mountaintopstobetty]:
+    NONE
+
+// Overgrown Ruins & Mushroom Dungeon
+
+lvl_Forest[sdoor_forest]:
+    NONE
+
+lvl_Forest[sdoor_forest_dung]:
+    NONE
+
+lvl_Forest[hod_anc_forest]:
+    NONE
+
+lvl_Forest[forest_buggy]:
+    NONE
+
+lvl_Forest[d_swamp_enter]:
+    NONE
+
+// Flooded Fortress
+
+lvl_Swamp[sdoor_swamp]:
+    NONE
+
+lvl_Swamp[d_swamp_enter]:
+    NONE
+
+lvl_Swamp[d_frog_boss]:
+    NONE
+
+// Throne of the Frog King
+
+boss_frog[sdoor_frogboss]:
+    NONE
+
+boss_frog[d_frog_boss]:
+    NONE

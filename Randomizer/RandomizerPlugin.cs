@@ -103,7 +103,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             Item("Blue_Ancient_Tablet_of_Knowledge"),
             Item("Purple_Ancient_Tablet_of_Knowledge"),
             Item("Pink_Ancient_Tablet_of_Knowledge"),
-            Item("Ink-Covered_Teddy_Bear")
+            Item("Ink-Covered_Teddy_Bear"),
+            Item("Fire")
         };
     }
 
@@ -141,7 +142,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             Loc("Soul_Orb-Fire_Secret"),
             Loc("Soul_Orb-Hookshot_Return"),
             Loc("Soul_Orb-Hookshot_Secret"),
-            Loc("Modern_Door_Scale_Model")
+            Loc("Modern_Door_Scale_Model"),
+            Loc("Makeshift_Soul_Key")
         };
     }
 }
