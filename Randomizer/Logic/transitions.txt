@@ -169,13 +169,13 @@ lvlconnect_graveyard_sailor[d_connecttosailor]:
 // Stranded Sailor
 
 lvl_SailorMountain[sdoor_sailor]:
-    NONE
+    Stranded_Sailor_Jefferson
 
 lvl_SailorMountain[d_connecttosailor]:
-    NONE
+    Stranded_Sailor_Jefferson
 
 lvl_SailorMountain[d_sailortofortress]:
-    NONE
+    Stranded_Sailor_Upper
 
 // Castle Lockstone
 

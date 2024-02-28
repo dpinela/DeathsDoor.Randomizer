@@ -1,12 +1,15 @@
+// Hall of Doors
+
 Camp_of_the_Free_Crows_Door:
     Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door
 
-// these all theed the other side added in
+// these all need the other side added in
 Betty's_Lair_Door:
     Hall_of_Doors_Lobby + Betty's_Lair_Door
 
 Stranded_Sailor_Door:
-    Hall_of_Doors_Lobby + Stranded_Sailor_Door
+    Hall_of_Doors_Lobby + Stranded_Sailor_Door |
+    Stranded_Sailor_Jefferson
 
 Castle_Lockstone_Door:
     Hall_of_Doors_Lobby + Castle_Lockstone_Door
@@ -105,5 +108,57 @@ Soul_Orb-Hookshot_Secret:
 Modern_Door_Scale_Model:
     Hall_of_Doors_Lobby + Hookshot
 
+// Grove of Spirits
+
 Makeshift_Soul_Key:
     Grove_of_Spirits + Hookshot
+
+// Stranded Sailor Caves
+
+Hookshot_Silent_Servant:
+    Stranded_Sailor_Caves + Hookshot_Silent_Servant_Lever
+
+Token_of_Death:
+    Stranded_Sailor_Caves + Hookshot
+
+Seed-Between_Cemetery_and_Sailor:
+    Stranded_Sailor_Caves
+
+Hookshot_Silent_Servant_Lever:
+    Stranded_Sailor_Caves + Hookshot
+
+// Stranded Sailor
+
+Reaper's_Greatsword:
+    Stranded_Sailor_Jefferson + Hookshot + Sailor_Greatsword_Gate_Lever
+
+Heart_Shrine-Hookshot_Arena:
+    Stranded_Sailor_Jefferson + Hookshot
+
+Magic_Shrine-Sailor_Turncam:
+    Stranded_Sailor_Upper
+
+Grunt's_Old_Mask:
+    Stranded_Sailor_Jefferson + Rescued_Grunt + Frog_King_Room
+
+Captain's_Log:
+    Stranded_Sailor_Jefferson
+
+Ink-Covered_Teddy_Bear:
+    Stranded_Sailor_Jefferson + Hookshot
+
+Seed-Sailor_Upper:
+    Stranded_Sailor_Upper
+
+Soul_Orb-Sailor_Turncam:
+    Stranded_Sailor_Upper
+
+Sailor_Turncam_Upper_Lever:
+    Stranded_Sailor_Upper
+
+Sailor_Turncam_Lower_Lever:
+    Stranded_Sailor_Upper
+
+// Bomb is required to break the secret walls
+Sailor_Greatsword_Gate_Lever:
+    Stranded_Sailor_Jefferson + Hookshot + Bomb

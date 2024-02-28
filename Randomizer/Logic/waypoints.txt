@@ -24,3 +24,23 @@ Hall_of_Doors_Lobby:
 
 Grove_of_Spirits:
     lvl_Tutorial[sdoor_tutorial] | lvl_Tutorial[tdoor_gy]
+
+Stranded_Sailor_Caves:
+    lvlconnect_graveyard_sailor[d_graveyardtosailorcaves] |
+    lvlconnect_graveyard_sailor[d_connecttosailor]
+
+Stranded_Sailor_Jefferson:
+    lvl_SailorMountain[sdoor_sailor] |
+    lvl_SailorMountain[d_connecttosailor] |
+    lvl_SailorMountain[d_sailortofortress] + Bomb
+
+Stranded_Sailor_Upper:
+    lvl_SailorMountain[sdoor_sailor] + Bomb |
+    lvl_SailorMountain[d_connecttosailor] + Bomb |
+    lvl_SailorMountain[d_sailortofortress]
+
+Rescued_Grunt:
+    lvl_Forest[sdoor_forest_dung] + Bomb // rewrite to use proper waypoint later
+
+Frog_King_Room:
+    lvl_frogboss[sdoor_frogboss] | lvl_frogboss[d_frog_boss]

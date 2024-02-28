@@ -104,7 +104,18 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             Item("Purple_Ancient_Tablet_of_Knowledge"),
             Item("Pink_Ancient_Tablet_of_Knowledge"),
             Item("Ink-Covered_Teddy_Bear"),
-            Item("Fire")
+            Item("Fire"),
+            Item("Sailor_Greatsword_Gate_Lever"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed"),
+            Item("Life_Seed")
         };
     }
 
@@ -143,7 +154,18 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             Loc("Soul_Orb-Hookshot_Return"),
             Loc("Soul_Orb-Hookshot_Secret"),
             Loc("Modern_Door_Scale_Model"),
-            Loc("Makeshift_Soul_Key")
+            Loc("Makeshift_Soul_Key"),
+            Loc("Reaper's_Greatsword"),
+            Loc("Heart_Shrine-Hookshot_Arena"),
+            Loc("Magic_Shrine-Sailor_Turncam"),
+            Loc("Grunt's_Old_Mask"),
+            Loc("Captain's_Log"),
+            Loc("Ink-Covered_Teddy_Bear"),
+            Loc("Seed-Sailor_Upper"),
+            Loc("Soul_Orb-Sailor_Turncam"),
+            Loc("Sailor_Turncam_Upper_Lever"),
+            Loc("Sailor_Turncam_Lower_Lever"),
+            Loc("Sailor_Greatsword_Gate_Lever")
         };
     }
 }
