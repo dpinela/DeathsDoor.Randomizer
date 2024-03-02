@@ -25,6 +25,65 @@ Hall_of_Doors_Lobby:
 Grove_of_Spirits:
     lvl_Tutorial[sdoor_tutorial] | lvl_Tutorial[tdoor_gy]
 
+Lost_Cemetery_Central:
+    lvl_Graveyard[tdoor_gy] |
+    lvl_Graveyard[sdoor_graveyard] |
+    lvl_Graveyard[d_graveyardtocrypt] + Catacombs_Tower_Lever |
+    Lost_Cemetery_Right_Arena
+
+Lost_Cemetery_Right_Arena:
+    lvl_Graveyard[tdoor_gy] + Hookshot |
+    lvl_Graveyard[forest_buggy] + Cemetery_Shortcut_to_East_Tree_Lever |
+    Lost_Cemetery_Central + (
+        Guardian_of_the_Door_Access_Lever |
+        Catacombs_Tower_Lever
+    )
+
+Lost_Cemetery_Steadhone:
+    Lost_Cemetery_Belltower |
+    Lost_Cemetery_Central + (
+        Pink_Key>4 |
+        Catacombs_Tower_Lever
+    )
+    // geometry skip from Sailor
+
+Lost_Cemetery_Summit:
+    Lost_Cemetery_Central + Guardian_of_the_Door_Access_Lever |
+    Lost_Cemetery_Steadhone + Cemetery_Sewer_Lever
+
+Lost_Cemetery_East_Tree_Bridge:
+    lvl_Graveyard[forest_buggy] + Cemetery_East_Tree_Lever |
+    Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever + Cemetery_East_Tree_Lever |
+    Lost_Cemetery_Summit + Fire
+
+Lost_Cemetery_Belltower:
+    lvl_Graveyard[d_graveyardtocrypt] |
+    Lost_Cemetery_Summit + Pink_Key>4 |
+    Lost_Cemetery_Steadhone + Cemetery_Exit_to_Estate_Lever
+
+Lost_Cemetery_Catacombs_Room_1:
+    Lost_Cemetery_Central + (Fire | Catacombs_Exit_Lever)
+
+Daytime:
+    NIGHTSTART=0 | NIGHTSTART + Can_Hit_Bell
+
+Nighttime:
+    NIGHTSTART | NIGHTSTART=0 + Can_Hit_Bell
+
+Can_Hit_Bell:
+    Lost_Cemetery_Belltower + Rusty_Belltower_Key
+
+Ceramic_Manor_Lobby:
+    lvl_GrandmaMansion[sdoor_mansion] |
+    lvl_GrandmaMansion[hod_anc_mansion] |
+    lvl_GrandmaMansion[d_gardenstomansion]
+
+Ceramic_Manor_Left:
+    Ceramic_Manor_Lobby + (Yellow_Key>2 | Manor_Big_Pot_Arena_Lever)
+
+Ceramic_Manor_Library:
+    Ceramic_Manor_Lobby + Yellow_Key>2
+
 Stranded_Sailor_Caves:
     lvlconnect_graveyard_sailor[d_graveyardtosailorcaves] |
     lvlconnect_graveyard_sailor[d_connecttosailor]
@@ -43,4 +102,4 @@ Rescued_Grunt:
     lvl_Forest[sdoor_forest_dung] + Bomb // rewrite to use proper waypoint later
 
 Frog_King_Room:
-    lvl_frogboss[sdoor_frogboss] | lvl_frogboss[d_frog_boss]
+    boss_frog[sdoor_frogboss] | boss_frog[d_frog_boss]

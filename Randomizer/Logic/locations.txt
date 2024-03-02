@@ -30,7 +30,8 @@ Flooded_Fortress_Door:
     Hall_of_Doors_Lobby + Flooded_Fortress_Door
 
 Lost_Cemetery_Door:
-    Hall_of_Doors_Lobby + Lost_Cemetery_Door
+    Hall_of_Doors_Lobby + Lost_Cemetery_Door |
+    Lost_Cemetery_Central
 
 Grove_of_Spirits_Door:
     Hall_of_Doors_Lobby + Grove_of_Spirits_Door |
@@ -40,7 +41,8 @@ The_Urn_Witch's_Laboratory_Door:
     Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door
 
 Ceramic_Manor_Door:
-    Hall_of_Doors_Lobby + Ceramic_Manor_Door
+    Hall_of_Doors_Lobby + Ceramic_Manor_Door |
+    Ceramic_Manor_Lobby
 
 Inner_Furnace_Door:
     Hall_of_Doors_Lobby + Inner_Furnace_Door
@@ -112,6 +114,165 @@ Modern_Door_Scale_Model:
 
 Makeshift_Soul_Key:
     Grove_of_Spirits + Hookshot
+
+// Lost Cemetery
+
+Bomb_Silent_Servant:
+    Lost_Cemetery_East_Tree_Bridge + Bomb
+
+Arrow_Silent_Servant:
+    Lost_Cemetery_Catacombs_Room_1 + Fire + Bomb + Hookshot
+
+Heart_Shrine-Cemetery_Behind_Entrance:
+    lvl_Graveyard[tdoor_gy] + Hookshot
+
+Magic_Shrine-Cemetery_After_Smough_Arena:
+    lvl_Graveyard[d_graveyardtosailorcaves] + Bomb
+
+Heart_Shrine-Cemetery_Winding_Bridge_End:
+    Lost_Cemetery_Right_Arena
+
+Old_Compass:
+    Lost_Cemetery_Catacombs_Room_1 + Fire
+
+Incense:
+    Lost_Cemetery_Summit
+
+Undying_Blossom:
+    Lost_Cemetery_Central
+
+Seed-Cemetery_Broken_Bridge:
+    Lost_Cemetery_Steadhone
+
+Seed-Catacombs_Tower:
+    Lost_Cemetery_Central
+
+Seed-Cemetery_Left_of_Main_Entrance:
+    Lost_Cemetery_Central
+
+Seed-Cemetery_Near_Tablet_Gate:
+    Lost_Cemetery_Right_Arena
+
+Soul_Orb-Catacombs_Exit:
+    Lost_Cemetery_Catacombs_Room_1
+
+Soul_Orb-Cemetery_Hookshot_Towers:
+    Lost_Cemetery_East_Tree_Bridge + Hookshot
+
+Soul_Orb-Cemetery_Under_Bridge:
+    Lost_Cemetery_Central
+
+Soul_Orb-Cemetery_East_Tree:
+    Lost_Cemetery_East_Tree_Bridge
+
+Soul_Orb-Cemetery_Winding_Bridge_End:
+    Lost_Cemetery_Right_Arena + Bomb
+
+Soul_Orb-Catacombs_Room_2:
+    Lost_Cemetery_Catacombs_Room_1 + Fire
+
+Soul_Orb-Catacombs_Room_1:
+    Lost_Cemetery_Catacombs_Room_1
+
+Soul_Orb-Cemetery_Gated_Sewer:
+    Lost_Cemetery_Summit + Cemetery_Sewer_Lever
+
+Soul_Orb-Catacombs_Entrance:
+    Lost_Cemetery_Central
+
+Soul_Orb-Cemetery_Cave:
+    Lost_Cemetery_Steadhone
+
+//Cyan_Ancient_Tablet_of_Knowledge:
+//    Lost_Cemetery_Central + Lost_Cemetery_Steadhone + Lost_Cemetery_Summit + Lost_Cemetery_Right_Arena + Nighttime
+
+//Purple_Ancient_Tablet_of_Knowledge:
+//    Lost_Cemetery_Steadhone + Nighttime + Mysterious_Locket
+
+Cemetery_Sewer_Lever:
+    Lost_Cemetery_Summit
+
+Guardian_of_the_Door_Access_Lever:
+    Lost_Cemetery_Right_Arena
+
+Cemetery_Shortcut_to_East_Tree_Lever:
+    lvl_Graveyard[forest_buggy] |
+    Lost_Cemetery_East_Tree_Bridge |
+    Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever
+
+Cemetery_East_Tree_Lever:
+    Lost_Cemetery_East_Tree_Bridge
+
+Catacombs_Tower_Lever:
+    Lost_Cemetery_Steadhone
+
+Cemetery_Exit_to_Estate_Lever:
+    Lost_Cemetery_Belltower
+
+Catacombs_Exit_Lever:
+    Lost_Cemetery_Catacombs_Room_1
+
+Key-Cemetery_Central:
+    Lost_Cemetery_Central
+
+Key-Cemetery_Grey_Crow:
+    Lost_Cemetery_Summit
+
+// Ceramic Manor
+
+Magic_Shrine-Manor_Bathroom_Puzzle:
+    Ceramic_Manor_Left
+
+Engagement_Ring:
+    Ceramic_Manor_Left
+
+Old_Photograph:
+    Ceramic_Manor_Lobby + Fire
+
+Seed-Manor_Boxes:
+    Ceramic_Manor_Left
+
+Seed-Manor_Near_Brazier:
+    Ceramic_Manor_Lobby
+
+Seed-Manor_Below_Big_Pot_Arena:
+    Ceramic_Manor_Left
+
+Seed-Manor_Rafters:
+    Ceramic_Manor_Left
+
+Seed-Manor_Main_Room_Upper:
+    Ceramic_Manor_Lobby
+
+Seed-Manor_Spinny_Pot_Room:
+    Ceramic_Manor_Left
+
+Seed-Manor_Library_Shelf:
+    Ceramic_Manor_Library
+
+Soul_Orb-Manor_Imp_Loft:
+    Ceramic_Manor_Left
+
+Soul_Orb-Manor_Library_Shelf:
+    Ceramic_Manor_Library
+
+Soul_Orb-Manor_Chandelier:
+    Ceramic_Manor_Left
+
+Manor_Big_Pot_Arena_Lever:
+    Ceramic_Manor_Left
+
+Manor_Bookshelf_Shortcut_Lever:
+    Ceramic_Manor_Library
+
+Key-Manor_Under_Dining_Room:
+    Ceramic_Manor_Lobby
+
+Key-Manor_After_Spinny_Pot_Room:
+    Ceramic_Manor_Left
+
+Key-Manor_Library:
+    Ceramic_Manor_Library
 
 // Stranded Sailor Caves
 

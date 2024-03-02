@@ -84,19 +84,24 @@ lvl_Tutorial[tdoor_gy]:
 // Lost Cemetery
 
 lvl_Graveyard[sdoor_graveyard]:
-    NONE
+    Lost_Cemetery_Central + Lost_Cemetery_Door
 
 lvl_Graveyard[tdoor_gy]:
     NONE
 
 lvl_Graveyard[d_graveyardtocrypt]:
-    NONE
+    Lost_Cemetery_Belltower
 
 lvl_Graveyard[d_graveyardtosailorcaves]:
-    NONE
+    lvl_Graveyard[d_graveyardtosailorcaves] |
+    Lost_Cemetery_Steadhone + Fire // or a well-aimed arrow offscreen
 
 lvl_Graveyard[forest_buggy]:
-    NONE
+    Fire + (
+        lvl_Graveyard[forest_buggy] |
+        Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever |
+        Lost_Cemetery_Summit + Cemetery_East_Tree_Lever
+    )
 
 // Crypt
 
@@ -120,16 +125,16 @@ lvl_GrandmaGardens[d_gardenstomansion]:
 // Ceramic Manor
 
 lvl_GrandmaMansion[sdoor_mansion]:
-    NONE
+    Ceramic_Manor_Lobby + Ceramic_Manor_Door
 
 lvl_GrandmaMansion[hod_anc_mansion]:
-    NONE
+    Ceramic_Manor_Lobby + Yellow_Key>2 + Daytime
 
 lvl_GrandmaMansion[d_gardenstomansion]:
-    NONE
+    Ceramic_Manor_Lobby
 
 lvl_GrandmaMansion[d_mansiontobasement]:
-    NONE
+    Ceramic_Manor_Lobby + Fire + Yellow_Key>2
 
 // Furnace Observation Rooms
 
@@ -169,7 +174,7 @@ lvlconnect_graveyard_sailor[d_connecttosailor]:
 // Stranded Sailor
 
 lvl_SailorMountain[sdoor_sailor]:
-    Stranded_Sailor_Jefferson
+    Stranded_Sailor_Jefferson + Stranded_Sailor_Door
 
 lvl_SailorMountain[d_connecttosailor]:
     Stranded_Sailor_Jefferson
@@ -252,7 +257,7 @@ lvl_Swamp[d_frog_boss]:
 // Throne of the Frog King
 
 boss_frog[sdoor_frogboss]:
-    NONE
+    Frog_King_Room + Throne_of_the_Frog_King_Door
 
 boss_frog[d_frog_boss]:
-    NONE
+    Frog_King_Room

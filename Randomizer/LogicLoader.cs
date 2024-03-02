@@ -24,6 +24,7 @@ internal static class LogicLoader
             var term = lmb.GetOrAddTerm(termName);
             lmb.AddItem(new RC.LogicItems.SingleItem(termName, new RC.TermValue(term, 1)));
         }
+        lmb.GetOrAddTerm("NIGHTSTART");
 
         var logicDir = IO.Path.GetDirectoryName(typeof(LogicLoader).Assembly.Location);
         var fmt = new MultilineLogicFormat();

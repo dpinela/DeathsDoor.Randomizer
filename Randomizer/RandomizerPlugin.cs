@@ -2,6 +2,8 @@ using Bep = BepInEx;
 using AGM = DDoor.AlternativeGameModes;
 using RC = RandomizerCore;
 using IC = DDoor.ItemChanger;
+using Collections = System.Collections.Generic;
+using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
 
@@ -18,16 +20,17 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 Logger.LogInfo("Rando Requested");
                 var lm = LogicLoader.Load();
                 var ctx = new DDRandoContext(lm);
+                var randoLocs = RandomizableLocations(lm);
                 var stage0 = new RC.Randomization.RandomizationStage
                 {
                     groups = new RC.Randomization.RandomizationGroup[]
                     {
                         new()
                         {
-                            Items = HODItems(lm),
-                            Locations = HODLocations(lm),
+                            Items = VanillaItems(randoLocs, lm),
+                            Locations = MakeLocations(randoLocs, lm),
                             Label = "Main Group",
-                            Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(1)
+                            Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
                         }
                     },
                     strategy = new(),
@@ -69,103 +72,32 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         });
     }
 
-    private RC.IRandoItem[] HODItems(RC.Logic.LogicManager lm)
+    private Collections.List<PoolLocation> RandomizableLocations(RC.Logic.LogicManager lm)
     {
-        RC.RandoItem Item(string name)
+        var pls = new Collections.List<PoolLocation>();
+        foreach (var pool in Pool.All)
         {
-            return new() { item = lm.GetItemStrict(name) };
+            foreach (var loc in pool.Content)
+            {
+                if (lm.GetLogicDef(loc.Name.Replace(" ", "_")) != null) {
+                    pls.Add(loc);
+                }
+            }
         }
-        return new RC.IRandoItem[]
-        {
-            Item("Fire"),
-            Item("Bomb"),
-            Item("Hookshot"),
-            Item("Camp_of_the_Free_Crows_Door"),
-            Item("Betty's_Lair_Door"),
-            Item("Stranded_Sailor_Door"),
-            Item("Castle_Lockstone_Door"),
-            Item("Old_Watchtowers_Door"),
-            Item("Mushroom_Dungeon_Door"),
-            Item("Throne_of_the_Frog_King_Door"),
-            Item("Overgrown_Ruins_Door"),
-            Item("Flooded_Fortress_Door"),
-            Item("Lost_Cemetery_Door"),
-            Item("Grove_of_Spirits_Door"),
-            Item("The_Urn_Witch's_Laboratory_Door"),
-            Item("Ceramic_Manor_Door"),
-            Item("Inner_Furnace_Door"),
-            Item("Estate_of_the_Urn_Witch_Door"),
-            Item("Bomb_Exit_Lever"),
-            Item("Red_Ancient_Tablet_of_Knowledge"),
-            Item("Yellow_Ancient_Tablet_of_Knowledge"),
-            Item("Green_Ancient_Tablet_of_Knowledge"),
-            Item("Cyan_Ancient_Tablet_of_Knowledge"),
-            Item("Blue_Ancient_Tablet_of_Knowledge"),
-            Item("Purple_Ancient_Tablet_of_Knowledge"),
-            Item("Pink_Ancient_Tablet_of_Knowledge"),
-            Item("Ink-Covered_Teddy_Bear"),
-            Item("Fire"),
-            Item("Sailor_Greatsword_Gate_Lever"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed"),
-            Item("Life_Seed")
-        };
+        return pls;
     }
 
-    private RC.IRandoLocation[] HODLocations(RC.Logic.LogicManager lm)
+    private RC.IRandoItem[] VanillaItems(Collections.List<PoolLocation> locs, RC.Logic.LogicManager lm)
     {
-        RC.RandoLocation Loc(string name)
-        {
-            return new() { logic = lm.GetLogicDefStrict(name) };
-        }
-        return new RC.IRandoLocation[]
-        {
-            Loc("Bomb_Avarice"),
-            Loc("Hookshot_Avarice"),
-            Loc("Camp_of_the_Free_Crows_Door"),
-            Loc("Betty's_Lair_Door"),
-            Loc("Stranded_Sailor_Door"),
-            Loc("Castle_Lockstone_Door"),
-            Loc("Old_Watchtowers_Door"),
-            Loc("Mushroom_Dungeon_Door"),
-            Loc("Throne_of_the_Frog_King_Door"),
-            Loc("Overgrown_Ruins_Door"),
-            Loc("Flooded_Fortress_Door"),
-            Loc("Lost_Cemetery_Door"),
-            Loc("Grove_of_Spirits_Door"),
-            Loc("The_Urn_Witch's_Laboratory_Door"),
-            Loc("Ceramic_Manor_Door"),
-            Loc("Inner_Furnace_Door"),
-            Loc("Estate_of_the_Urn_Witch_Door"),
-            Loc("Bomb_Exit_Lever"),
-            Loc("Discarded_Umbrella"),
-            Loc("Surveillance_Device"),
-            Loc("Soul_Orb-Bomb_Secret"),
-            Loc("Soul_Orb-Bomb_Return"),
-            Loc("Ancient_Door_Scale_Model"),
-            Loc("Soul_Orb-Fire_Secret"),
-            Loc("Soul_Orb-Hookshot_Return"),
-            Loc("Soul_Orb-Hookshot_Secret"),
-            Loc("Modern_Door_Scale_Model"),
-            Loc("Makeshift_Soul_Key"),
-            Loc("Reaper's_Greatsword"),
-            Loc("Heart_Shrine-Hookshot_Arena"),
-            Loc("Magic_Shrine-Sailor_Turncam"),
-            Loc("Grunt's_Old_Mask"),
-            Loc("Captain's_Log"),
-            Loc("Ink-Covered_Teddy_Bear"),
-            Loc("Seed-Sailor_Upper"),
-            Loc("Soul_Orb-Sailor_Turncam"),
-            Loc("Sailor_Turncam_Upper_Lever"),
-            Loc("Sailor_Turncam_Lower_Lever"),
-            Loc("Sailor_Greatsword_Gate_Lever")
-        };
+        return locs.Select(loc => loc.VanillaItem.Replace(" ", "_"))
+            .Select(name => new RC.RandoItem() { item = lm.GetItemStrict(name) })
+            .ToArray();
+    }
+
+    private RC.IRandoLocation[] MakeLocations(Collections.List<PoolLocation> locs, RC.Logic.LogicManager lm)
+    {
+        return locs.Select(loc => loc.Name.Replace(" ", "_"))
+            .Select(name => new RC.RandoLocation() { logic = lm.GetLogicDefStrict(name) })
+            .ToArray();
     }
 }
