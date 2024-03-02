@@ -23,7 +23,7 @@ internal class Pool
         new(name: "Fire Silent Servant", vanillaItem: "Fire"),
         new(name: "Bomb Silent Servant", vanillaItem: "Bomb"),
         new(name: "Hookshot Silent Servant", vanillaItem: "Hookshot"),
-        new(name: "Arrow Silent Servant", vanillaItem: "Arrow Level 2")
+        new(name: "Arrow Silent Servant", vanillaItem: "Arrow Upgrade")
     );
 
     public static readonly Pool Weapons = new(
