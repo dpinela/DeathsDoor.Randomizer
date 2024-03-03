@@ -166,10 +166,10 @@ boss_grandma[d_basementtoboss]:
 // Cemetery -> Sailor
 
 lvlconnect_graveyard_sailor[d_graveyardtosailorcaves]:
-    NONE
+    Stranded_Sailor_Caves
 
 lvlconnect_graveyard_sailor[d_connecttosailor]:
-    NONE
+    Stranded_Sailor_Caves
 
 // Stranded Sailor
 
@@ -185,27 +185,31 @@ lvl_SailorMountain[d_sailortofortress]:
 // Castle Lockstone
 
 lvl_frozenfortress[sdoor_fortress]:
-    NONE
+    Lockstone_Central + Castle_Lockstone_Door
 
 lvl_frozenfortress[hod_anc_fortress]:
-    NONE
+    Lockstone_Central + Daytime +
+        Lockstone_West_Crow +
+        Lockstone_West_Keyed_Crow +
+        Lockstone_Southwest_Crow +
+        Lockstone_East_Crow
 
 lvl_frozenfortress[d_sailortofortress]:
-    NONE
+    Lockstone_Entrance
 
 lvl_frozenfortress[d_fortresstoroof]:
-    NONE
+    Lockstone_Roof
 
 // Camp of the Free Crows
 
 lvlConnect_Fortress_Mountaintops[sdoor_covenant]:
-    NONE
+    Camp_Village + Camp_of_the_Free_Crows_Door
 
 lvlConnect_Fortress_Mountaintops[d_fortresstoroof]:
-    NONE
+    Camp_Castle_Door
 
 lvlConnect_Fortress_Mountaintops[d_CrowCavestoMountaintops]:
-    NONE
+    Camp_Elevator
 
 // Old Watchtowers
 

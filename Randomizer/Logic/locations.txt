@@ -12,7 +12,8 @@ Stranded_Sailor_Door:
     Stranded_Sailor_Jefferson
 
 Castle_Lockstone_Door:
-    Hall_of_Doors_Lobby + Castle_Lockstone_Door
+    Hall_of_Doors_Lobby + Castle_Lockstone_Door |
+    Lockstone_Central
 
 Old_Watchtowers_Door:
     Hall_of_Doors_Lobby + Old_Watchtowers_Door
@@ -461,3 +462,109 @@ Sailor_Turncam_Lower_Lever:
 // Bomb is required to break the secret walls
 Sailor_Greatsword_Gate_Lever:
     Stranded_Sailor_Jefferson + Hookshot + Bomb
+
+// Castle Lockstone
+
+Magic_Shrine-Lockstone_Secret_West:
+    Lockstone_Jailed_Seed + Lockstone_Secret_West_Lever
+
+Ancient_Crown:
+    Lockstone_Central
+
+Death's_Contract:
+    Lockstone_Library
+
+Seed-Lockstone_Upper_East:
+    Lockstone_East_Crow
+
+Seed-Lockstone_Soul_Door:
+    Lockstone_Central
+
+Seed-Lockstone_Behind_Bars:
+    Lockstone_Jailed_Seed
+
+Seed-Lockstone_Entrance_West:
+    Lockstone_Central
+
+Seed-Lockstone_North:
+    Lockstone_East
+
+Soul_Orb-North_Lockstone_Sewer:
+    Lockstone_Central
+
+Soul_Orb-Lockstone_Hookshot_North:
+    Lockstone_Central + Hookshot
+
+Soul_Orb-Lockstone_Exit:
+    Lockstone_Roof
+
+Soul_Orb-West_Lockstone_Sewer:
+    Lockstone_Central
+
+Lockstone_East_Start_Shortcut_Lever:
+    Lockstone_Library
+
+Lockstone_Entrance_Lever:
+    Lockstone_Entrance
+
+Lockstone_East_Lower_Lever:
+    Lockstone_Central
+
+Lockstone_Upper_Shortcut_Lever:
+    Lockstone_East_Upper
+
+Lockstone_Dual_Laser_Puzzle_Lever:
+    Lockstone_Central
+
+Lockstone_Tracking_Beam_Puzzle_Lever:
+    Lockstone_East
+
+Lockstone_Vertical_Laser_Puzzle_Lever:
+    Lockstone_East + Lockstone_Tracking_Beam_Puzzle_Lever
+
+Lockstone_North_Puzzle_Lever:
+    Lockstone_Central
+
+Lockstone_Secret_West_Lever:
+    (Lockstone_Central | Lockstone_Jailed_Seed) + Hookshot
+
+Lockstone_Hookshot_Puzzle_Lever:
+    Lockstone_Southwest_Upper
+
+Lockstone_Upper_Puzzle_Lever:
+    Lockstone_East_Upper + Hookshot
+
+Lockstone_Upper_Dual_Laser_Puzzle_Lever:
+    Lockstone_East_Upper_Keyed_Door + Pink_Key>4 + Hookshot
+
+Key-Lockstone_West:
+    Lockstone_Central + Hookshot
+
+Key-Lockstone_North:
+    Lockstone_Central + Lockstone_North_Puzzle_Lever
+
+// Camp of the Free Crows
+
+Heart_Shrine-Camp_Ice_Skating:
+    Camp_Elevator + Hookshot
+
+Shiny_Medallion:
+    Camp_Elevator + Bomb
+
+Seed-Camp_Ledge_With_Huts:
+    Camp_Bridge
+
+Seed-Camp_Stall:
+    Camp_Village
+
+Seed-Camp_Rooftops:
+    Camp_Bridge
+
+Soul_Orb-Camp_Rooftops:
+    (Camp_Castle_Door | Camp_Bridge) + Hookshot
+
+Soul_Orb-Camp_Broken_Bridge:
+    Camp_Elevator + Hookshot
+
+Key-Camp_of_the_Free_Crows:
+    Camp_Village
