@@ -73,6 +73,25 @@ Nighttime:
 Can_Hit_Bell:
     Lost_Cemetery_Belltower + Rusty_Belltower_Key
 
+Crypt_Main_Room:
+    lvlConnect_Graveyard_Gardens[d_graveyardtocrypt] |
+    lvlConnect_Graveyard_Gardens[d_crypttogardens] // can roll through the gate when coming from below
+
+Estate_South:
+    lvl_GrandmaGardens[d_crypttogardens] |
+    lvl_GrandmaGardens[sdoor_gardens] |
+    Estate_North + Garden_of_Joy_Lever + Garden_of_Peace_Lever
+
+Estate_North:
+    lvl_GrandmaGardens[d_gardenstomansion] |
+    Estate_South + Garden_of_Joy_Lever + Garden_of_Peace_Lever
+
+Estate_Urn_Shed:
+    Estate_South + (Hookshot | Estate_Underground_Urn_Shed_Lever)
+
+Estate_Garden_of_Life_End:
+    Estate_North + (Garden_of_Life_Lanterns_Lever | Garden_of_Life_End_Lever)
+
 Ceramic_Manor_Lobby:
     lvl_GrandmaMansion[sdoor_mansion] |
     lvl_GrandmaMansion[hod_anc_mansion] |
@@ -83,6 +102,63 @@ Ceramic_Manor_Left:
 
 Ceramic_Manor_Library:
     Ceramic_Manor_Lobby + Yellow_Key>2
+
+Furnace_Observation_Rooms:
+    lvlConnect_Mansion_Basement[d_mansiontobasement] |
+    lvlConnect_Mansion_Basement[d_basementtoromp]
+
+Inner_Furnace_Entrance:
+    lvl_GrandmaBasement[d_basementtoromp] |
+    lvl_GrandmaBasement[sdoor_basementromp] |
+    Inner_Furnace_Post_Burner_1 |
+    Inner_Furnace_Post_Burner_2 |
+    Inner_Furnace_Post_Burner_3 |
+    Inner_Furnace_Post_Burner_4 |
+    Inner_Furnace_Post_Burner_7
+
+Inner_Furnace_Post_Burner_1:
+    Inner_Furnace_Entrance + Fire | Inner_Furnace_Post_Burner_2
+
+Inner_Furnace_Post_Burner_2:
+    Inner_Furnace_Post_Burner_1 + Fire
+
+Inner_Furnace_Post_Burner_3:
+    Inner_Furnace_Post_Burner_2 + Fire
+
+Inner_Furnace_Post_Burner_4:
+    Inner_Furnace_Post_Burner_3 + Fire | Inner_Furnace_Post_Burner_5
+
+Inner_Furnace_Post_Burner_5:
+    Inner_Furnace_Post_Burner_4 + Fire
+
+Inner_Furnace_Post_Burner_6:
+    Inner_Furnace_Post_Burner_5 + Fire
+
+Inner_Furnace_Post_Burner_7:
+    Inner_Furnace_Post_Burner_6 + Fire | Inner_Furnace_Post_Burner_7
+
+Inner_Furnace_Post_Burner_8:
+    Inner_Furnace_Post_Burner_7 + Fire | Inner_Furnace_Post_Burner_9
+
+Inner_Furnace_Post_Burner_9:
+    lvl_GrandmaBasement[d_basementtoboss] |
+    Inner_Furnace_Post_Burner_8 + Fire
+
+Inner_Furnace_Burner_2_Pot:
+    Inner_Furnace_Post_Burner_2
+
+Inner_Furnace_Islands_Pot:
+    Inner_Furnace_Post_Burner_6
+
+Inner_Furnace_Burner_8_Pot:
+    Inner_Furnace_Post_Burner_8
+
+Inner_Furnace_Final_Pot:
+    Inner_Furnace_Post_Burner_9
+
+Grandma_Room:
+    boss_grandma[sdoor_grandmaboss] |
+    boss_grandma[d_basementtoboss]
 
 Stranded_Sailor_Caves:
     lvlconnect_graveyard_sailor[d_graveyardtosailorcaves] |

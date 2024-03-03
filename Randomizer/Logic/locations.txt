@@ -45,10 +45,12 @@ Ceramic_Manor_Door:
     Ceramic_Manor_Lobby
 
 Inner_Furnace_Door:
-    Hall_of_Doors_Lobby + Inner_Furnace_Door
+    Hall_of_Doors_Lobby + Inner_Furnace_Door |
+    Inner_Furnace_Entrance
 
 Estate_of_the_Urn_Witch_Door:
-    Hall_of_Doors_Lobby + Estate_of_the_Urn_Witch_Door
+    Hall_of_Doors_Lobby + Estate_of_the_Urn_Witch_Door |
+    Estate_South
 
 Discarded_Umbrella:
     Hall_of_Doors_Lobby
@@ -218,6 +220,108 @@ Key-Cemetery_Central:
 Key-Cemetery_Grey_Crow:
     Lost_Cemetery_Summit
 
+// Crypt
+
+Fire_Silent_Servant:
+    Crypt_Main_Room + Fire
+
+Soul_Orb-Estate_Access_Crypt:
+    Crypt_Main_Room
+
+Estate_Elevator_Left_Lever:
+    Crypt_Main_Room
+
+Estate_Elevator_Right_Lever:
+    Crypt_Main_Room
+
+// Estate of the Urn Witch
+
+Rogue_Daggers:
+    Estate_Garden_of_Life_End
+
+Magic_Shrine-Estate_Left_of_Manor:
+    Estate_North
+
+Heart_Shrine-Garden_of_Life:
+    Estate_North + Fire
+
+Sludge-Filled_Urn:
+    Estate_Urn_Shed
+
+Rusty_Garden_Trowel:
+    Estate_North
+
+Seed-Estate_Family_Tomb:
+    Estate_North
+
+Seed-Estate_Entrance:
+    lvl_GrandmaGardens[d_crypttogardens]
+
+Seed-Estate_Hedge_Gaps:
+    Estate_South
+
+Seed-Garden_of_Joy:
+    Estate_South
+
+Soul_Orb-Estate_Balcony:
+    Estate_South
+
+Soul_Orb-Garden_of_Love_Turncam:
+    Estate_North
+
+Soul_Orb-Garden_of_Life_Hookshot_Loop:
+    Estate_North + Hookshot
+
+Soul_Orb-Garden_of_Love_Bomb_Walls:
+    Estate_North + Bomb
+
+Soul_Orb-Garden_of_Life_Bomb_Wall:
+    Estate_North
+
+Soul_Orb-Estate_Broken_Boardwalk:
+    Estate_South + Hookshot
+
+Soul_Orb-Estate_Secret_Cave:
+    Estate_South
+
+Soul_Orb-Estate_Twin_Benches:
+    Estate_South + Bomb + Fire
+
+Soul_Orb-Estate_Sewer_Middle:
+    Estate_South + Hookshot
+
+Soul_Orb-Estate_Sewer_End:
+    Estate_Urn_Shed
+
+Soul_Orb-Garden_of_Peace:
+    Estate_South + Bomb
+
+//Green_Ancient_Tablet_of_Knowledge:
+
+//Estate_Owl:
+//  Estate_Garden_of_Life_End + Nighttime
+
+Garden_of_Love_Lever:
+    Estate_North
+
+Garden_of_Life_End_Lever:
+    Estate_Garden_of_Life_End
+
+Garden_of_Peace_Lever:
+    Estate_South
+
+Garden_of_Joy_Lever:
+    Estate_South
+
+Garden_of_Love_Turncam_Lever:
+    Estate_North
+
+Garden_of_Life_Lanterns_Lever:
+    Estate_North
+
+Estate_Underground_Urn_Shed_Lever:
+    Estate_Urn_Shed
+
 // Ceramic Manor
 
 Magic_Shrine-Manor_Bathroom_Puzzle:
@@ -273,6 +377,40 @@ Key-Manor_After_Spinny_Pot_Room:
 
 Key-Manor_Library:
     Ceramic_Manor_Library
+
+// Furnace
+
+Heart_Shrine-Furnace_Cart_Puzzle:
+    Furnace_Observation_Rooms
+
+Seed-Cart_Puzzle:
+    Furnace_Observation_Rooms
+
+Seed-Furnace_Entrance:
+    Furnace_Observation_Rooms
+
+Seed-Inner_Furnace_Horizontal_Pistons:
+    Inner_Furnace_Post_Burner_6
+
+Seed-Inner_Furnace_Conveyor_Bridge:
+    Inner_Furnace_Post_Burner_3
+
+Seed-Inner_Furnace_Conveyor_Gauntlet:
+    Inner_Furnace_Post_Burner_7
+
+Soul Orb-Furnace_Lantern_Chain:
+    Furnace_Observation_Rooms + Fire
+
+Soul Orb-Small_Room:
+    Furnace_Observation_Rooms + Fire
+
+Soul Orb-Furnace_Entrance_Sewer:
+    Furnace_Observation_Rooms
+
+// The Urn Witch's Laboratory
+
+Grandma:
+    Grandma_Room
 
 // Stranded Sailor Caves
 

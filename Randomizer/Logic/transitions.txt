@@ -106,21 +106,21 @@ lvl_Graveyard[forest_buggy]:
 // Crypt
 
 lvlConnect_Graveyard_Gardens[d_graveyardtocrypt]:
-    NONE
+    Crypt_Main_Room
 
 lvlConnect_Graveyard_Gardens[d_crypttogardens]:
-    NONE
+    Crypt_Main_Room + Estate_Elevator_Left_Lever + Estate_Elevator_Right_Lever
 
 // Estate of the Urn Witch
 
 lvl_GrandmaGardens[sdoor_gardens]:
-    NONE
+    Estate_South + Estate_of_the_Urn_Witch_Door
 
 lvl_GrandmaGardens[d_crypttogardens]:
-    NONE
+    lvl_GrandmaGardens[d_crypttogardens]
 
 lvl_GrandmaGardens[d_gardenstomansion]:
-    NONE
+    Estate_North
 
 // Ceramic Manor
 
@@ -139,29 +139,29 @@ lvl_GrandmaMansion[d_mansiontobasement]:
 // Furnace Observation Rooms
 
 lvlConnect_Mansion_Basement[d_mansiontobasement]:
-    NONE
+    Furnace_Observation_Rooms
 
 lvlConnect_Mansion_Basement[d_basementtoromp]:
-    NONE
+    Furnace_Observation_Rooms + Fire
 
 // Inner Furnace
 
 lvl_GrandmaBasement[sdoor_basementromp]:
-    NONE
+    Inner_Furnace_Entrance + Inner_Furnace_Door
 
 lvl_GrandmaBasement[d_basementtoromp]:
-    NONE
+    Inner_Furnace_Entrance
 
 lvl_GrandmaBasement[d_basementtoboss]:
-    NONE
+    Inner_Furnace_Post_Burner_9
 
 // The Urn Witch's Laboratory
 
 boss_grandma[sdoor_grandmaboss]:
-    NONE
+    Grandma_Room + The_Urn_Witch's_Laboratory_Door
 
 boss_grandma[d_basementtoboss]:
-    NONE
+    Grandma_Room
 
 // Cemetery -> Sailor
 
