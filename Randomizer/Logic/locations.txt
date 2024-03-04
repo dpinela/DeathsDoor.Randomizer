@@ -1,7 +1,8 @@
 // Hall of Doors
 
 Camp_of_the_Free_Crows_Door:
-    Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door
+    Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door |
+    Camp_Village
 
 // these all need the other side added in
 Betty's_Lair_Door:
@@ -22,7 +23,8 @@ Mushroom_Dungeon_Door:
     Hall_of_Doors_Lobby + Mushroom_Dungeon_Door
 
 Throne_of_the_Frog_King_Door:
-    Hall_of_Doors_Lobby + Throne_of_the_Frog_King_Door
+    Hall_of_Doors_Lobby + Throne_of_the_Frog_King_Door |
+    Frog_King_Room
 
 Overgrown_Ruins_Door:
     Hall_of_Doors_Lobby + Overgrown_Ruins_Door
@@ -39,7 +41,8 @@ Grove_of_Spirits_Door:
     Grove_of_Spirits
 
 The_Urn_Witch's_Laboratory_Door:
-    Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door
+    Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door |
+    Grandma_Room
 
 Ceramic_Manor_Door:
     Hall_of_Doors_Lobby + Ceramic_Manor_Door |
