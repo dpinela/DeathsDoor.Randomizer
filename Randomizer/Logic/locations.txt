@@ -195,11 +195,11 @@ Soul_Orb-Catacombs_Entrance:
 Soul_Orb-Cemetery_Cave:
     Lost_Cemetery_Steadhone
 
-//Cyan_Ancient_Tablet_of_Knowledge:
-//    Lost_Cemetery_Central + Lost_Cemetery_Steadhone + Lost_Cemetery_Summit + Lost_Cemetery_Right_Arena + Nighttime
+Cyan_Ancient_Tablet_of_Knowledge:
+    Lost_Cemetery_Central + Lost_Cemetery_Steadhone + Lost_Cemetery_Summit + Lost_Cemetery_Right_Arena + Nighttime
 
-//Purple_Ancient_Tablet_of_Knowledge:
-//    Lost_Cemetery_Steadhone + Nighttime + Mysterious_Locket
+Purple_Ancient_Tablet_of_Knowledge:
+    Lost_Cemetery_Steadhone + Nighttime + Mysterious_Locket
 
 Cemetery_Sewer_Lever:
     Lost_Cemetery_Summit
@@ -308,8 +308,8 @@ Soul_Orb-Garden_of_Peace:
 
 //Green_Ancient_Tablet_of_Knowledge:
 
-//Estate_Owl:
-//  Estate_Garden_of_Life_End + Nighttime
+Estate_Owl:
+    Estate_Garden_of_Life_End + Nighttime
 
 Garden_of_Love_Lever:
     Estate_North
@@ -598,17 +598,17 @@ Seed-Watchtowers_Boxes:
 Soul_Orb-Watchtowers_Behind_Barb_Elevator:
     Watchtowers_Barb_Elevator
 
-//Blue_Ancient_Tablet_of_Knowledge:
-//  Watchtowers_First_Pot +
-//      Watchtowers_Entrance_Torch + 
-//      Watchtowers_Jamming_Start_Torch +
-//      Watchtowers_Boxes_Torch +
-//      Watchtowers_First_Pot_Torch +
-//      Watchtowers_Boomers_Torch_1 +
-//      Watchtowers_Boomers_Torch_2
+Blue_Ancient_Tablet_of_Knowledge:
+    Watchtowers_First_Pot +
+        Watchtowers_Entrance_Torch + 
+        Watchtowers_Jamming_Start_Torch +
+        Watchtowers_Boxes_Torch +
+        Watchtowers_First_Pot_Torch +
+        Watchtowers_Boomers_Torch_1 +
+        Watchtowers_Boomers_Torch_2
 
-//Watchtowers_Owl:
-//  Watchtowers_Ice_Skating_End
+Watchtowers_Owl:
+    Watchtowers_Ice_Skating_End
 
 Watchtowers_After_Boomers_Lever:
     Watchtowers_Barb_Elevator
