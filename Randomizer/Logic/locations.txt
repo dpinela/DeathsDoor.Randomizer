@@ -6,7 +6,8 @@ Camp_of_the_Free_Crows_Door:
 
 // these all need the other side added in
 Betty's_Lair_Door:
-    Hall_of_Doors_Lobby + Betty's_Lair_Door
+    Hall_of_Doors_Lobby + Betty's_Lair_Door |
+    Betty_Room
 
 Stranded_Sailor_Door:
     Hall_of_Doors_Lobby + Stranded_Sailor_Door |
@@ -17,7 +18,8 @@ Castle_Lockstone_Door:
     Lockstone_Central
 
 Old_Watchtowers_Door:
-    Hall_of_Doors_Lobby + Old_Watchtowers_Door
+    Hall_of_Doors_Lobby + Old_Watchtowers_Door |
+    Watchtowers_Entrance
 
 Mushroom_Dungeon_Door:
     Hall_of_Doors_Lobby + Mushroom_Dungeon_Door
@@ -115,6 +117,10 @@ Soul_Orb-Hookshot_Secret:
 
 Modern_Door_Scale_Model:
     Hall_of_Doors_Lobby + Hookshot
+
+Rusty_Belltower_Key:
+    // Hookshot is required for Lord of Doors
+    Hall_of_Doors_Lobby + Grey_Crow_Boss + Hookshot
 
 // Grove of Spirits
 
@@ -571,3 +577,57 @@ Soul_Orb-Camp_Broken_Bridge:
 
 Key-Camp_of_the_Free_Crows:
     Camp_Village
+
+// Old Watchtowers
+
+Mysterious_Locket:
+    Watchtowers_Cave_Entrance_Pot + Nighttime
+
+Seed-Watchtowers_Ice_Skating:
+    Watchtowers_Ice_Skating_End
+
+Seed-Watchtowers_Tablet_Door:
+    Watchtowers_First_Pot
+
+Seed-Watchtowers_Archer_Platform:
+    Watchtowers_Barb_Elevator + Hookshot
+
+Seed-Watchtowers_Boxes:
+    Watchtowers_Jamming_Start
+
+Soul_Orb-Watchtowers_Behind_Barb_Elevator:
+    Watchtowers_Barb_Elevator
+
+//Blue_Ancient_Tablet_of_Knowledge:
+//  Watchtowers_First_Pot +
+//      Watchtowers_Entrance_Torch + 
+//      Watchtowers_Jamming_Start_Torch +
+//      Watchtowers_Boxes_Torch +
+//      Watchtowers_First_Pot_Torch +
+//      Watchtowers_Boomers_Torch_1 +
+//      Watchtowers_Boomers_Torch_2
+
+//Watchtowers_Owl:
+//  Watchtowers_Ice_Skating_End
+
+Watchtowers_After_Boomers_Lever:
+    Watchtowers_Barb_Elevator
+
+Watchtowers_Before_Ice_Arena_Lever:
+    Watchtowers_Headless_Lord_of_Doors
+
+Watchtowers_After_Ice_Skating_Lever:
+    Watchtowers_Ice_Skating_End
+
+// Betty's Lair
+
+Betty:
+    Betty_Room
+
+// Throne of the Frog King
+
+Frog_King:
+    Frog_King_Room
+
+Giant_Arrowhead:
+    Frog_King_Room

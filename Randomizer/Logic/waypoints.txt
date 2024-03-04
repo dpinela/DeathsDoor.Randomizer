@@ -73,6 +73,12 @@ Nighttime:
 Can_Hit_Bell:
     Lost_Cemetery_Belltower + Rusty_Belltower_Key
 
+Grey_Crow_Boss:
+    Lost_Cemetery_Summit +
+    Giant_Soul_of_The_Urn_Witch +
+    Giant_Soul_of_The_Frog_King +
+    Giant_Soul_of_Betty
+
 Crypt_Main_Room:
     lvlConnect_Graveyard_Gardens[d_graveyardtocrypt] |
     lvlConnect_Graveyard_Gardens[d_crypttogardens] // can roll through the gate when coming from below
@@ -274,6 +280,77 @@ Camp_Elevator:
 
 Camp_Castle_Door_Pot:
     Camp_Castle_Door
+
+Watchtowers_Entrance:
+    lvl_mountaintops[sdoor_mountaintops] |
+    lvl_mountaintops[d_CrowCavestoMountaintops] |
+    Watchtowers_Jamming_Start + Hookshot
+
+Watchtowers_Jamming_Start:
+    Watchtowers_Entrance + Hookshot |
+    Watchtowers_Barb_Elevator + Watchtowers_After_Boomers_Lever + Hookshot
+
+Watchtowers_First_Pot:
+    Watchtowers_Jamming_Start + Hookshot
+
+Watchtowers_Barb_Elevator_Pot:
+    Watchtowers_Barb_Elevator
+
+Watchtowers_Barb_Elevator:
+    Watchtowers_First_Pot + Hookshot |
+    Watchtowers_Jamming_Start + Watchtowers_After_Boomers_Lever + Hookshot |
+    // lever not required for the last one, just go around
+    Watchtowers_Ice_Skating_Start + Hookshot
+
+Watchtowers_Lasers_Arena:
+    Watchtowers_Barb_Elevator + Hookshot
+
+Watchtowers_Lasers_Arena_Pot:
+    Watchtowers_Lasers_Arena
+
+Watchtowers_Ice_Skating_Start:
+    // When coming from the Barb elevator, the lever can be skipped by hooking
+    // over the gate from the ledge around the top of the elevator.
+    Watchtowers_Barb_Elevator + Watchtowers_Before_Ice_Arena_Lever + Hookshot |
+    Watchtowers_Headless_Lord_of_Doors + Watchtowers_Before_Ice_Arena_Lever
+
+Watchtowers_Ice_Skating_End:
+    Watchtowers_Ice_Skating_Start + Hookshot
+
+Watchtowers_Headless_Lord_of_Doors:
+    Watchtowers_Lasers_Arena + Hookshot |
+    Watchtowers_Ice_Skating_Start + Watchtowers_Before_Ice_Arena_Lever |
+    Watchtowers_Ice_Skating_End + Watchtowers_After_Ice_Skating_Lever |
+    Watchtowers_Cave_Entrance_Pot + Watchtowers_After_Ice_Skating_Lever
+
+Watchtowers_Owl_Pot:
+    Watchtowers_Headless_Lord_of_Doors
+
+Watchtowers_Cave_Entrance_Pot:
+    lvl_mountaintops[d_mountaintopstobetty] |
+    Watchtowers_Headless_Lord_of_Doors + Watchtowers_After_Ice_Skating_Lever
+
+Watchtowers_Entrance_Torch:
+    Watchtowers_Entrance + Nighttime + Fire
+
+Watchtowers_Jamming_Start_Torch:
+    Watchtowers_Jamming_Start + Nighttime + Fire
+
+Watchtowers_Boxes_Torch:
+    Watchtowers_Jamming_Start + Nighttime + Fire
+
+Watchtowers_First_Pot_Torch:
+    Watchtowers_First_Pot + Nighttime + Fire
+
+Watchtowers_Boomers_Torch_1:
+    (Watchtowers_Ice_Skating_Start | Watchtowers_First_Pot) + 
+    Nighttime + Hookshot + Fire
+
+Watchtowers_Boomers_Torch_2:
+    Watchtowers_Ice_Skating_Start + Nighttime + Hookshot + Fire
+
+Betty_Room:
+    boss_betty[sdoor_betty] | boss_betty[d_mountaintopstobetty]
 
 Rescued_Grunt:
     lvl_Forest[sdoor_forest_dung] + Bomb // rewrite to use proper waypoint later

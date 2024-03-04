@@ -214,21 +214,21 @@ lvlConnect_Fortress_Mountaintops[d_CrowCavestoMountaintops]:
 // Old Watchtowers
 
 lvl_mountaintops[sdoor_mountaintops]:
-    NONE
+    Watchtowers_Entrance + Old_Watchtowers_Door
 
 lvl_mountaintops[d_CrowCavestoMountaintops]:
-    NONE
+    Watchtowers_Entrance
 
 lvl_mountaintops[d_mountaintopstobetty]:
-    NONE
+    Watchtowers_Cave_Entrance_Pot
 
 // Betty's Lair
 
 boss_betty[sdoor_betty]:
-    NONE
+    Betty_Room + Betty's_Lair_Door
 
 boss_betty[d_mountaintopstobetty]:
-    NONE
+    Betty_Room
 
 // Overgrown Ruins & Mushroom Dungeon
 
