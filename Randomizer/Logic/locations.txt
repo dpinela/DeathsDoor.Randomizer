@@ -22,14 +22,16 @@ Old_Watchtowers_Door:
     Watchtowers_Entrance
 
 Mushroom_Dungeon_Door:
-    Hall_of_Doors_Lobby + Mushroom_Dungeon_Door
+    Hall_of_Doors_Lobby + Mushroom_Dungeon_Door |
+    Dungeon_Lobby
 
 Throne_of_the_Frog_King_Door:
     Hall_of_Doors_Lobby + Throne_of_the_Frog_King_Door |
     Frog_King_Room
 
 Overgrown_Ruins_Door:
-    Hall_of_Doors_Lobby + Overgrown_Ruins_Door
+    Hall_of_Doors_Lobby + Overgrown_Ruins_Door |
+    Ruins_Outside_Main_Dungeon_Gate
 
 Flooded_Fortress_Door:
     Hall_of_Doors_Lobby + Flooded_Fortress_Door
@@ -623,6 +625,157 @@ Watchtowers_After_Ice_Skating_Lever:
 
 Betty:
     Betty_Room
+
+// Overgrown Ruins
+
+Magic_Shrine-Ruins_Hookshot_Arena:
+    Ruins_Outside_Front_Gate + Hookshot
+
+Magic_Shrine-Ruins_Turncam:
+    Ruins_Forest_Settlement
+
+Heart_Shrine-Ruins_Sewer:
+    Ruins_Forest_Settlement
+
+Malformed_Seed:
+    Ruins_Forest_Settlement + Hookshot
+
+Magical_Forest_Horn:
+    Ruins_Forest_Settlement
+
+Seed-Ruins_Lord_of_Doors_Arena:
+    Ruins_Forest_Settlement
+
+Seed-Ruins_Fire_Plant_Corridor:
+    Ruins_Forest_Settlement
+
+Seed-Ruins_Right_Middle:
+    Ruins_Forest_Settlement
+
+Seed-Ruins_On_Settlement_Wall:
+    Ruins_Forest_Settlement
+
+Seed-Ruins_Behind_Boxes:
+    Ruins_Outside_Main_Dungeon_Gate
+
+Seed-Ruins_Down_Through_Bomb_Wall:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Stump:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Outside_Left_Dungeon_Exit:
+    Dungeon_Main_Hall
+
+Soul_Orb-Ruins_Left_After_Key_Door:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Lower_Bomb_Wall:
+    // or a somewhat precise offscreen arrow on a bomb flower
+    Ruins_Outside_Main_Dungeon_Gate + Bomb
+
+Soul_Orb-Ruins_Lord_of_Doors_Arena_Hookshot:
+    Ruins_Forest_Settlement + Hookshot
+
+Soul_Orb-Ruins_Upper_Above_Horn:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Above_Three_Plants:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Up_Turncam_Ladder:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Above_Entrance_Gate:
+    Ruins_Outside_Front_Gate + Hookshot
+
+Soul_Orb-Ruins_Upper_Bomb_Wall:
+    Ruins_Forest_Settlement
+
+Soul_Orb-Ruins_Lower_Hookshot:
+    Ruins_Forest_Settlement + Hookshot
+    // there is a skip to get this without hookshot, but it may require haste>=2?
+
+Yellow_Ancient_Tablet_of_Knowledge:
+    Ruins_Outside_Front_Gate + Nighttime
+
+Ruins_Owl:
+    // breaking the bomb wall almost counts as a skip, but not quite
+    Ruins_Forest_Settlement
+
+Ruins_Settlement_Gate_Lever:
+    Ruins_Forest_Settlement
+
+Ruins_Upper_Dungeon_Entrance_Lever:
+    Dungeon_Main_Hall
+
+Ruins_Ladder_Left_of_Lord_of_Doors_Arena_Lever:
+    Ruins_Forest_Settlement
+
+Ruins_Entrance_Ladder_Shortcut_Lever:
+    Ruins_Forest_Settlement
+
+Ruins_Main_Gate_Lever:
+    Ruins_Outside_Front_Gate
+
+Key-Overgrown_Ruins:
+    Ruins_Outside_Main_Dungeon_Gate
+
+// Mushroom Dungeon
+
+Thunder_Hammer:
+    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever
+
+Heart_Shrine-Dungeon_Water_Arena:
+    Dungeon_Water_Arena + Bomb + Fire
+
+Corrupted_Antler:
+    Dungeon_Main_Hall + Bomb + Green_Key>3
+
+Seed-Dungeon_Fire_Puzzle_Near_Water_Arena:
+    Dungeon_Big_Door
+
+Seed-Dungeon_Water_Arena_Left_Exit:
+    Dungeon_Water_Arena
+
+Seed-Dungeon_Above_Crow_2:
+    Dungeon_Crow_2
+
+Seed-Dungeon_Right_Above_Key:
+    Dungeon_Main_Hall
+
+Seed-Dungeon_Avarice_Bridge:
+    Dungeon_Big_Door
+
+Soul_Orb-Dungeon_Vine:
+    Dungeon_Water_Arena
+
+Soul_Orb-Dungeon_Cobweb:
+    Dungeon_Big_Door + Fire
+
+Soul_Orb-Dungeon_Lower_Entrance:
+    Ruins_Outside_Main_Dungeon_Gate + Bomb
+
+Soul_Orb-Dungeon_Left_Exit_Shelf:
+    Dungeon_Main_Hall
+
+Dungeon_Entrance_Right_Gate_Lever:
+    Dungeon_Main_Hall
+
+Dungeon_Entrance_Left_Gate_Lever:
+    Dungeon_Main_Hall
+
+Dungeon_Above_Crow_2_Lever:
+    Dungeon_Crow_2
+
+Key-Dungeon_Hall:
+    Dungeon_Main_Hall + Fire
+
+Key-Dungeon_Right:
+    Dungeon_Main_Hall + Fire
+
+Key-Dungeon_Near_Water_Arena:
+    Dungeon_Water_Arena + Fire
 
 // Throne of the Frog King
 

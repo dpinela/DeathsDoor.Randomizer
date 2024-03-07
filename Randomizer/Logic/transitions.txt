@@ -233,19 +233,23 @@ boss_betty[d_mountaintopstobetty]:
 // Overgrown Ruins & Mushroom Dungeon
 
 lvl_Forest[sdoor_forest]:
-    NONE
+    Ruins_Outside_Main_Dungeon_Gate + Overgrown_Ruins_Door
 
 lvl_Forest[sdoor_forest_dung]:
-    NONE
+    Dungeon_Lobby + Mushroom_Dungeon_Door
 
 lvl_Forest[hod_anc_forest]:
-    NONE
+    Dungeon_Big_Door + Daytime +
+        Dungeon_Water_Arena +
+        Dungeon_Crow_2 +
+        Dungeon_Spider_Crow +
+        Dungeon_Hall_Crow
 
 lvl_Forest[forest_buggy]:
-    NONE
+    Ruins_Outside_Front_Gate
 
 lvl_Forest[d_swamp_enter]:
-    NONE
+    Dungeon_Main_Hall + Bomb
 
 // Flooded Fortress
 

@@ -352,8 +352,88 @@ Watchtowers_Boomers_Torch_2:
 Betty_Room:
     boss_betty[sdoor_betty] | boss_betty[d_mountaintopstobetty]
 
+Ruins_Outside_Front_Gate:
+    lvl_Forest[forest_buggy] |
+    Ruins_Outside_Main_Dungeon_Gate + Ruins_Main_Gate_Lever
+
+Ruins_Outside_Main_Dungeon_Gate:
+    lvl_Forest[sdoor_forest] |
+    Ruins_Outside_Front_Gate + Ruins_Main_Gate_Lever |
+    Ruins_Forest_Settlement |
+    Dungeon_Lobby
+
+Ruins_Forest_Settlement:
+    Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Ruins_Entrance_Ladder_Shortcut_Lever) |
+    Dungeon_Main_Hall |
+    Dungeon_Crow_2 + Dungeon_Above_Crow_2_Lever
+
+Ruins_Key_Pot:
+    Ruins_Outside_Main_Dungeon_Gate
+
+Ruins_Fire_Plant_Corridor_Pot:
+    Ruins_Forest_Settlement
+
+Ruins_Right_Arena_Pot:
+    Ruins_Forest_Settlement
+
+Ruins_Sewer_Pot:
+    Ruins_Forest_Settlement
+
+Ruins_Left_of_Lord_of_Doors_Arena_Pot:
+    Ruins_Forest_Settlement
+
+Dungeon_Lobby:
+    lvl_Forest[sdoor_forest_dung] |
+    Ruins_Outside_Main_Dungeon_Gate + Ruins_Forest_Settlement + Magical_Forest_Horn + Daytime |
+    Dungeon_Big_Door |
+    Dungeon_Main_Hall + Dungeon_Entrance_Left_Gate_Lever |
+    Dungeon_Main_Hall + Dungeon_Entrance_Right_Gate_Lever
+
+Dungeon_Big_Door:
+    Dungeon_Lobby + Fire |
+    Dungeon_Main_Hall + Bomb |
+    Dungeon_Water_Arena |
+    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever
+
+Dungeon_Main_Hall:
+    Dungeon_Big_Door |
+    // technically redundant as Water Arena is only reachable from
+    // Main Hall or Big Door in the first place
+    Dungeon_Water_Arena |
+    Dungeon_Crow_2 |
+    Dungeon_Lobby + Dungeon_Entrance_Left_Gate_Lever |
+    Dungeon_Lobby + Dungeon_Entrance_Right_Gate_Lever |
+    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever |
+    Ruins_Outside_Main_Dungeon_Gate + Bomb
+
+Dungeon_Water_Arena:
+    Dungeon_Big_Door + Bomb |
+    Dungeon_Main_Hall + Green_Key>3
+
+Dungeon_Crow_2:
+    Dungeon_Main_Hall + Green_Key>3 |
+    Ruins_Forest_Settlement + Dungeon_Above_Crow_2_Lever
+
+Dungeon_Spider_Crow:
+    Dungeon_Big_Door + Fire
+
+Dungeon_Hall_Crow:
+    Dungeon_Main_Hall
+
+Dungeon_Cobweb_Room_Pot:
+    Dungeon_Big_Door
+
+Dungeon_Water_Arena_Pot:
+    Dungeon_Water_Arena
+
+Dungeon_Hall_Pot:
+    Dungeon_Main_Hall
+
+Dungeon_Crow_2_Pot:
+    Dungeon_Crow_2
+
 Rescued_Grunt:
-    lvl_Forest[sdoor_forest_dung] + Bomb // rewrite to use proper waypoint later
+    Dungeon_Lobby + Bomb
 
 Frog_King_Room:
     boss_frog[sdoor_frogboss] | boss_frog[d_frog_boss]
