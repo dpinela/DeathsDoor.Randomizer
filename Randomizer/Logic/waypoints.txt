@@ -432,6 +432,47 @@ Dungeon_Hall_Pot:
 Dungeon_Crow_2_Pot:
     Dungeon_Crow_2
 
+Fortress_Entrance:
+    lvl_Swamp[d_swamp_enter] |
+    Fortress_Frog_King_Encounter
+
+Fortress_Watchtower_Lower:
+    Fortress_Entrance + Fortress_Watchtower_Lower_Lever
+
+Fortress_Frog_King_Encounter:
+    lvl_Swamp[sdoor_swamp] |
+    Fortress_Entrance + Fortress_Statue_Lever + Fortress_Pre-Main_Gate_Lever
+
+Fortress_Inside_Main_Gate:
+    Fortress_Frog_King_Encounter + Bomb + Fortress_Main_Gate_Lever
+
+Fortress_Main_Gate_Pot:
+    Fortress_Inside_Main_Gate + Bomb
+
+Fortress_U_Turn:
+    Fortress_Inside_Main_Gate + Bomb + Fortress_Central_Shortcut_Lever
+
+Fortress_U_Turn_Pot:
+    Fortress_U_Turn
+
+Fortress_Breakable_Bridges:
+    Fortress_U_Turn + Bomb
+
+Fortress_Breakable_Bridges_Pot:
+    Fortress_Breakable_Bridges
+
+Fortress_Bridge:
+    Fortress_Breakable_Bridges + Fortress_Bridge_Ladder
+
+Fortress_Bridge_Pot:
+    Fortress_Bridge
+
+Fortress_Exit:
+    Fortress_Bridge + Fortress_North_West_Lever
+
+Fortress_Exit_Pot:
+    Fortress_Exit
+
 Rescued_Grunt:
     Dungeon_Lobby + Bomb
 

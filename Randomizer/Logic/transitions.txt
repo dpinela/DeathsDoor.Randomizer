@@ -254,13 +254,13 @@ lvl_Forest[d_swamp_enter]:
 // Flooded Fortress
 
 lvl_Swamp[sdoor_swamp]:
-    NONE
+    Fortress_Frog_King_Encounter + Flooded_Fortress_Door
 
 lvl_Swamp[d_swamp_enter]:
-    NONE
+    Fortress_Entrance
 
 lvl_Swamp[d_frog_boss]:
-    NONE
+    lvl_Swamp[d_frog_boss] | Fortress_Exit
 
 // Throne of the Frog King
 

@@ -34,7 +34,8 @@ Overgrown_Ruins_Door:
     Ruins_Outside_Main_Dungeon_Gate
 
 Flooded_Fortress_Door:
-    Hall_of_Doors_Lobby + Flooded_Fortress_Door
+    Hall_of_Doors_Lobby + Flooded_Fortress_Door |
+    Fortress_Frog_King_Encounter
 
 Lost_Cemetery_Door:
     Hall_of_Doors_Lobby + Lost_Cemetery_Door |
@@ -776,6 +777,66 @@ Key-Dungeon_Right:
 
 Key-Dungeon_Near_Water_Arena:
     Dungeon_Water_Arena + Fire
+
+// Flooded Fortress
+
+Magic_Shrine-Fortress_Bow_Secret:
+    Fortress_Entrance
+
+Seed-Fortress_Watchtower:
+    Fortress_Watchtower_Lower + Fortress_Watchtower_Upper_Lever
+
+Seed-Fortress_Statue:
+    Fortress_Entrance
+
+Seed-Fortress_Bridge:
+    Fortress_Bridge + (Bomb | Hookshot)
+
+Seed-Fortress_Intro_Crate:
+    Fortress_Entrance
+
+Seed-Fortress_East_After_Statue:
+    Fortress_Entrance
+
+Soul_Orb-Fortress_Bomb:
+    Fortress_Watchtower_Lower + Bomb
+
+Soul_Orb-Fortress_Hidden_Sewer:
+    Fortress_Watchtower_Lower
+
+Soul_Orb-Fortress_Drop:
+    Fortress_Entrance
+
+Red_Ancient_Tablet_of_Knowledge:
+    Fortress_Entrance + Hookshot + Nighttime // wrong
+
+Fortress_Bomb_Lever:
+    Fortress_U_Turn
+
+Fortress_Main_Gate_Lever:
+    Fortress_Frog_King_Encounter + Bomb
+
+Fortress_Central_Shortcut_Lever:
+    Fortress_Inside_Main_Gate + Bomb
+
+Fortress_Statue_Lever:
+    Fortress_Entrance
+
+Fortress_Watchtower_Lower_Lever:
+    Fortress_Entrance
+
+Fortress_Watchtower_Upper_Lever:
+    Fortress_Watchtower_Lower
+
+Fortress_Bridge_Ladder:
+    Fortress_Breakable_Bridges
+
+Fortress_Pre-Main_Gate_Lever:
+    Fortress_Entrance + Fortress_Statue_Lever |
+    Fortress_Frog_King_Encounter
+
+Fortress_North_West_Lever:
+    Fortress_Bridge
 
 // Throne of the Frog King
 
