@@ -1,5 +1,5 @@
 Hall_of_Doors_Lobby:
-    lvl_hallofdoors[bus_overridespawn] |
+    $DEFAULTSTATE + lvl_hallofdoors[bus_overridespawn]/  |
     lvl_hallofdoors[sdoor_covenant] |
     lvl_hallofdoors[sdoor_betty] |
     lvl_hallofdoors[sdoor_sailor] |
@@ -40,12 +40,18 @@ Lost_Cemetery_Right_Arena:
     )
 
 Lost_Cemetery_Steadhone:
+    lvl_Graveyard[d_graveyardtosailorcaves] + Lost_Cemetery_Opened_Exit_to_Sailor |
     Lost_Cemetery_Belltower |
     Lost_Cemetery_Central + (
         Pink_Key>4 |
         Catacombs_Tower_Lever
     )
     // geometry skip from Sailor
+
+// This particular lamp is on the Jefferson quest path, so we need to track it.
+// If/when we do room rando, we may have to track other lamps and gates similarly.
+stateless Lost_Cemetery_Opened_Exit_to_Sailor:
+    Lost_Cemetery_Steadhone + Fire // or a well-aimed arrow offscreen
 
 Lost_Cemetery_Summit:
     Lost_Cemetery_Central + Guardian_of_the_Door_Access_Lever |
@@ -64,16 +70,16 @@ Lost_Cemetery_Belltower:
 Lost_Cemetery_Catacombs_Room_1:
     Lost_Cemetery_Central + (Fire | Catacombs_Exit_Lever)
 
-Daytime:
+stateless Daytime:
     NIGHTSTART=0 | NIGHTSTART + Can_Hit_Bell
 
-Nighttime:
+stateless Nighttime:
     NIGHTSTART | NIGHTSTART=0 + Can_Hit_Bell
 
-Can_Hit_Bell:
+stateless Can_Hit_Bell:
     Lost_Cemetery_Belltower + Rusty_Belltower_Key
 
-Grey_Crow_Boss:
+stateless Grey_Crow_Boss:
     Lost_Cemetery_Summit +
     Giant_Soul_of_The_Urn_Witch +
     Giant_Soul_of_The_Frog_King +
@@ -175,6 +181,9 @@ Stranded_Sailor_Jefferson:
     lvl_SailorMountain[d_connecttosailor] |
     lvl_SailorMountain[d_sailortofortress] + Bomb
 
+Jefferson_Quest_Start:
+    Stranded_Sailor_Jefferson + Nighttime + Ink-Covered_Teddy_Bear + $BEGIN_JEFFERSON
+
 Stranded_Sailor_Upper:
     lvl_SailorMountain[sdoor_sailor] + Bomb |
     lvl_SailorMountain[d_connecttosailor] + Bomb |
@@ -220,10 +229,10 @@ Lockstone_Library:
 Lockstone_Roof:
     lvl_frozenfortress[d_fortresstoroof] |
     Lockstone_Central + 
-        Lockstone_Lord_Lockstone +
-        Lockstone_Lord_Opengate +
-        Lockstone_Lord_Deadbolt +
-        Lockstone_Lord_Theodoor
+        Lockstone_Lord_Lockstone/ +
+        Lockstone_Lord_Opengate/ +
+        Lockstone_Lord_Deadbolt/ +
+        Lockstone_Lord_Theodoor/
 
 Lockstone_West_Crow_Pot:
     Lockstone_Central
@@ -473,7 +482,7 @@ Fortress_Exit:
 Fortress_Exit_Pot:
     Fortress_Exit
 
-Rescued_Grunt:
+stateless Rescued_Grunt:
     Dungeon_Lobby + Bomb
 
 Frog_King_Room:

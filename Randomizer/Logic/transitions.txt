@@ -74,17 +74,15 @@ lvl_hallofdoors[avarice_hod_anc_mansion]:
 // Grove of Spirits
 
 lvl_Tutorial[sdoor_tutorial]:
-    Grove_of_Spirits
+    Grove_of_Spirits + Grove_of_Spirits_Door + $NO_JEFFERSON
 
 lvl_Tutorial[tdoor_gy]:
     Grove_of_Spirits
 
-// placeholders with incomplete logic
-
 // Lost Cemetery
 
 lvl_Graveyard[sdoor_graveyard]:
-    Lost_Cemetery_Central + Lost_Cemetery_Door
+    Lost_Cemetery_Central + Lost_Cemetery_Door + $NO_JEFFERSON
 
 lvl_Graveyard[tdoor_gy]:
     NONE
@@ -94,7 +92,7 @@ lvl_Graveyard[d_graveyardtocrypt]:
 
 lvl_Graveyard[d_graveyardtosailorcaves]:
     lvl_Graveyard[d_graveyardtosailorcaves] |
-    Lost_Cemetery_Steadhone + Fire // or a well-aimed arrow offscreen
+    Lost_Cemetery_Steadhone + Lost_Cemetery_Opened_Exit_to_Sailor
 
 lvl_Graveyard[forest_buggy]:
     Fire + (
@@ -114,7 +112,7 @@ lvlConnect_Graveyard_Gardens[d_crypttogardens]:
 // Estate of the Urn Witch
 
 lvl_GrandmaGardens[sdoor_gardens]:
-    Estate_South + Estate_of_the_Urn_Witch_Door
+    Estate_South + Estate_of_the_Urn_Witch_Door + $NO_JEFFERSON
 
 lvl_GrandmaGardens[d_crypttogardens]:
     lvl_GrandmaGardens[d_crypttogardens]
@@ -125,7 +123,7 @@ lvl_GrandmaGardens[d_gardenstomansion]:
 // Ceramic Manor
 
 lvl_GrandmaMansion[sdoor_mansion]:
-    Ceramic_Manor_Lobby + Ceramic_Manor_Door
+    Ceramic_Manor_Lobby + Ceramic_Manor_Door + $NO_JEFFERSON
 
 lvl_GrandmaMansion[hod_anc_mansion]:
     Ceramic_Manor_Lobby + Yellow_Key>2 + Daytime
@@ -147,7 +145,7 @@ lvlConnect_Mansion_Basement[d_basementtoromp]:
 // Inner Furnace
 
 lvl_GrandmaBasement[sdoor_basementromp]:
-    Inner_Furnace_Entrance + Inner_Furnace_Door
+    Inner_Furnace_Entrance + Inner_Furnace_Door + $NO_JEFFERSON
 
 lvl_GrandmaBasement[d_basementtoromp]:
     Inner_Furnace_Entrance
@@ -158,7 +156,7 @@ lvl_GrandmaBasement[d_basementtoboss]:
 // The Urn Witch's Laboratory
 
 boss_grandma[sdoor_grandmaboss]:
-    Grandma_Room + The_Urn_Witch's_Laboratory_Door
+    Grandma_Room + The_Urn_Witch's_Laboratory_Door + $NO_JEFFERSON
 
 boss_grandma[d_basementtoboss]:
     Grandma_Room
@@ -174,25 +172,25 @@ lvlconnect_graveyard_sailor[d_connecttosailor]:
 // Stranded Sailor
 
 lvl_SailorMountain[sdoor_sailor]:
-    Stranded_Sailor_Jefferson + Stranded_Sailor_Door
+    Stranded_Sailor_Jefferson + Stranded_Sailor_Door + $NO_JEFFERSON
 
 lvl_SailorMountain[d_connecttosailor]:
-    Stranded_Sailor_Jefferson
+    Stranded_Sailor_Jefferson | Jefferson_Quest_Start
 
 lvl_SailorMountain[d_sailortofortress]:
-    Stranded_Sailor_Upper
+    Stranded_Sailor_Upper | Jefferson_Quest_Start + Bomb
 
 // Castle Lockstone
 
 lvl_frozenfortress[sdoor_fortress]:
-    Lockstone_Central + Castle_Lockstone_Door
+    Lockstone_Central + Castle_Lockstone_Door + $NO_JEFFERSON
 
 lvl_frozenfortress[hod_anc_fortress]:
     Lockstone_Central + Daytime +
-        Lockstone_West_Crow +
-        Lockstone_West_Keyed_Crow +
-        Lockstone_Southwest_Crow +
-        Lockstone_East_Crow
+        Lockstone_West_Crow/ +
+        Lockstone_West_Keyed_Crow/ +
+        Lockstone_Southwest_Crow/ +
+        Lockstone_East_Crow/
 
 lvl_frozenfortress[d_sailortofortress]:
     Lockstone_Entrance
@@ -203,7 +201,7 @@ lvl_frozenfortress[d_fortresstoroof]:
 // Camp of the Free Crows
 
 lvlConnect_Fortress_Mountaintops[sdoor_covenant]:
-    Camp_Village + Camp_of_the_Free_Crows_Door
+    Camp_Village + Camp_of_the_Free_Crows_Door + $NO_JEFFERSON
 
 lvlConnect_Fortress_Mountaintops[d_fortresstoroof]:
     Camp_Castle_Door
@@ -214,7 +212,7 @@ lvlConnect_Fortress_Mountaintops[d_CrowCavestoMountaintops]:
 // Old Watchtowers
 
 lvl_mountaintops[sdoor_mountaintops]:
-    Watchtowers_Entrance + Old_Watchtowers_Door
+    Watchtowers_Entrance + Old_Watchtowers_Door + $NO_JEFFERSON
 
 lvl_mountaintops[d_CrowCavestoMountaintops]:
     Watchtowers_Entrance
@@ -225,7 +223,7 @@ lvl_mountaintops[d_mountaintopstobetty]:
 // Betty's Lair
 
 boss_betty[sdoor_betty]:
-    Betty_Room + Betty's_Lair_Door
+    Betty_Room + Betty's_Lair_Door + $NO_JEFFERSON
 
 boss_betty[d_mountaintopstobetty]:
     Betty_Room
@@ -233,17 +231,17 @@ boss_betty[d_mountaintopstobetty]:
 // Overgrown Ruins & Mushroom Dungeon
 
 lvl_Forest[sdoor_forest]:
-    Ruins_Outside_Main_Dungeon_Gate + Overgrown_Ruins_Door
+    Ruins_Outside_Main_Dungeon_Gate + Overgrown_Ruins_Door + $NO_JEFFERSON
 
 lvl_Forest[sdoor_forest_dung]:
-    Dungeon_Lobby + Mushroom_Dungeon_Door
+    Dungeon_Lobby + Mushroom_Dungeon_Door + $NO_JEFFERSON
 
 lvl_Forest[hod_anc_forest]:
     Dungeon_Big_Door + Daytime +
-        Dungeon_Water_Arena +
-        Dungeon_Crow_2 +
-        Dungeon_Spider_Crow +
-        Dungeon_Hall_Crow
+        Dungeon_Water_Arena/ +
+        Dungeon_Crow_2/ +
+        Dungeon_Spider_Crow/ +
+        Dungeon_Hall_Crow/
 
 lvl_Forest[forest_buggy]:
     Ruins_Outside_Front_Gate

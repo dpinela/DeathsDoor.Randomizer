@@ -411,13 +411,13 @@ Seed-Inner_Furnace_Conveyor_Bridge:
 Seed-Inner_Furnace_Conveyor_Gauntlet:
     Inner_Furnace_Post_Burner_7
 
-Soul Orb-Furnace_Lantern_Chain:
+Soul_Orb-Furnace_Lantern_Chain:
     Furnace_Observation_Rooms + Fire
 
-Soul Orb-Small_Room:
+Soul_Orb-Small_Room:
     Furnace_Observation_Rooms + Fire
 
-Soul Orb-Furnace_Entrance_Sewer:
+Soul_Orb-Furnace_Entrance_Sewer:
     Furnace_Observation_Rooms
 
 // The Urn Witch's Laboratory
@@ -451,7 +451,7 @@ Magic_Shrine-Sailor_Turncam:
     Stranded_Sailor_Upper
 
 Grunt's_Old_Mask:
-    Stranded_Sailor_Jefferson + Rescued_Grunt + Frog_King_Room
+    Stranded_Sailor_Jefferson + Rescued_Grunt + Frog_King_Room/
 
 Captain's_Log:
     Stranded_Sailor_Jefferson
@@ -808,7 +808,7 @@ Soul_Orb-Fortress_Drop:
     Fortress_Entrance
 
 Red_Ancient_Tablet_of_Knowledge:
-    Fortress_Entrance + Hookshot + Nighttime // wrong
+    Fortress_Entrance + Hookshot + Nighttime + NO_JEFFERSON=FALSE
 
 Fortress_Bomb_Lever:
     Fortress_U_Turn

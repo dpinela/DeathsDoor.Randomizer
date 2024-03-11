@@ -7,6 +7,8 @@ using LFT = RandomizerCore.Logic.LogicFileType;
 
 internal static class LogicLoader
 {
+    public const string JeffersonStateTerm = "NO_JEFFERSON";
+
     public static RC.Logic.LogicManager Load()
     {
         var lmb = new RC.Logic.LogicManagerBuilder();
@@ -25,6 +27,10 @@ internal static class LogicLoader
             lmb.AddItem(new RC.LogicItems.SingleItem(termName, new RC.TermValue(term, 1)));
         }
         lmb.GetOrAddTerm("NIGHTSTART");
+        lmb.StateManager.GetOrAddBool(JeffersonStateTerm);
+        lmb.StateManager.SetProperty(JeffersonStateTerm, RC.Logic.StateLogic.StateField.DefaultValuePropertyName, true);
+
+        lmb.VariableResolver = new DDVariableResolver();
 
         var logicDir = IO.Path.GetDirectoryName(typeof(LogicLoader).Assembly.Location);
         var fmt = new MultilineLogicFormat();

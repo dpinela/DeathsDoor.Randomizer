@@ -14,9 +14,17 @@ internal class MultilineLogicFormat : RC.Logic.ILogicFormat
 
     public Collections.IEnumerable<RC.Logic.RawWaypointDef> LoadWaypoints(IO.Stream s)
     {
-        foreach (var (name, logic) in LoadGenericFile(s))
+        const string statelessPrefix = "stateless ";
+
+        foreach (var (rawName, logic) in LoadGenericFile(s))
         {
-            yield return new(name, logic, true);
+            var name = rawName;
+            var stateless = name.StartsWith(statelessPrefix);
+            if (stateless)
+            {
+                name = rawName.Substring(statelessPrefix.Length).Trim();
+            }
+            yield return new(name, logic, stateless);
         }
     }
 
