@@ -156,18 +156,6 @@ Inner_Furnace_Post_Burner_9:
     lvl_GrandmaBasement[d_basementtoboss] |
     Inner_Furnace_Post_Burner_8 + Fire
 
-Inner_Furnace_Burner_2_Pot:
-    Inner_Furnace_Post_Burner_2
-
-Inner_Furnace_Islands_Pot:
-    Inner_Furnace_Post_Burner_6
-
-Inner_Furnace_Burner_8_Pot:
-    Inner_Furnace_Post_Burner_8
-
-Inner_Furnace_Final_Pot:
-    Inner_Furnace_Post_Burner_9
-
 Grandma_Room:
     boss_grandma[sdoor_grandmaboss] |
     boss_grandma[d_basementtoboss]
@@ -234,18 +222,6 @@ Lockstone_Roof:
         Lockstone_Lord_Deadbolt/ +
         Lockstone_Lord_Theodoor/
 
-Lockstone_West_Crow_Pot:
-    Lockstone_Central
-
-Lockstone_West_Keyed_Crow_Pot:
-    Lockstone_West_Keyed_Crow
-
-Lockstone_Entrance_Pot:
-    Lockstone_Central
-
-Lockstone_East_Crow_Pot:
-    Lockstone_East_Crow
-
 Lockstone_Lord_Lockstone:
     Lockstone_Central + Fire
 
@@ -262,7 +238,7 @@ Lockstone_West_Crow:
     Lockstone_Central
 
 Lockstone_West_Keyed_Crow:
-    Lockstone_West_Keyed_Crow_Pot + Pink_Key>4
+    Lockstone_Central + Pink_Key>4
 
 Lockstone_Southwest_Crow:
     Lockstone_Central + Lockstone_Dual_Laser_Puzzle_Lever |
@@ -287,9 +263,6 @@ Camp_Elevator:
     lvlConnect_Fortress_Mountaintops[d_CrowCavestoMountaintops] |
     Camp_Village + Pink_Key>4
 
-Camp_Castle_Door_Pot:
-    Camp_Castle_Door
-
 Watchtowers_Entrance:
     lvl_mountaintops[sdoor_mountaintops] |
     lvl_mountaintops[d_CrowCavestoMountaintops] |
@@ -299,23 +272,17 @@ Watchtowers_Jamming_Start:
     Watchtowers_Entrance + Hookshot |
     Watchtowers_Barb_Elevator + Watchtowers_After_Boomers_Lever + Hookshot
 
-Watchtowers_First_Pot:
+Watchtowers_First_Pot_Area:
     Watchtowers_Jamming_Start + Hookshot
 
-Watchtowers_Barb_Elevator_Pot:
-    Watchtowers_Barb_Elevator
-
 Watchtowers_Barb_Elevator:
-    Watchtowers_First_Pot + Hookshot |
+    Watchtowers_First_Pot_Area + Hookshot |
     Watchtowers_Jamming_Start + Watchtowers_After_Boomers_Lever + Hookshot |
     // lever not required for the last one, just go around
     Watchtowers_Ice_Skating_Start + Hookshot
 
 Watchtowers_Lasers_Arena:
     Watchtowers_Barb_Elevator + Hookshot
-
-Watchtowers_Lasers_Arena_Pot:
-    Watchtowers_Lasers_Arena
 
 Watchtowers_Ice_Skating_Start:
     // When coming from the Barb elevator, the lever can be skipped by hooking
@@ -330,32 +297,29 @@ Watchtowers_Headless_Lord_of_Doors:
     Watchtowers_Lasers_Arena + Hookshot |
     Watchtowers_Ice_Skating_Start + Watchtowers_Before_Ice_Arena_Lever |
     Watchtowers_Ice_Skating_End + Watchtowers_After_Ice_Skating_Lever |
-    Watchtowers_Cave_Entrance_Pot + Watchtowers_After_Ice_Skating_Lever
+    Watchtowers_Cave_Entrance + Watchtowers_After_Ice_Skating_Lever
 
-Watchtowers_Owl_Pot:
-    Watchtowers_Headless_Lord_of_Doors
-
-Watchtowers_Cave_Entrance_Pot:
+Watchtowers_Cave_Entrance:
     lvl_mountaintops[d_mountaintopstobetty] |
     Watchtowers_Headless_Lord_of_Doors + Watchtowers_After_Ice_Skating_Lever
 
-Watchtowers_Entrance_Torch:
+stateless Watchtowers_Entrance_Torch:
     Watchtowers_Entrance + Nighttime + Fire
 
-Watchtowers_Jamming_Start_Torch:
+stateless Watchtowers_Jamming_Start_Torch:
     Watchtowers_Jamming_Start + Nighttime + Fire
 
-Watchtowers_Boxes_Torch:
+stateless Watchtowers_Boxes_Torch:
     Watchtowers_Jamming_Start + Nighttime + Fire
 
-Watchtowers_First_Pot_Torch:
-    Watchtowers_First_Pot + Nighttime + Fire
+stateless Watchtowers_First_Pot_Torch:
+    Watchtowers_First_Pot_Area + Nighttime + Fire
 
-Watchtowers_Boomers_Torch_1:
-    (Watchtowers_Ice_Skating_Start | Watchtowers_First_Pot) + 
+stateless Watchtowers_Boomers_Torch_1:
+    (Watchtowers_Ice_Skating_Start | Watchtowers_First_Pot_Area) + 
     Nighttime + Hookshot + Fire
 
-Watchtowers_Boomers_Torch_2:
+stateless Watchtowers_Boomers_Torch_2:
     Watchtowers_Ice_Skating_Start + Nighttime + Hookshot + Fire
 
 Betty_Room:
@@ -375,21 +339,6 @@ Ruins_Forest_Settlement:
     Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Ruins_Entrance_Ladder_Shortcut_Lever) |
     Dungeon_Main_Hall |
     Dungeon_Crow_2 + Dungeon_Above_Crow_2_Lever
-
-Ruins_Key_Pot:
-    Ruins_Outside_Main_Dungeon_Gate
-
-Ruins_Fire_Plant_Corridor_Pot:
-    Ruins_Forest_Settlement
-
-Ruins_Right_Arena_Pot:
-    Ruins_Forest_Settlement
-
-Ruins_Sewer_Pot:
-    Ruins_Forest_Settlement
-
-Ruins_Left_of_Lord_of_Doors_Arena_Pot:
-    Ruins_Forest_Settlement
 
 Dungeon_Lobby:
     lvl_Forest[sdoor_forest_dung] |
@@ -429,18 +378,6 @@ Dungeon_Spider_Crow:
 Dungeon_Hall_Crow:
     Dungeon_Main_Hall
 
-Dungeon_Cobweb_Room_Pot:
-    Dungeon_Big_Door
-
-Dungeon_Water_Arena_Pot:
-    Dungeon_Water_Arena
-
-Dungeon_Hall_Pot:
-    Dungeon_Main_Hall
-
-Dungeon_Crow_2_Pot:
-    Dungeon_Crow_2
-
 Fortress_Entrance:
     lvl_Swamp[d_swamp_enter] |
     Fortress_Frog_King_Encounter
@@ -455,32 +392,17 @@ Fortress_Frog_King_Encounter:
 Fortress_Inside_Main_Gate:
     Fortress_Frog_King_Encounter + Bomb + Fortress_Main_Gate_Lever
 
-Fortress_Main_Gate_Pot:
-    Fortress_Inside_Main_Gate + Bomb
-
 Fortress_U_Turn:
     Fortress_Inside_Main_Gate + Bomb + Fortress_Central_Shortcut_Lever
-
-Fortress_U_Turn_Pot:
-    Fortress_U_Turn
 
 Fortress_Breakable_Bridges:
     Fortress_U_Turn + Bomb
 
-Fortress_Breakable_Bridges_Pot:
-    Fortress_Breakable_Bridges
-
 Fortress_Bridge:
     Fortress_Breakable_Bridges + Fortress_Bridge_Ladder
 
-Fortress_Bridge_Pot:
-    Fortress_Bridge
-
 Fortress_Exit:
     Fortress_Bridge + Fortress_North_West_Lever
-
-Fortress_Exit_Pot:
-    Fortress_Exit
 
 stateless Rescued_Grunt:
     Dungeon_Lobby + Bomb

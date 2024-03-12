@@ -218,7 +218,7 @@ lvl_mountaintops[d_CrowCavestoMountaintops]:
     Watchtowers_Entrance
 
 lvl_mountaintops[d_mountaintopstobetty]:
-    Watchtowers_Cave_Entrance_Pot
+    Watchtowers_Cave_Entrance
 
 // Betty's Lair
 

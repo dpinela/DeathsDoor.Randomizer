@@ -5,7 +5,7 @@ using RC = RandomizerCore;
 
 internal class DDRandoContext : RC.RandoContext
 {
-    private Collections.List<RC.RandoTransition> transitions = new();
+    private Collections.List<RC.Logic.LogicDef> pots = new();
 
     private const string initDoor = "lvl_hallofdoors[bus_overridespawn]";
 
@@ -22,6 +22,15 @@ internal class DDRandoContext : RC.RandoContext
             var from = LM.GetTransitionStrict($"{t.ToScene}[{t.Door}]");
             yield return new RC.GeneralizedPlacement(to, from);
             yield return new RC.GeneralizedPlacement(from, to);
+        }
+
+        var potItem = LM.GetItemStrict(LogicLoader.PotsTerm);
+        foreach (var (name, logicDef) in LM.LogicLookup)
+        {
+            if (name.StartsWith("Pot-"))
+            {
+                yield return new RC.GeneralizedPlacement(potItem, logicDef);
+            }
         }
     }
 
@@ -67,4 +76,39 @@ internal class DDRandoContext : RC.RandoContext
     };
 
     private record class Transition(string FromScene, string Door, string ToScene);
+
+    private static readonly Collections.List<string> potLocations = new()
+    {
+        "Outside_Catacombs_Exit_Pot",
+        "Catacombs_Room_2_Pot",
+        "Cemetery_Right_Arena_Pot",
+        "Inner_Furnace_Burner_2_Pot",
+        "Inner_Furnace_Islands_Pot",
+        "Inner_Furnace_Burner_8_Pot",
+        "Inner_Furnace_Final_Pot",
+        "Lockstone_West_Crow_Pot",
+        "Lockstone_West_Keyed_Crow_Pot",
+        "Lockstone_Entrance_Pot",
+        "Lockstone_East_Crow_Pot",
+        "Camp_Castle_Door_Pot",
+        "Watchtowers_First_Pot",
+        "Watchtowers_Barb_Elevator_Pot",
+        "Watchtowers_Lasers_Arena_Pot",
+        "Watchtowers_Owl_Pot",
+        "Watchtowers_Cave_Entrance_Pot",
+        "Ruins_Key_Pot",
+        "Ruins_Fire_Plant_Corridor_Pot",
+        "Ruins_Right_Arena_Pot",
+        "Ruins_Sewer_Pot",
+        "Ruins_Left_of_Lord_of_Doors_Arena_Pot",
+        "Dungeon_Cobweb_Room_Pot",
+        "Dungeon_Water_Arena_Pot",
+        "Dungeon_Hall_Pot",
+        "Dungeon_Crow_2_Pot",
+        "Fortress_Main_Gate_Pot",
+        "Fortress_U_Turn_Pot",
+        "Fortress_Breakable_Bridges_Pot",
+        "Fortress_Bridge_Pot",
+        "Fortress_Exit_Pot"
+    };
 }

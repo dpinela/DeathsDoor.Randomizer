@@ -232,6 +232,25 @@ Key-Cemetery_Central:
 Key-Cemetery_Grey_Crow:
     Lost_Cemetery_Summit
 
+Pot-Outside_Catacombs_Exit:
+    Lost_Cemetery_Central
+
+Pot-Catacombs_Room_2:
+    Lost_Cemetery_Catacombs_Room_1 + Fire
+
+Pot-Cemetery_Right_Arena:
+    Lost_Cemetery_Right_Arena
+
+Pot-Bomb_Silent_Servant:
+    Lost_Cemetery_East_Tree_Bridge + Bomb
+
+Pot-Cemetery_Summit:
+    Lost_Cemetery_Summit
+
+Pot-Cemetery_Central_Arena:
+    Lost_Cemetery_Central + Pink_Key>4 |
+    Lost_Cemetery_Steadhone
+
 // Crypt
 
 Fire_Silent_Servant:
@@ -245,6 +264,9 @@ Estate_Elevator_Left_Lever:
 
 Estate_Elevator_Right_Lever:
     Crypt_Main_Room
+
+Pot-Fire_Silent_Servant:
+    Crypt_Main_Room + Fire
 
 // Estate of the Urn Witch
 
@@ -308,7 +330,10 @@ Soul_Orb-Estate_Sewer_End:
 Soul_Orb-Garden_of_Peace:
     Estate_South + Bomb
 
-//Green_Ancient_Tablet_of_Knowledge:
+Green_Ancient_Tablet_of_Knowledge:
+    // The pot requirement is handled separately by a logic cost,
+    // to make it easier to change to arbitary values.
+    Estate_North 
 
 Estate_Owl:
     Estate_Garden_of_Life_End + Nighttime
@@ -333,6 +358,27 @@ Garden_of_Life_Lanterns_Lever:
 
 Estate_Underground_Urn_Shed_Lever:
     Estate_Urn_Shed
+
+Pot-Estate_Door:
+    Estate_South
+
+Pot-Garden_of_Joy:
+    Estate_South
+
+Pot-Garden_of_Peace:
+    Estate_South
+
+Pot-Garden_of_Love_Entrance:
+    Estate_North
+
+Pot-Garden_of_Love_Hidden_Left:
+    Estate_North
+
+Pot-Garden_of_Love_Hidden_Right:
+    Estate_North
+
+Pot-Garden_of_Life:
+    Estate_North
 
 // Ceramic Manor
 
@@ -390,6 +436,24 @@ Key-Manor_After_Spinny_Pot_Room:
 Key-Manor_Library:
     Ceramic_Manor_Library
 
+Pot-Manor_Lobby:
+    Ceramic_Manor_Lobby
+
+Pot-Manor_Rafters:
+    Ceramic_Manor_Left
+
+Pot-Manor_Imp_Loft:
+    Ceramic_Manor_Left + Fire
+
+Pot-Manor_Post_Dining:
+    Ceramic_Manor_Lobby
+
+Pot-Manor_Library:
+    Ceramic_Manor_Library
+
+Pot-Manor_Bedroom:
+    Ceramic_Manor_Left
+
 // Furnace
 
 Heart_Shrine-Furnace_Cart_Puzzle:
@@ -419,6 +483,21 @@ Soul_Orb-Small_Room:
 Soul_Orb-Furnace_Entrance_Sewer:
     Furnace_Observation_Rooms
 
+Pot-Inner_Furnace_Burner_2:
+    Inner_Furnace_Post_Burner_2
+
+Pot-Inner_Furnace_Burner_3:
+    Inner_Furnace_Post_Burner_3
+
+Pot-Inner_Furnace_Islands:
+    Inner_Furnace_Post_Burner_6
+
+Pot-Inner_Furnace_Burner_8:
+    Inner_Furnace_Post_Burner_8
+
+Pot-Inner_Furnace_Final:
+    Inner_Furnace_Post_Burner_9
+
 // The Urn Witch's Laboratory
 
 Grandma:
@@ -437,6 +516,9 @@ Seed-Between_Cemetery_and_Sailor:
 
 Hookshot_Silent_Servant_Lever:
     Stranded_Sailor_Caves + Hookshot
+
+Pot-Hookshot_Silent_Servant:
+    Stranded_Sailor_Caves + Hookshot_Silent_Servant_Lever
 
 // Stranded Sailor
 
@@ -554,6 +636,18 @@ Key-Lockstone_West:
 Key-Lockstone_North:
     Lockstone_Central + Lockstone_North_Puzzle_Lever
 
+Pot-Lockstone_West_Crow:
+    Lockstone_Central
+
+Pot-Lockstone_West_Keyed_Crow:
+    Lockstone_West_Keyed_Crow
+
+Pot-Lockstone_Entrance:
+    Lockstone_Central
+
+Pot-Lockstone_East_Crow:
+    Lockstone_East_Crow
+
 // Camp of the Free Crows
 
 Heart_Shrine-Camp_Ice_Skating:
@@ -580,16 +674,19 @@ Soul_Orb-Camp_Broken_Bridge:
 Key-Camp_of_the_Free_Crows:
     Camp_Village
 
+Pot-Camp_Castle_Door:
+    Camp_Castle_Door
+
 // Old Watchtowers
 
 Mysterious_Locket:
-    Watchtowers_Cave_Entrance_Pot + Nighttime
+    Watchtowers_Cave_Entrance + Nighttime
 
 Seed-Watchtowers_Ice_Skating:
     Watchtowers_Ice_Skating_End
 
 Seed-Watchtowers_Tablet_Door:
-    Watchtowers_First_Pot
+    Watchtowers_First_Pot_Area
 
 Seed-Watchtowers_Archer_Platform:
     Watchtowers_Barb_Elevator + Hookshot
@@ -601,7 +698,7 @@ Soul_Orb-Watchtowers_Behind_Barb_Elevator:
     Watchtowers_Barb_Elevator
 
 Blue_Ancient_Tablet_of_Knowledge:
-    Watchtowers_First_Pot +
+    Watchtowers_First_Pot_Area +
         Watchtowers_Entrance_Torch + 
         Watchtowers_Jamming_Start_Torch +
         Watchtowers_Boxes_Torch +
@@ -620,6 +717,21 @@ Watchtowers_Before_Ice_Arena_Lever:
 
 Watchtowers_After_Ice_Skating_Lever:
     Watchtowers_Ice_Skating_End
+
+Pot-Watchtowers_First:
+    Watchtowers_First_Pot_Area
+
+Pot-Watchtowers_Barb_Elevator:
+    Watchtowers_Barb_Elevator
+
+Pot-Watchtowers_Lasers_Arena:
+    Watchtowers_Lasers_Arena
+
+Pot-Watchtowers_Owl:
+    Watchtowers_Headless_Lord_of_Doors
+
+Pot-Watchtowers_Cave_Entrance:
+    Watchtowers_Cave_Entrance
 
 // Betty's Lair
 
@@ -721,6 +833,21 @@ Ruins_Main_Gate_Lever:
 Key-Overgrown_Ruins:
     Ruins_Outside_Main_Dungeon_Gate
 
+Pot-Ruins_Key:
+    Ruins_Outside_Main_Dungeon_Gate
+
+Pot-Ruins_Fire_Plant_Corridor:
+    Ruins_Forest_Settlement
+
+Pot-Ruins_Right_Arena:
+    Ruins_Forest_Settlement
+
+Pot-Ruins_Sewer:
+    Ruins_Forest_Settlement
+
+Pot-Ruins_Left_of_Lord_of_Doors_Arena:
+    Ruins_Forest_Settlement
+
 // Mushroom Dungeon
 
 Thunder_Hammer:
@@ -776,6 +903,18 @@ Key-Dungeon_Right:
 
 Key-Dungeon_Near_Water_Arena:
     Dungeon_Water_Arena + Fire
+
+Pot-Dungeon_Cobweb_Room:
+    Dungeon_Big_Door
+
+Pot-Dungeon_Water_Arena:
+    Dungeon_Water_Arena
+
+Pot-Dungeon_Hall:
+    Dungeon_Main_Hall
+
+Pot-Dungeon_Crow_2:
+    Dungeon_Crow_2
 
 // Flooded Fortress
 
@@ -836,6 +975,21 @@ Fortress_Pre-Main_Gate_Lever:
 
 Fortress_North_West_Lever:
     Fortress_Bridge
+
+Pot-Fortress_Main_Gate:
+    Fortress_Inside_Main_Gate + Bomb
+
+Pot-Fortress_U_Turn:
+    Fortress_U_Turn
+
+Pot-Fortress_Breakable_Bridges:
+    Fortress_Breakable_Bridges
+
+Pot-Fortress_Bridge:
+    Fortress_Bridge
+
+Pot-Fortress_Exit:
+    Fortress_Exit
 
 // Throne of the Frog King
 

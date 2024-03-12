@@ -97,7 +97,14 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     private RC.IRandoLocation[] MakeLocations(Collections.List<PoolLocation> locs, RC.Logic.LogicManager lm)
     {
         return locs.Select(loc => loc.Name.Replace(" ", "_"))
-            .Select(name => new RC.RandoLocation() { logic = lm.GetLogicDefStrict(name) })
+            .Select(name => {
+                var loc = new RC.RandoLocation() { logic = lm.GetLogicDefStrict(name) };
+                if (name == "Green_Ancient_Tablet_of_Knowledge")
+                {
+                    loc.AddCost(new PlantedPotCost(lm, 50));
+                }
+                return loc;
+            })
             .ToArray();
     }
 }
