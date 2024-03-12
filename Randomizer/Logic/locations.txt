@@ -4,7 +4,6 @@ Camp_of_the_Free_Crows_Door:
     Hall_of_Doors_Lobby + Camp_of_the_Free_Crows_Door |
     Camp_Village
 
-// these all need the other side added in
 Betty's_Lair_Door:
     Hall_of_Doors_Lobby + Betty's_Lair_Door |
     Betty_Room

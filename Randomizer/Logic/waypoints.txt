@@ -1,5 +1,5 @@
 Hall_of_Doors_Lobby:
-    $DEFAULTSTATE + lvl_hallofdoors[bus_overridespawn]/  |
+    $DEFAULTSTATE + lvl_hallofdoors[bus_overridespawn]/ |
     lvl_hallofdoors[sdoor_covenant] |
     lvl_hallofdoors[sdoor_betty] |
     lvl_hallofdoors[sdoor_sailor] |
