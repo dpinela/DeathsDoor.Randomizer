@@ -64,6 +64,10 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                         location: p.Location.Name.Replace("_", " ")
                     );
                 }
+                // Disable the first Grey Crow cutscene so that its invisible
+                // hitbox isn't blocking the bridge when entering Cemetery from
+                // anything other than the vanilla route.
+                GameSave.currentSave.SetKeyState("crow_cut1", true, true);
             }
             catch (System.Exception err)
             {
