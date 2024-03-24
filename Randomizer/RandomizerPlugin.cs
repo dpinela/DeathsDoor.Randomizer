@@ -73,6 +73,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 // hitbox isn't blocking the bridge when entering Cemetery from
                 // anything other than the vanilla route.
                 GameSave.currentSave.SetKeyState("crow_cut1", true, true);
+                WriteHelperLog(GenerateHelperLog(new()));
             }
             catch (System.Exception err)
             {
@@ -84,50 +85,55 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         {
             if (tlog != null && GameSave.GetSaveData().IsKeyUnlocked(isRandoKey))
             {
-                lm ??= LogicLoader.Load();
-                var ctx = new DDRandoContext(lm);
-                var pm = new RC.Logic.ProgressionManager(lm, ctx);
-                pm.mu.AddWaypoints(lm.Waypoints);
-                pm.mu.AddTransitions(lm.TransitionLookup.Values);
-                var save = IC.SaveData.Open();
-                var reachableLocations = new CG.HashSet<string>();
-                foreach (var loc in save.NamedPlacements.Keys)
-                {
-                    if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
-                    {
-                        pm.mu.AddEntry(new HelperLogUpdateEntry(logic, reachableLocations));
-                    }
-                }
-                foreach (var gp in ctx.EnumerateExistingPlacements())
-                {
-                    pm.mu.AddEntry(new HelperLogVanillaUpdateEntry(gp.Location, gp.Item));
-                }
-                pm.mu.StartUpdating();
-                
-                foreach (var entry in tlog)
-                {
-                    if (!save.NamedPlacements.TryGetValue(entry.LocationName, out var item))
-                    {
-                        Logger.LogError($"Helper log generation: unnamed item at {entry.LocationName}");
-                        continue;
-                    }
-                    var randoItem = lm.GetItemStrict(item.Replace(" ", "_"));
-                    // no location-dependent items exist in this rando,
-                    // so we don't need to use the Add(ILogicItem, ILogicDef) overload.
-                    pm.Add(randoItem);
-                }
-
-                foreach (var entry in tlog)
-                {
-                    reachableLocations.Remove(entry.LocationName.Replace(" ", "_"));
-                }
-
-                WriteHelperLog(reachableLocations);
+                WriteHelperLog(GenerateHelperLog(tlog));
             }
         };
     }
 
     private const string isRandoKey = "Randomizer-is_rando";
+
+    private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
+    {
+        lm ??= LogicLoader.Load();
+        var ctx = new DDRandoContext(lm);
+        var pm = new RC.Logic.ProgressionManager(lm, ctx);
+        pm.mu.AddWaypoints(lm.Waypoints);
+        pm.mu.AddTransitions(lm.TransitionLookup.Values);
+        var save = IC.SaveData.Open();
+        var reachableLocations = new CG.HashSet<string>();
+        foreach (var loc in save.NamedPlacements.Keys)
+        {
+            if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
+            {
+                pm.mu.AddEntry(new HelperLogUpdateEntry(logic, reachableLocations));
+            }
+        }
+        foreach (var gp in ctx.EnumerateExistingPlacements())
+        {
+            pm.mu.AddEntry(new HelperLogVanillaUpdateEntry(gp.Location, gp.Item));
+        }
+        pm.mu.StartUpdating();
+        
+        foreach (var entry in tlog)
+        {
+            if (!save.NamedPlacements.TryGetValue(entry.LocationName, out var item))
+            {
+                Logger.LogError($"Helper log generation: unnamed item at {entry.LocationName}");
+                continue;
+            }
+            var randoItem = lm.GetItemStrict(item.Replace(" ", "_"));
+            // no location-dependent items exist in this rando,
+            // so we don't need to use the Add(ILogicItem, ILogicDef) overload.
+            pm.Add(randoItem);
+        }
+
+        foreach (var entry in tlog)
+        {
+            reachableLocations.Remove(entry.LocationName);
+        }
+
+        return reachableLocations;
+    }
 
     private static void WriteHelperLog(CG.IEnumerable<string> uncheckedReachableLocations)
     {
@@ -137,7 +143,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         using var helperLog = IO.File.Create(fileLocation);
         using var writer = new IO.StreamWriter(helperLog);
         writer.WriteLine("UNCHECKED REACHABLE LOCATIONS:\n");
-        foreach (var loc in uncheckedReachableLocations)
+        foreach (var loc in sortedLocations)
         {
             writer.WriteLine(loc);
         }
