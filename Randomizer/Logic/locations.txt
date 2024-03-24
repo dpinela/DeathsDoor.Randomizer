@@ -333,7 +333,7 @@ Soul_Orb-Garden_of_Peace:
 Green_Ancient_Tablet_of_Knowledge:
     // The pot requirement is handled separately by a logic cost,
     // to make it easier to change to arbitary values.
-    Estate_North 
+    Estate_North + Nighttime
 
 Estate_Owl:
     Estate_Garden_of_Life_End + Nighttime
@@ -707,7 +707,7 @@ Blue_Ancient_Tablet_of_Knowledge:
         Watchtowers_Boomers_Torch_2
 
 Watchtowers_Owl:
-    Watchtowers_Ice_Skating_End
+    Watchtowers_Ice_Skating_End + Nighttime
 
 Watchtowers_After_Boomers_Lever:
     Watchtowers_Barb_Elevator
@@ -813,7 +813,7 @@ Yellow_Ancient_Tablet_of_Knowledge:
 
 Ruins_Owl:
     // breaking the bomb wall almost counts as a skip, but not quite
-    Ruins_Forest_Settlement
+    Ruins_Forest_Settlement + Nighttime
 
 Ruins_Settlement_Gate_Lever:
     Ruins_Forest_Settlement
