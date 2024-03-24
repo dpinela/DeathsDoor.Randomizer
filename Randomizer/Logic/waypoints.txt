@@ -354,6 +354,7 @@ Dungeon_Big_Door:
     Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever
 
 Dungeon_Main_Hall:
+    lvl_Forest[d_swamp_enter] + Bomb |
     Dungeon_Big_Door |
     // technically redundant as Water Arena is only reachable from
     // Main Hall or Big Door in the first place
