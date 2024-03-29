@@ -41,8 +41,7 @@ Lost_Cemetery_Door:
     Lost_Cemetery_Central
 
 Grove_of_Spirits_Door:
-    Hall_of_Doors_Lobby + Grove_of_Spirits_Door |
-    Grove_of_Spirits
+    Hall_of_Doors_Lobby | Grove_of_Spirits
 
 The_Urn_Witch's_Laboratory_Door:
     Hall_of_Doors_Lobby + The_Urn_Witch's_Laboratory_Door |

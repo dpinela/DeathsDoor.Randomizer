@@ -147,10 +147,10 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         using var helperLog = IO.File.Create(fileLocation);
         using var writer = new IO.StreamWriter(helperLog);
 
-        writer.WriteLine("UNCHECKED REACHABLE LOCATIONS:\n");
+        writer.WriteLine("UNCHECKED REACHABLE LOCATIONS:");
         foreach (var group in locationsByArea)
         {
-            writer.WriteLine(IC.AreaName.Of(group.Key) + ":\n");
+            writer.WriteLine("\n" + IC.AreaName.Of(group.Key) + ":\n");
             foreach (var loc in group.OrderBy(x => x))
             {
                 writer.WriteLine(loc);
