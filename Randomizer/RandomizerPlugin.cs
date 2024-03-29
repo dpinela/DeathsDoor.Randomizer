@@ -137,15 +137,24 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
     private static void WriteHelperLog(CG.IEnumerable<string> uncheckedReachableLocations)
     {
+        var locationsByArea = uncheckedReachableLocations
+            .GroupBy(name => IC.Predefined.TryGetLocation(name, out var loc) ? loc.Area : IC.Area.Unknown)
+            .OrderBy(g => g.Key);
+        
         var sortedLocations = new CG.List<string>(uncheckedReachableLocations);
         sortedLocations.Sort();
         var fileLocation = IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Helper Log.txt");
         using var helperLog = IO.File.Create(fileLocation);
         using var writer = new IO.StreamWriter(helperLog);
+
         writer.WriteLine("UNCHECKED REACHABLE LOCATIONS:\n");
-        foreach (var loc in sortedLocations)
+        foreach (var group in locationsByArea)
         {
-            writer.WriteLine(loc);
+            writer.WriteLine(IC.AreaName.Of(group.Key) + ":\n");
+            foreach (var loc in group.OrderBy(x => x))
+            {
+                writer.WriteLine(loc);
+            }
         }
     }
 
