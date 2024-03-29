@@ -60,7 +60,7 @@ lvl_hallofdoors[hod_anc_mansion]:
 lvl_hallofdoors[avarice_hod_anc_forest]:
     lvl_hallofdoors[avarice_hod_anc_forest] |
     lvl_hallofdoors[hod_anc_forest] |
-    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+    Hall_of_Doors_Lobby + Lever-Bomb_Exit + Bomb
 
 lvl_hallofdoors[avarice_hod_anc_fortress]:
     lvl_hallofdoors[avarice_hod_anc_fortress] |
@@ -97,8 +97,8 @@ lvl_Graveyard[d_graveyardtosailorcaves]:
 lvl_Graveyard[forest_buggy]:
     Fire + (
         lvl_Graveyard[forest_buggy] |
-        Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever |
-        Lost_Cemetery_Summit + Cemetery_East_Tree_Lever
+        Lost_Cemetery_Right_Arena + Lever-Cemetery_Shortcut_to_East_Tree |
+        Lost_Cemetery_Summit + Lever-Cemetery_East_Tree
     )
 
 // Crypt
@@ -107,7 +107,7 @@ lvlConnect_Graveyard_Gardens[d_graveyardtocrypt]:
     Crypt_Main_Room
 
 lvlConnect_Graveyard_Gardens[d_crypttogardens]:
-    Crypt_Main_Room + Estate_Elevator_Left_Lever + Estate_Elevator_Right_Lever
+    Crypt_Main_Room + Lever-Estate_Elevator_Left + Lever-Estate_Elevator_Right
 
 // Estate of the Urn Witch
 

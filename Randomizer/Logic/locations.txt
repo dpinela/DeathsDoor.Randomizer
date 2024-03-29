@@ -82,20 +82,20 @@ Fire_Avarice:
     lvl_hallofdoors[avarice_hod_anc_mansion] |
     lvl_hallofdoors[hod_anc_mansion]
 
-Bomb_Exit_Lever:
+Lever-Bomb_Exit:
     lvl_hallofdoors[avarice_hod_anc_forest] + Bomb |
     lvl_hallofdoors[hod_anc_forest] + Bomb |
-    Hall_of_Doors_Lobby + Bomb_Exit_Lever
+    Hall_of_Doors_Lobby + Lever-Bomb_Exit
 
 Soul_Orb-Bomb_Return:
     lvl_hallofdoors[avarice_hod_anc_forest] + Bomb |
     lvl_hallofdoors[hod_anc_forest] + Bomb |
-    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+    Hall_of_Doors_Lobby + Lever-Bomb_Exit + Bomb
 
 Bomb_Avarice:
     lvl_hallofdoors[avarice_hod_anc_forest] |
     lvl_hallofdoors[hod_anc_forest] |
-    Hall_of_Doors_Lobby + Bomb_Exit_Lever + Bomb
+    Hall_of_Doors_Lobby + Lever-Bomb_Exit + Bomb
 
 Ancient_Door_Scale_Model:
     Hall_of_Doors_Lobby + Fire
@@ -188,7 +188,7 @@ Soul_Orb-Catacombs_Room_1:
     Lost_Cemetery_Catacombs_Room_1
 
 Soul_Orb-Cemetery_Gated_Sewer:
-    Lost_Cemetery_Summit + Cemetery_Sewer_Lever
+    Lost_Cemetery_Summit + Lever-Cemetery_Sewer
 
 Soul_Orb-Catacombs_Entrance:
     Lost_Cemetery_Central
@@ -202,27 +202,27 @@ Cyan_Ancient_Tablet_of_Knowledge:
 Purple_Ancient_Tablet_of_Knowledge:
     Lost_Cemetery_Steadhone + Nighttime + Mysterious_Locket
 
-Cemetery_Sewer_Lever:
+Lever-Cemetery_Sewer:
     Lost_Cemetery_Summit
 
-Guardian_of_the_Door_Access_Lever:
+Lever-Guardian_of_the_Door_Access:
     Lost_Cemetery_Right_Arena
 
-Cemetery_Shortcut_to_East_Tree_Lever:
+Lever-Cemetery_Shortcut_to_East_Tree:
     lvl_Graveyard[forest_buggy] |
     Lost_Cemetery_East_Tree_Bridge |
-    Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever
+    Lost_Cemetery_Right_Arena + Lever-Cemetery_Shortcut_to_East_Tree
 
-Cemetery_East_Tree_Lever:
+Lever-Cemetery_East_Tree:
     Lost_Cemetery_East_Tree_Bridge
 
-Catacombs_Tower_Lever:
+Lever-Catacombs_Tower:
     Lost_Cemetery_Steadhone
 
-Cemetery_Exit_to_Estate_Lever:
+Lever-Cemetery_Exit_to_Estate:
     Lost_Cemetery_Belltower
 
-Catacombs_Exit_Lever:
+Lever-Catacombs_Exit:
     Lost_Cemetery_Catacombs_Room_1
 
 Key-Cemetery_Central:
@@ -258,10 +258,10 @@ Fire_Silent_Servant:
 Soul_Orb-Estate_Access_Crypt:
     Crypt_Main_Room
 
-Estate_Elevator_Left_Lever:
+Lever-Estate_Elevator_Left:
     Crypt_Main_Room
 
-Estate_Elevator_Right_Lever:
+Lever-Estate_Elevator_Right:
     Crypt_Main_Room
 
 Pot-Fire_Silent_Servant:
@@ -337,25 +337,25 @@ Green_Ancient_Tablet_of_Knowledge:
 Estate_Owl:
     Estate_Garden_of_Life_End + Nighttime
 
-Garden_of_Love_Lever:
+Lever-Garden_of_Love:
     Estate_North
 
-Garden_of_Life_End_Lever:
+Lever-Garden_of_Life_End:
     Estate_Garden_of_Life_End
 
-Garden_of_Peace_Lever:
+Lever-Garden_of_Peace:
     Estate_South
 
-Garden_of_Joy_Lever:
+Lever-Garden_of_Joy:
     Estate_South
 
-Garden_of_Love_Turncam_Lever:
+Lever-Garden_of_Love_Turncam:
     Estate_North
 
-Garden_of_Life_Lanterns_Lever:
+Lever-Garden_of_Life_Lanterns:
     Estate_North
 
-Estate_Underground_Urn_Shed_Lever:
+Lever-Estate_Underground_Urn_Shed:
     Estate_Urn_Shed
 
 Pot-Estate_Door:
@@ -420,10 +420,10 @@ Soul_Orb-Manor_Library_Shelf:
 Soul_Orb-Manor_Chandelier:
     Ceramic_Manor_Left
 
-Manor_Big_Pot_Arena_Lever:
+Lever-Manor_Big_Pot_Arena:
     Ceramic_Manor_Left
 
-Manor_Bookshelf_Shortcut_Lever:
+Lever-Manor_Bookshelf_Shortcut:
     Ceramic_Manor_Library
 
 Key-Manor_Under_Dining_Room:
@@ -505,7 +505,7 @@ Grandma:
 // Stranded Sailor Caves
 
 Hookshot_Silent_Servant:
-    Stranded_Sailor_Caves + Hookshot_Silent_Servant_Lever
+    Stranded_Sailor_Caves + Lever-Hookshot_Silent_Servant
 
 Token_of_Death:
     Stranded_Sailor_Caves + Hookshot
@@ -513,16 +513,16 @@ Token_of_Death:
 Seed-Between_Cemetery_and_Sailor:
     Stranded_Sailor_Caves
 
-Hookshot_Silent_Servant_Lever:
+Lever-Hookshot_Silent_Servant:
     Stranded_Sailor_Caves + Hookshot
 
 Pot-Hookshot_Silent_Servant:
-    Stranded_Sailor_Caves + Hookshot_Silent_Servant_Lever
+    Stranded_Sailor_Caves + Lever-Hookshot_Silent_Servant
 
 // Stranded Sailor
 
 Reaper's_Greatsword:
-    Stranded_Sailor_Jefferson + Hookshot + Sailor_Greatsword_Gate_Lever
+    Stranded_Sailor_Jefferson + Hookshot + Lever-Sailor_Greatsword_Gate
 
 Heart_Shrine-Hookshot_Arena:
     Stranded_Sailor_Jefferson + Hookshot
@@ -545,20 +545,20 @@ Seed-Sailor_Upper:
 Soul_Orb-Sailor_Turncam:
     Stranded_Sailor_Upper
 
-Sailor_Turncam_Upper_Lever:
+Lever-Sailor_Turncam_Upper:
     Stranded_Sailor_Upper
 
-Sailor_Turncam_Lower_Lever:
+Lever-Sailor_Turncam_Lower:
     Stranded_Sailor_Upper
 
 // Bomb is required to break the secret walls
-Sailor_Greatsword_Gate_Lever:
+Lever-Sailor_Greatsword_Gate:
     Stranded_Sailor_Jefferson + Hookshot + Bomb
 
 // Castle Lockstone
 
 Magic_Shrine-Lockstone_Secret_West:
-    Lockstone_Jailed_Seed + Lockstone_Secret_West_Lever
+    Lockstone_Jailed_Seed + Lever-Lockstone_Secret_West
 
 Ancient_Crown:
     Lockstone_Central
@@ -593,47 +593,47 @@ Soul_Orb-Lockstone_Exit:
 Soul_Orb-West_Lockstone_Sewer:
     Lockstone_Central
 
-Lockstone_East_Start_Shortcut_Lever:
+Lever-Lockstone_East_Start_Shortcut:
     Lockstone_Library
 
-Lockstone_Entrance_Lever:
+Lever-Lockstone_Entrance:
     Lockstone_Entrance
 
-Lockstone_East_Lower_Lever:
+Lever-Lockstone_East_Lower:
     Lockstone_Central
 
-Lockstone_Upper_Shortcut_Lever:
+Lever-Lockstone_Upper_Shortcut:
     Lockstone_East_Upper
 
-Lockstone_Dual_Laser_Puzzle_Lever:
+Lever-Lockstone_Dual_Laser_Puzzle:
     Lockstone_Central
 
-Lockstone_Tracking_Beam_Puzzle_Lever:
+Lever-Lockstone_Tracking_Beam_Puzzle:
     Lockstone_East
 
-Lockstone_Vertical_Laser_Puzzle_Lever:
-    Lockstone_East + Lockstone_Tracking_Beam_Puzzle_Lever
+Lever-Lockstone_Vertical_Laser_Puzzle:
+    Lockstone_East + Lever-Lockstone_Tracking_Beam_Puzzle
 
-Lockstone_North_Puzzle_Lever:
+Lever-Lockstone_North_Puzzle:
     Lockstone_Central
 
-Lockstone_Secret_West_Lever:
+Lever-Lockstone_Secret_West:
     (Lockstone_Central | Lockstone_Jailed_Seed) + Hookshot
 
-Lockstone_Hookshot_Puzzle_Lever:
+Lever-Lockstone_Hookshot_Puzzle:
     Lockstone_Southwest_Upper
 
-Lockstone_Upper_Puzzle_Lever:
+Lever-Lockstone_Upper_Puzzle:
     Lockstone_East_Upper + Hookshot
 
-Lockstone_Upper_Dual_Laser_Puzzle_Lever:
+Lever-Lockstone_Upper_Dual_Laser_Puzzle:
     Lockstone_East_Upper_Keyed_Door + Pink_Key>4 + Hookshot
 
 Key-Lockstone_West:
     Lockstone_Central + Hookshot
 
 Key-Lockstone_North:
-    Lockstone_Central + Lockstone_North_Puzzle_Lever
+    Lockstone_Central + Lever-Lockstone_North_Puzzle
 
 Pot-Lockstone_West_Crow:
     Lockstone_Central
@@ -708,13 +708,13 @@ Blue_Ancient_Tablet_of_Knowledge:
 Watchtowers_Owl:
     Watchtowers_Ice_Skating_End + Nighttime
 
-Watchtowers_After_Boomers_Lever:
+Lever-Watchtowers_After_Boomers:
     Watchtowers_Barb_Elevator
 
-Watchtowers_Before_Ice_Arena_Lever:
+Lever-Watchtowers_Before_Ice_Arena:
     Watchtowers_Headless_Lord_of_Doors
 
-Watchtowers_After_Ice_Skating_Lever:
+Lever-Watchtowers_After_Ice_Skating:
     Watchtowers_Ice_Skating_End
 
 Pot-Watchtowers_First:
@@ -814,19 +814,19 @@ Ruins_Owl:
     // breaking the bomb wall almost counts as a skip, but not quite
     Ruins_Forest_Settlement + Nighttime
 
-Ruins_Settlement_Gate_Lever:
+Lever-Ruins_Settlement_Gate:
     Ruins_Forest_Settlement
 
-Ruins_Upper_Dungeon_Entrance_Lever:
+Lever-Ruins_Upper_Dungeon_Entrance:
     Dungeon_Main_Hall
 
-Ruins_Ladder_Left_of_Lord_of_Doors_Arena_Lever:
+Lever-Ruins_Ladder_Left_of_Lord_of_Doors_Arena:
     Ruins_Forest_Settlement
 
-Ruins_Entrance_Ladder_Shortcut_Lever:
+Lever-Ruins_Entrance_Ladder_Shortcut:
     Ruins_Forest_Settlement
 
-Ruins_Main_Gate_Lever:
+Lever-Ruins_Main_Gate:
     Ruins_Outside_Front_Gate
 
 Key-Overgrown_Ruins:
@@ -850,7 +850,7 @@ Pot-Ruins_Left_of_Lord_of_Doors_Arena:
 // Mushroom Dungeon
 
 Thunder_Hammer:
-    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever
+    Ruins_Forest_Settlement + Lever-Ruins_Upper_Dungeon_Entrance
 
 Heart_Shrine-Dungeon_Water_Arena:
     Dungeon_Water_Arena + Bomb + Fire
@@ -885,13 +885,13 @@ Soul_Orb-Dungeon_Lower_Entrance:
 Soul_Orb-Dungeon_Left_Exit_Shelf:
     Dungeon_Main_Hall
 
-Dungeon_Entrance_Right_Gate_Lever:
+Lever-Dungeon_Entrance_Right_Gate:
     Dungeon_Main_Hall
 
-Dungeon_Entrance_Left_Gate_Lever:
+Lever-Dungeon_Entrance_Left_Gate:
     Dungeon_Main_Hall
 
-Dungeon_Above_Crow_2_Lever:
+Lever-Dungeon_Above_Crow_2:
     Dungeon_Crow_2
 
 Key-Dungeon_Hall:
@@ -921,7 +921,7 @@ Magic_Shrine-Fortress_Bow_Secret:
     Fortress_Entrance
 
 Seed-Fortress_Watchtower:
-    Fortress_Watchtower_Lower + Fortress_Watchtower_Upper_Lever
+    Fortress_Watchtower_Lower + Lever-Fortress_Watchtower_Upper
 
 Seed-Fortress_Statue:
     Fortress_Entrance
@@ -947,32 +947,32 @@ Soul_Orb-Fortress_Drop:
 Red_Ancient_Tablet_of_Knowledge:
     Fortress_Entrance + Hookshot + Nighttime + NO_JEFFERSON=FALSE
 
-Fortress_Bomb_Lever:
+Lever-Fortress_Bomb:
     Fortress_U_Turn
 
-Fortress_Main_Gate_Lever:
+Lever-Fortress_Main_Gate:
     Fortress_Frog_King_Encounter + Bomb
 
-Fortress_Central_Shortcut_Lever:
+Lever-Fortress_Central_Shortcut:
     Fortress_Inside_Main_Gate + Bomb
 
-Fortress_Statue_Lever:
+Lever-Fortress_Statue:
     Fortress_Entrance
 
-Fortress_Watchtower_Lower_Lever:
+Lever-Fortress_Watchtower_Lower:
     Fortress_Entrance
 
-Fortress_Watchtower_Upper_Lever:
+Lever-Fortress_Watchtower_Upper:
     Fortress_Watchtower_Lower
 
-Fortress_Bridge_Ladder:
+Lever-Fortress_Bridge:
     Fortress_Breakable_Bridges
 
-Fortress_Pre-Main_Gate_Lever:
-    Fortress_Entrance + Fortress_Statue_Lever |
+Lever-Fortress_Pre-Main_Gate:
+    Fortress_Entrance + Lever-Fortress_Statue |
     Fortress_Frog_King_Encounter
 
-Fortress_North_West_Lever:
+Lever-Fortress_North_West:
     Fortress_Bridge
 
 Pot-Fortress_Main_Gate:

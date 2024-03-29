@@ -15,10 +15,10 @@ Hall_of_Doors_Lobby:
     lvl_hallofdoors[sdoor_mansion] |
     lvl_hallofdoors[sdoor_basementromp] |
     lvl_hallofdoors[sdoor_gardens] |
-    lvl_hallofdoors[hod_anc_forest] + Fire + Bomb_Exit_Lever |
+    lvl_hallofdoors[hod_anc_forest] + Fire + Lever-Bomb_Exit |
     lvl_hallofdoors[hod_anc_fortress] + Fire |
     lvl_hallofdoors[hod_anc_mansion] + Fire |
-    lvl_hallofdoors[avarice_hod_anc_forest] + Fire + Bomb_Exit_Lever |
+    lvl_hallofdoors[avarice_hod_anc_forest] + Fire + Lever-Bomb_Exit |
     lvl_hallofdoors[avarice_hod_anc_fortress] + Fire |
     lvl_hallofdoors[avarice_hod_anc_mansion] + Fire
 
@@ -28,15 +28,15 @@ Grove_of_Spirits:
 Lost_Cemetery_Central:
     lvl_Graveyard[tdoor_gy] |
     lvl_Graveyard[sdoor_graveyard] |
-    lvl_Graveyard[d_graveyardtocrypt] + Catacombs_Tower_Lever |
+    lvl_Graveyard[d_graveyardtocrypt] + Lever-Catacombs_Tower |
     Lost_Cemetery_Right_Arena
 
 Lost_Cemetery_Right_Arena:
     lvl_Graveyard[tdoor_gy] + Hookshot |
-    lvl_Graveyard[forest_buggy] + Cemetery_Shortcut_to_East_Tree_Lever |
+    lvl_Graveyard[forest_buggy] + Lever-Cemetery_Shortcut_to_East_Tree |
     Lost_Cemetery_Central + (
-        Guardian_of_the_Door_Access_Lever |
-        Catacombs_Tower_Lever
+        Lever-Guardian_of_the_Door_Access |
+        Lever-Catacombs_Tower
     )
 
 Lost_Cemetery_Steadhone:
@@ -44,7 +44,7 @@ Lost_Cemetery_Steadhone:
     Lost_Cemetery_Belltower |
     Lost_Cemetery_Central + (
         Pink_Key>4 |
-        Catacombs_Tower_Lever
+        Lever-Catacombs_Tower
     )
     // geometry skip from Sailor
 
@@ -54,21 +54,21 @@ stateless Lost_Cemetery_Opened_Exit_to_Sailor:
     Lost_Cemetery_Steadhone + Fire // or a well-aimed arrow offscreen
 
 Lost_Cemetery_Summit:
-    Lost_Cemetery_Central + Guardian_of_the_Door_Access_Lever |
-    Lost_Cemetery_Steadhone + Cemetery_Sewer_Lever
+    Lost_Cemetery_Central + Lever-Guardian_of_the_Door_Access |
+    Lost_Cemetery_Steadhone + Lever-Cemetery_Sewer
 
 Lost_Cemetery_East_Tree_Bridge:
-    lvl_Graveyard[forest_buggy] + Cemetery_East_Tree_Lever |
-    Lost_Cemetery_Right_Arena + Cemetery_Shortcut_to_East_Tree_Lever + Cemetery_East_Tree_Lever |
+    lvl_Graveyard[forest_buggy] + Lever-Cemetery_East_Tree |
+    Lost_Cemetery_Right_Arena + Lever-Cemetery_Shortcut_to_East_Tree + Lever-Cemetery_East_Tree |
     Lost_Cemetery_Summit + Fire
 
 Lost_Cemetery_Belltower:
     lvl_Graveyard[d_graveyardtocrypt] |
     Lost_Cemetery_Summit + Pink_Key>4 |
-    Lost_Cemetery_Steadhone + Cemetery_Exit_to_Estate_Lever
+    Lost_Cemetery_Steadhone + Lever-Cemetery_Exit_to_Estate
 
 Lost_Cemetery_Catacombs_Room_1:
-    Lost_Cemetery_Central + (Fire | Catacombs_Exit_Lever)
+    Lost_Cemetery_Central + (Fire | Lever-Catacombs_Exit)
 
 stateless Daytime:
     NIGHTSTART=0 | NIGHTSTART + Can_Hit_Bell
@@ -92,17 +92,17 @@ Crypt_Main_Room:
 Estate_South:
     lvl_GrandmaGardens[d_crypttogardens] |
     lvl_GrandmaGardens[sdoor_gardens] |
-    Estate_North + Garden_of_Joy_Lever + Garden_of_Peace_Lever
+    Estate_North + Lever-Garden_of_Joy + Lever-Garden_of_Peace
 
 Estate_North:
     lvl_GrandmaGardens[d_gardenstomansion] |
-    Estate_South + Garden_of_Joy_Lever + Garden_of_Peace_Lever
+    Estate_South + Lever-Garden_of_Joy + Lever-Garden_of_Peace
 
 Estate_Urn_Shed:
-    Estate_South + (Hookshot | Estate_Underground_Urn_Shed_Lever)
+    Estate_South + (Hookshot | Lever-Estate_Underground_Urn_Shed)
 
 Estate_Garden_of_Life_End:
-    Estate_North + (Garden_of_Life_Lanterns_Lever | Garden_of_Life_End_Lever)
+    Estate_North + (Lever-Garden_of_Life_Lanterns | Lever-Garden_of_Life_End)
 
 Ceramic_Manor_Lobby:
     lvl_GrandmaMansion[sdoor_mansion] |
@@ -110,7 +110,7 @@ Ceramic_Manor_Lobby:
     lvl_GrandmaMansion[d_gardenstomansion]
 
 Ceramic_Manor_Left:
-    Ceramic_Manor_Lobby + (Yellow_Key>2 | Manor_Big_Pot_Arena_Lever)
+    Ceramic_Manor_Lobby + (Yellow_Key>2 | Lever-Manor_Big_Pot_Arena)
 
 Ceramic_Manor_Library:
     Ceramic_Manor_Lobby + Yellow_Key>2
@@ -179,28 +179,28 @@ Stranded_Sailor_Upper:
 
 Lockstone_Entrance:
     lvl_frozenfortress[d_sailortofortress] |
-    Lockstone_Central + Lockstone_Entrance_Lever |
+    Lockstone_Central + Lever-Lockstone_Entrance |
     Lockstone_Southwest_Crow |
-    Lockstone_Library + Lockstone_East_Start_Shortcut_Lever
+    Lockstone_Library + Lever-Lockstone_East_Start_Shortcut
 
 Lockstone_Central:
     lvl_frozenfortress[d_fortresstoroof] |
     lvl_frozenfortress[sdoor_fortress] |
-    Lockstone_Entrance + Lockstone_Entrance_Lever
+    Lockstone_Entrance + Lever-Lockstone_Entrance
 
 Lockstone_Southwest_Upper:
     Lockstone_Central + Hookshot
 
 Lockstone_East:
-    Lockstone_Central + Lockstone_East_Lower_Lever
+    Lockstone_Central + Lever-Lockstone_East_Lower
     // | Lockstone_East_Upper (does falling behind the grate from above count as a skip?)
 
 Lockstone_East_Upper:
-    Lockstone_Central + (Hookshot | Lockstone_Upper_Shortcut_Lever)
+    Lockstone_Central + (Hookshot | Lever-Lockstone_Upper_Shortcut)
 
 Lockstone_East_Upper_Keyed_Door:
     // the lever can be skipped
-    Lockstone_East_Upper + Hookshot + Lockstone_Upper_Puzzle_Lever
+    Lockstone_East_Upper + Hookshot + Lever-Lockstone_Upper_Puzzle
 
 // this waypoint is redundant in restricted logic but I figure there might be
 // a way to get through the wall?
@@ -208,11 +208,11 @@ Lockstone_Jailed_Seed:
     Lockstone_Central + Hookshot
 
 Lockstone_Lord_Theodoor_Lamp:
-    Lockstone_East_Upper_Keyed_Door + Pink_Key>4 + Hookshot + Lockstone_Upper_Dual_Laser_Puzzle_Lever
+    Lockstone_East_Upper_Keyed_Door + Pink_Key>4 + Hookshot + Lever-Lockstone_Upper_Dual_Laser_Puzzle
 
 Lockstone_Library:
     Lockstone_Lord_Deadbolt |
-    Lockstone_Entrance + Lockstone_East_Start_Shortcut_Lever
+    Lockstone_Entrance + Lever-Lockstone_East_Start_Shortcut
 
 Lockstone_Roof:
     lvl_frozenfortress[d_fortresstoroof] |
@@ -226,7 +226,7 @@ Lockstone_Lord_Lockstone:
     Lockstone_Central + Fire
 
 Lockstone_Lord_Opengate:
-    Lockstone_Central + Lockstone_Hookshot_Puzzle_Lever + Fire
+    Lockstone_Central + Lever-Lockstone_Hookshot_Puzzle + Fire
 
 Lockstone_Lord_Deadbolt:
     Lockstone_East_Upper_Keyed_Door + Hookshot + Fire
@@ -241,11 +241,11 @@ Lockstone_West_Keyed_Crow:
     Lockstone_Central + Pink_Key>4
 
 Lockstone_Southwest_Crow:
-    Lockstone_Central + Lockstone_Dual_Laser_Puzzle_Lever |
+    Lockstone_Central + Lever-Lockstone_Dual_Laser_Puzzle |
     Lockstone_Lord_Opengate
 
 Lockstone_East_Crow:
-    Lockstone_East + Lockstone_Tracking_Beam_Puzzle_Lever + Lockstone_Vertical_Laser_Puzzle_Lever |
+    Lockstone_East + Lever-Lockstone_Tracking_Beam_Puzzle + Lever-Lockstone_Vertical_Laser_Puzzle |
     Lockstone_Lord_Theodoor_Lamp
 
 Camp_Castle_Door:
@@ -270,14 +270,14 @@ Watchtowers_Entrance:
 
 Watchtowers_Jamming_Start:
     Watchtowers_Entrance + Hookshot |
-    Watchtowers_Barb_Elevator + Watchtowers_After_Boomers_Lever + Hookshot
+    Watchtowers_Barb_Elevator + Lever-Watchtowers_After_Boomers + Hookshot
 
 Watchtowers_First_Pot_Area:
     Watchtowers_Jamming_Start + Hookshot
 
 Watchtowers_Barb_Elevator:
     Watchtowers_First_Pot_Area + Hookshot |
-    Watchtowers_Jamming_Start + Watchtowers_After_Boomers_Lever + Hookshot |
+    Watchtowers_Jamming_Start + Lever-Watchtowers_After_Boomers + Hookshot |
     // lever not required for the last one, just go around
     Watchtowers_Ice_Skating_Start + Hookshot
 
@@ -287,21 +287,21 @@ Watchtowers_Lasers_Arena:
 Watchtowers_Ice_Skating_Start:
     // When coming from the Barb elevator, the lever can be skipped by hooking
     // over the gate from the ledge around the top of the elevator.
-    Watchtowers_Barb_Elevator + Watchtowers_Before_Ice_Arena_Lever + Hookshot |
-    Watchtowers_Headless_Lord_of_Doors + Watchtowers_Before_Ice_Arena_Lever
+    Watchtowers_Barb_Elevator + Lever-Watchtowers_Before_Ice_Arena + Hookshot |
+    Watchtowers_Headless_Lord_of_Doors + Lever-Watchtowers_Before_Ice_Arena
 
 Watchtowers_Ice_Skating_End:
     Watchtowers_Ice_Skating_Start + Hookshot
 
 Watchtowers_Headless_Lord_of_Doors:
     Watchtowers_Lasers_Arena + Hookshot |
-    Watchtowers_Ice_Skating_Start + Watchtowers_Before_Ice_Arena_Lever |
-    Watchtowers_Ice_Skating_End + Watchtowers_After_Ice_Skating_Lever |
-    Watchtowers_Cave_Entrance + Watchtowers_After_Ice_Skating_Lever
+    Watchtowers_Ice_Skating_Start + Lever-Watchtowers_Before_Ice_Arena |
+    Watchtowers_Ice_Skating_End + Lever-Watchtowers_After_Ice_Skating |
+    Watchtowers_Cave_Entrance + Lever-Watchtowers_After_Ice_Skating
 
 Watchtowers_Cave_Entrance:
     lvl_mountaintops[d_mountaintopstobetty] |
-    Watchtowers_Headless_Lord_of_Doors + Watchtowers_After_Ice_Skating_Lever
+    Watchtowers_Headless_Lord_of_Doors + Lever-Watchtowers_After_Ice_Skating
 
 stateless Watchtowers_Entrance_Torch:
     Watchtowers_Entrance + Nighttime + Fire
@@ -327,31 +327,31 @@ Betty_Room:
 
 Ruins_Outside_Front_Gate:
     lvl_Forest[forest_buggy] |
-    Ruins_Outside_Main_Dungeon_Gate + Ruins_Main_Gate_Lever
+    Ruins_Outside_Main_Dungeon_Gate + Lever-Ruins_Main_Gate
 
 Ruins_Outside_Main_Dungeon_Gate:
     lvl_Forest[sdoor_forest] |
-    Ruins_Outside_Front_Gate + Ruins_Main_Gate_Lever |
+    Ruins_Outside_Front_Gate + Lever-Ruins_Main_Gate |
     Ruins_Forest_Settlement |
     Dungeon_Lobby
 
 Ruins_Forest_Settlement:
-    Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Ruins_Entrance_Ladder_Shortcut_Lever) |
+    Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Lever-Ruins_Entrance_Ladder_Shortcut) |
     Dungeon_Main_Hall |
-    Dungeon_Crow_2 + Dungeon_Above_Crow_2_Lever
+    Dungeon_Crow_2 + Lever-Dungeon_Above_Crow_2
 
 Dungeon_Lobby:
     lvl_Forest[sdoor_forest_dung] |
     Ruins_Outside_Main_Dungeon_Gate + Ruins_Forest_Settlement + Magical_Forest_Horn + Daytime |
     Dungeon_Big_Door |
-    Dungeon_Main_Hall + Dungeon_Entrance_Left_Gate_Lever |
-    Dungeon_Main_Hall + Dungeon_Entrance_Right_Gate_Lever
+    Dungeon_Main_Hall + Lever-Dungeon_Entrance_Left_Gate |
+    Dungeon_Main_Hall + Lever-Dungeon_Entrance_Right_Gate
 
 Dungeon_Big_Door:
     Dungeon_Lobby + Fire |
     Dungeon_Main_Hall + Bomb |
     Dungeon_Water_Arena |
-    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever
+    Ruins_Forest_Settlement + Lever-Ruins_Upper_Dungeon_Entrance
 
 Dungeon_Main_Hall:
     lvl_Forest[d_swamp_enter] + Bomb |
@@ -360,9 +360,9 @@ Dungeon_Main_Hall:
     // Main Hall or Big Door in the first place
     Dungeon_Water_Arena |
     Dungeon_Crow_2 |
-    Dungeon_Lobby + Dungeon_Entrance_Left_Gate_Lever |
-    Dungeon_Lobby + Dungeon_Entrance_Right_Gate_Lever |
-    Ruins_Forest_Settlement + Ruins_Upper_Dungeon_Entrance_Lever |
+    Dungeon_Lobby + Lever-Dungeon_Entrance_Left_Gate |
+    Dungeon_Lobby + Lever-Dungeon_Entrance_Right_Gate |
+    Ruins_Forest_Settlement + Lever-Ruins_Upper_Dungeon_Entrance |
     Ruins_Outside_Main_Dungeon_Gate + Bomb
 
 Dungeon_Water_Arena:
@@ -371,7 +371,7 @@ Dungeon_Water_Arena:
 
 Dungeon_Crow_2:
     Dungeon_Main_Hall + Green_Key>3 |
-    Ruins_Forest_Settlement + Dungeon_Above_Crow_2_Lever
+    Ruins_Forest_Settlement + Lever-Dungeon_Above_Crow_2
 
 Dungeon_Spider_Crow:
     Dungeon_Big_Door + Fire
@@ -384,26 +384,26 @@ Fortress_Entrance:
     Fortress_Frog_King_Encounter
 
 Fortress_Watchtower_Lower:
-    Fortress_Entrance + Fortress_Watchtower_Lower_Lever
+    Fortress_Entrance + Lever-Fortress_Watchtower_Lower
 
 Fortress_Frog_King_Encounter:
     lvl_Swamp[sdoor_swamp] |
-    Fortress_Entrance + Fortress_Statue_Lever + Fortress_Pre-Main_Gate_Lever
+    Fortress_Entrance + Lever-Fortress_Statue + Lever-Fortress_Pre-Main_Gate
 
 Fortress_Inside_Main_Gate:
-    Fortress_Frog_King_Encounter + Bomb + Fortress_Main_Gate_Lever
+    Fortress_Frog_King_Encounter + Bomb + Lever-Fortress_Main_Gate
 
 Fortress_U_Turn:
-    Fortress_Inside_Main_Gate + Bomb + Fortress_Central_Shortcut_Lever
+    Fortress_Inside_Main_Gate + Bomb + Lever-Fortress_Central_Shortcut
 
 Fortress_Breakable_Bridges:
     Fortress_U_Turn + Bomb
 
 Fortress_Bridge:
-    Fortress_Breakable_Bridges + Fortress_Bridge_Ladder
+    Fortress_Breakable_Bridges + Lever-Fortress_Bridge
 
 Fortress_Exit:
-    Fortress_Bridge + Fortress_North_West_Lever
+    Fortress_Bridge + Lever-Fortress_North_West
 
 stateless Rescued_Grunt:
     Dungeon_Lobby + Bomb
