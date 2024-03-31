@@ -951,7 +951,7 @@ Lever-Fortress_Bomb:
     Fortress_U_Turn
 
 Lever-Fortress_Main_Gate:
-    Fortress_Frog_King_Encounter + Bomb
+    Fortress_Frog_King_Encounter + (Bomb | Hookshot)
 
 Lever-Fortress_Central_Shortcut:
     Fortress_Inside_Main_Gate + Bomb

@@ -15,11 +15,11 @@ Hall_of_Doors_Lobby:
     lvl_hallofdoors[sdoor_mansion] |
     lvl_hallofdoors[sdoor_basementromp] |
     lvl_hallofdoors[sdoor_gardens] |
-    lvl_hallofdoors[hod_anc_forest] + Fire + Lever-Bomb_Exit |
-    lvl_hallofdoors[hod_anc_fortress] + Fire |
+    lvl_hallofdoors[hod_anc_forest] + Bomb |
+    lvl_hallofdoors[hod_anc_fortress] + Hookshot |
     lvl_hallofdoors[hod_anc_mansion] + Fire |
-    lvl_hallofdoors[avarice_hod_anc_forest] + Fire + Lever-Bomb_Exit |
-    lvl_hallofdoors[avarice_hod_anc_fortress] + Fire |
+    lvl_hallofdoors[avarice_hod_anc_forest] + Bomb |
+    lvl_hallofdoors[avarice_hod_anc_fortress] + Hookshot |
     lvl_hallofdoors[avarice_hod_anc_mansion] + Fire
 
 Grove_of_Spirits:
@@ -391,7 +391,7 @@ Fortress_Frog_King_Encounter:
     Fortress_Entrance + Lever-Fortress_Statue + Lever-Fortress_Pre-Main_Gate
 
 Fortress_Inside_Main_Gate:
-    Fortress_Frog_King_Encounter + Bomb + Lever-Fortress_Main_Gate
+    Fortress_Frog_King_Encounter + (Bomb | Hookshot) + Lever-Fortress_Main_Gate
 
 Fortress_U_Turn:
     Fortress_Inside_Main_Gate + Bomb + Lever-Fortress_Central_Shortcut
