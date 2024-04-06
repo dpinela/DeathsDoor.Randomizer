@@ -147,7 +147,7 @@ Inner_Furnace_Post_Burner_6:
     Inner_Furnace_Post_Burner_5 + Fire
 
 Inner_Furnace_Post_Burner_7:
-    Inner_Furnace_Post_Burner_6 + Fire | Inner_Furnace_Post_Burner_7
+    Inner_Furnace_Post_Burner_6 + Fire | Inner_Furnace_Post_Burner_8
 
 Inner_Furnace_Post_Burner_8:
     Inner_Furnace_Post_Burner_7 + Fire | Inner_Furnace_Post_Burner_9

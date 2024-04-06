@@ -215,9 +215,11 @@ internal class Pool
         new("Purple Ancient Tablet of Knowledge"),
         // This is not the actual vanilla situation, but no logic
         // actually depends on tablets so that's fine.
+        // TODO: this is a workaround to remove the dupe tablets for 1.0,
+        // use a more robust solution later.
         new(name: "Estate Owl", vanillaItem: "Pink Ancient Tablet of Knowledge"),
-        new(name: "Ruins Owl", vanillaItem: "Pink Ancient Tablet of Knowledge"),
-        new(name: "Watchtowers Owl", vanillaItem: "Pink Ancient Tablet of Knowledge")
+        new(name: "Ruins Owl", vanillaItem: "Life Seed"),
+        new(name: "Watchtowers Owl", vanillaItem: "Life Seed")
     );
 
     public static readonly Pool Levers = new(

@@ -17,69 +17,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
     public void Start()
     {
-        AGM.AlternativeGameModes.Add("START RANDO", () =>
-        {
-            try
-            {
-                Logger.LogInfo("Rando Requested");
-                lm = LogicLoader.Load();
-                var ctx = new DDRandoContext(lm);
-                var randoLocs = RandomizableLocations(lm);
-                var stage0 = new RC.Randomization.RandomizationStage
-                {
-                    groups = new RC.Randomization.RandomizationGroup[]
-                    {
-                        new()
-                        {
-                            Items = VanillaItems(randoLocs, lm),
-                            Locations = MakeLocations(randoLocs, lm),
-                            Label = "Main Group",
-                            Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
-                        }
-                    },
-                    strategy = new(),
-                    label = "stage0"
-                };
-                var monitor = new RC.RandoMonitor();
-                monitor.OnSendEvent += (etype, msg) =>
-                {
-                    Logger.LogInfo($"Rando Run: {etype}: {msg}");
-                };
-                monitor.OnError += (err) =>
-                {
-                    if (err is RC.Exceptions.UnreachableLocationException ule)
-                    {
-                        Logger.LogError(ule.GetVerboseMessage());
-                        throw new System.Exception("dead");
-                    }
-                };
-                var rando = new RC.Randomization.Randomizer(
-                    new System.Random(),
-                    ctx,
-                    new[] { stage0 },
-                    monitor
-                );
-                var placements = rando.Run()[0][0];
-                var data = IC.SaveData.Open();
-                foreach (var p in placements)
-                {
-                    data.Place(
-                        item: p.Item.Name.Replace("_", " "),
-                        location: p.Location.Name.Replace("_", " ")
-                    );
-                }
-                GameSave.currentSave.SetKeyState(isRandoKey, true);
-                // Disable the first Grey Crow cutscene so that its invisible
-                // hitbox isn't blocking the bridge when entering Cemetery from
-                // anything other than the vanilla route.
-                GameSave.currentSave.SetKeyState("crow_cut1", true, true);
-                WriteHelperLog(GenerateHelperLog(new()));
-            }
-            catch (System.Exception err)
-            {
-                Logger.LogError($"Randomization failed: {err}");
-            }
-        });
+        AGM.AlternativeGameModes.Add("START RANDO", StartRando);
 
         IC.SaveData.OnTrackerLogUpdate += tlog =>
         {
@@ -88,6 +26,70 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 WriteHelperLog(GenerateHelperLog(tlog));
             }
         };
+    }
+
+    private void StartRando()
+    {
+        try
+        {
+            Logger.LogInfo("Rando Requested");
+            lm = LogicLoader.Load();
+            var ctx = new DDRandoContext(lm);
+            var randoLocs = RandomizableLocations(lm);
+            var stage0 = new RC.Randomization.RandomizationStage
+            {
+                groups = new RC.Randomization.RandomizationGroup[]
+                {
+                    new()
+                    {
+                        Items = VanillaItems(randoLocs, lm),
+                        Locations = MakeLocations(randoLocs, lm),
+                        Label = "Main Group",
+                        Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
+                    }
+                },
+                strategy = new(),
+                label = "stage0"
+            };
+            var monitor = new RC.RandoMonitor();
+            monitor.OnSendEvent += (etype, msg) =>
+            {
+                Logger.LogInfo($"Rando Run: {etype}: {msg}");
+            };
+            monitor.OnError += (err) =>
+            {
+                if (err is RC.Exceptions.UnreachableLocationException ule)
+                {
+                    Logger.LogError(ule.GetVerboseMessage());
+                    throw new System.Exception("dead");
+                }
+            };
+            var rando = new RC.Randomization.Randomizer(
+                new System.Random(),
+                ctx,
+                new[] { stage0 },
+                monitor
+            );
+            var placements = rando.Run()[0][0];
+            var data = IC.SaveData.Open();
+            foreach (var p in placements)
+            {
+                data.Place(
+                    item: p.Item.Name.Replace("_", " "),
+                    location: p.Location.Name.Replace("_", " ")
+                );
+            }
+            GameSave.currentSave.SetKeyState(isRandoKey, true);
+            // Disable the first Grey Crow cutscene so that its invisible
+            // hitbox isn't blocking the bridge when entering Cemetery from
+            // anything other than the vanilla route.
+            GameSave.currentSave.SetKeyState("crow_cut1", true, true);
+            WriteHelperLog(GenerateHelperLog(new()));
+        }
+        catch (System.Exception err)
+        {
+            Logger.LogError($"Randomization failed: {err}");
+        }
     }
 
     private const string isRandoKey = "Randomizer-is_rando";
