@@ -2,3 +2,4 @@ bin/
 Deps/
 obj/
 lib/
+*.zip
