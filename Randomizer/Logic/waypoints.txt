@@ -70,11 +70,13 @@ Lost_Cemetery_Belltower:
 Lost_Cemetery_Catacombs_Room_1:
     Lost_Cemetery_Central + (Fire | Lever-Catacombs_Exit)
 
+// One of these two waypoints is given by the initial progression, depending
+// on which start was chosen.
 stateless Daytime:
-    NIGHTSTART=0 | NIGHTSTART + Can_Hit_Bell
+    Nighttime + Can_Hit_Bell
 
 stateless Nighttime:
-    NIGHTSTART | NIGHTSTART=0 + Can_Hit_Bell
+    Daytime + Can_Hit_Bell
 
 stateless Can_Hit_Bell:
     Lost_Cemetery_Belltower + Rusty_Belltower_Key

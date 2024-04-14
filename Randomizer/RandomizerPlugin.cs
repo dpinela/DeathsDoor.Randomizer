@@ -9,11 +9,12 @@ using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
 
-[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.0.0.0")]
+[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.1.0.0")]
 [Bep.BepInDependency("deathsdoor.itemchanger", "1.2")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
     private RC.Logic.LogicManager? lm;
+    private Settings? modSettings;
 
     public void Start()
     {
@@ -26,15 +27,19 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 WriteHelperLog(GenerateHelperLog(tlog));
             }
         };
+        
+        modSettings = new(Config);
     }
 
     private void StartRando()
     {
         try
         {
-            Logger.LogInfo("Rando Requested");
+            var gs = modSettings!.GetGS();
+            var rng = new System.Random();
+            gs.Derandomize(rng);
             lm = LogicLoader.Load();
-            var ctx = new DDRandoContext(lm);
+            var ctx = new DDRandoContext(lm, gs);
             var randoLocs = RandomizableLocations(lm);
             var stage0 = new RC.Randomization.RandomizationStage
             {
@@ -65,7 +70,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 }
             };
             var rando = new RC.Randomization.Randomizer(
-                new System.Random(),
+                rng,
                 ctx,
                 new[] { stage0 },
                 monitor
@@ -79,11 +84,36 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                     location: p.Location.Name.Replace("_", " ")
                 );
             }
+
+            gs.SaveTo(GameSave.currentSave);
+            if (gs.StartLightState == StartLightState.Night)
+            {
+                // SaveData.populateDataStructure will copy this flag
+                // into the savefile later.
+                LightNight.nightTime = true;
+            }
+            var startWeaponId = gs.StartWeapon switch
+            {
+                StartWeapon.Sword => "sword",
+                StartWeapon.Daggers => "daggers",
+                StartWeapon.Umbrella => "umbrella",
+                StartWeapon.Greatsword => "sword_heavy",
+                StartWeapon.Hammer => "hammer",
+                _ => throw new System.InvalidOperationException("BUG: StartLightState should not be Random at this point")
+            };
+            data.StartingWeapon = startWeaponId;
+            // Actually equip the chosen weapon.
+            // (IC does not do this for you)
+            GameSave.currentSave.weaponId = startWeaponId;
+
             GameSave.currentSave.SetKeyState(isRandoKey, true);
             // Disable the first Grey Crow cutscene so that its invisible
             // hitbox isn't blocking the bridge when entering Cemetery from
             // anything other than the vanilla route.
+            // Write the savefile immediately because otherwise this change
+            // does nothing.
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
+
             WriteHelperLog(GenerateHelperLog(new()));
         }
         catch (System.Exception err)
@@ -97,7 +127,9 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
     {
         lm ??= LogicLoader.Load();
-        var ctx = new DDRandoContext(lm);
+        var gs = new GenerationSettings();
+        gs.LoadFrom(GameSave.currentSave);
+        var ctx = new DDRandoContext(lm, gs);
         var pm = new RC.Logic.ProgressionManager(lm, ctx);
         pm.mu.AddWaypoints(lm.Waypoints);
         pm.mu.AddTransitions(lm.TransitionLookup.Values);

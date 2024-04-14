@@ -22,6 +22,7 @@ internal static class LogicLoader
             }
         }
         uniqueItems.Add(PotsTerm);
+        uniqueItems.Add("Reaper's_Sword");
         foreach (var it in uniqueItems)
         {
             var termName = it.Replace(" ", "_");

@@ -1,18 +1,39 @@
 namespace DDoor.Randomizer;
 
-using Collections = System.Collections.Generic;
+using CG = System.Collections.Generic;
 using RC = RandomizerCore;
 
 internal class DDRandoContext : RC.RandoContext
 {
     private const string initDoor = "lvl_hallofdoors[bus_overridespawn]";
 
-    public DDRandoContext(RC.Logic.LogicManager lm) : base(lm)
+    public DDRandoContext(RC.Logic.LogicManager lm, GenerationSettings gs) : base(lm)
     {
-        InitialProgression = new RC.RandoTransition(lm.GetTransitionStrict(initDoor));
+        var things = new CG.List<RC.ILogicItem>();
+
+        var weapon = lm.GetItemStrict(gs.StartWeapon switch
+        {
+            StartWeapon.Sword => "Reaper's_Sword",
+            StartWeapon.Umbrella => "Discarded_Umbrella",
+            StartWeapon.Hammer => "Thunder_Hammer",
+            StartWeapon.Daggers => "Rogue_Daggers",
+            StartWeapon.Greatsword => "Reaper's_Greatsword",
+            _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
+        });
+        
+        things.Add(weapon);
+        var lightStateTerm = lm.GetTermStrict(gs.StartLightState switch
+        {
+            StartLightState.Day => "Daytime",
+            StartLightState.Night => "Nighttime",
+            _ => throw new System.InvalidOperationException("BUG: StartLightState should not be Random at this point")
+        });
+        things.Add(new RC.LogicItems.BoolItem("Start Light State", lightStateTerm));
+        things.Add(new RC.RandoTransition(lm.GetTransitionStrict(initDoor)));
+        InitialProgression = new CompositeItem("Start Progression", things.ToArray());
     }
 
-    public override Collections.IEnumerable<RC.GeneralizedPlacement> EnumerateExistingPlacements()
+    public override CG.IEnumerable<RC.GeneralizedPlacement> EnumerateExistingPlacements()
     {
         foreach (var t in vanillaTransitions)
         {
@@ -32,7 +53,7 @@ internal class DDRandoContext : RC.RandoContext
         }
     }
 
-    private static readonly Collections.List<Transition> vanillaTransitions = new()
+    private static readonly CG.List<Transition> vanillaTransitions = new()
     {
         new("lvl_hallofdoors", "sdoor_covenant", "lvlConnect_Fortress_Mountaintops"),
         new("lvl_hallofdoors", "sdoor_betty", "boss_betty"),

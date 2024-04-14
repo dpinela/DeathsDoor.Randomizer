@@ -1,11 +1,11 @@
 namespace DDoor.Randomizer;
 
-using Collections = System.Collections.Generic;
+using CG = System.Collections.Generic;
 using static System.Linq.Enumerable;
 
 internal class Pool
 {
-    public Collections.List<PoolLocation> Content;
+    public CG.List<PoolLocation> Content;
 
     public Pool(params PoolLocation[] locations) {
         Content = new(locations);
@@ -313,7 +313,7 @@ internal class Pool
         new(name: "Key-Manor Library", vanillaItem: "Yellow Key")
     );
 
-    public static readonly Collections.List<Pool> All = new()
+    public static readonly CG.List<Pool> All = new()
     {
         Spells,
         Weapons,
