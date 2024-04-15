@@ -6,6 +6,7 @@ public class GenerationSettings
 {
     public StartLightState StartLightState = StartLightState.Day;
     public StartWeapon StartWeapon = StartWeapon.Sword;
+    public int Seed = 777_777_777;
 
     public void Derandomize(System.Random rng)
     {

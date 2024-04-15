@@ -36,7 +36,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         try
         {
             var gs = modSettings!.GetGS();
-            var rng = new System.Random();
+            var rng = new System.Random(gs.Seed);
             gs.Derandomize(rng);
             lm = LogicLoader.Load();
             var ctx = new DDRandoContext(lm, gs);
@@ -121,6 +121,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             Logger.LogError($"Randomization failed: {err}");
         }
     }
+
+    
 
     private const string isRandoKey = "Randomizer-is_rando";
 
