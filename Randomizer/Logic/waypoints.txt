@@ -322,6 +322,9 @@ stateless Watchtowers_Boomers_Torch_1:
     Nighttime + Hookshot + Fire
 
 stateless Watchtowers_Boomers_Torch_2:
+    // can also hit it from Watchtowers_First_Pot_Area from a corner of
+    // the boomers platform but the torch is also barely visible so maybe
+    // count as a skip?
     Watchtowers_Ice_Skating_Start + Nighttime + Hookshot + Fire
 
 Betty_Room:
