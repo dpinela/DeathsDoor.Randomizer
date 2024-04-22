@@ -98,7 +98,7 @@ lvl_Graveyard[forest_buggy]:
     Fire + (
         lvl_Graveyard[forest_buggy] |
         Lost_Cemetery_Right_Arena + Lever-Cemetery_Shortcut_to_East_Tree |
-        Lost_Cemetery_Summit + Lever-Cemetery_East_Tree
+        Lost_Cemetery_Summit
     )
 
 // Crypt
