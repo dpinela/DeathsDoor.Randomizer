@@ -7,8 +7,11 @@ internal class DDRandoContext : RC.RandoContext
 {
     private const string initDoor = "lvl_hallofdoors[bus_overridespawn]";
 
+    private GenerationSettings gs;
+
     public DDRandoContext(RC.Logic.LogicManager lm, GenerationSettings gs) : base(lm)
     {
+        this.gs = gs;
         var things = new CG.List<RC.ILogicItem>();
 
         var weapon = lm.GetItemStrict(gs.StartWeapon switch
@@ -41,6 +44,22 @@ internal class DDRandoContext : RC.RandoContext
             var from = LM.GetTransitionStrict($"{t.ToScene}[{t.Door}]");
             yield return new RC.GeneralizedPlacement(to, from);
             yield return new RC.GeneralizedPlacement(from, to);
+        }
+
+        foreach (var (name, pool) in Pool.Predefined)
+        {
+            if (!gs.Pools[name])
+            {
+                foreach (var pe in pool.Content)
+                {
+                    if (pe.VanillaItem != null)
+                    {
+                        var loc = LM.GetLogicDefStrict(pe.Name.Replace(" ", "_"));
+                        var item = LM.GetItemStrict(pe.VanillaItem.Replace(" ", "_"));
+                        yield return new RC.GeneralizedPlacement(item, loc);
+                    }
+                }
+            }
         }
 
         var potItem = LM.GetItemStrict(LogicLoader.PotsTerm);

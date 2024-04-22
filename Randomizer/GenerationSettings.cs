@@ -6,6 +6,7 @@ public class GenerationSettings
 {
     public StartLightState StartLightState = StartLightState.Day;
     public StartWeapon StartWeapon = StartWeapon.Sword;
+    public CG.Dictionary<string, bool> Pools = new();
     public int Seed = 777_777_777;
 
     public void Derandomize(System.Random rng)
@@ -24,17 +25,26 @@ public class GenerationSettings
 
     private const string startLightKey = "Randomizer-start_light";
     private const string startWeaponKey = "Randomizer-start_weapon";
+    private const string poolKeyPrefix = "Randomizer-pool_";
 
     public void SaveTo(GameSave save)
     {
         save.SetCountKey(startLightKey, (int)StartLightState);
         save.SetCountKey(startWeaponKey, (int)StartWeapon);
+        foreach (var (k, on) in Pools)
+        {
+            save.SetKeyState(poolKeyPrefix + k, on);
+        }
     }
 
     public void LoadFrom(GameSave save)
     {
         StartLightState = (StartLightState)save.GetCountKey(startLightKey);
         StartWeapon = (StartWeapon)save.GetCountKey(startWeaponKey);
+        foreach (var k in Pool.Predefined.Keys)
+        {
+            Pools[k] = save.IsKeyUnlocked(poolKeyPrefix + k);
+        }
     }
 }
 

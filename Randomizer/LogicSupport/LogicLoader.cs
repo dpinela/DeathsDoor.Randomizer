@@ -18,7 +18,10 @@ internal static class LogicLoader
         {
             foreach (var loc in pool.Content)
             {
-                uniqueItems.Add(loc.VanillaItem);
+                if (loc.VanillaItem != null)
+                {
+                    uniqueItems.Add(loc.VanillaItem);
+                }
             }
         }
         uniqueItems.Add(PotsTerm);

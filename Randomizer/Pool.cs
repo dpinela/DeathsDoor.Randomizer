@@ -215,11 +215,9 @@ internal class Pool
         new("Purple Ancient Tablet of Knowledge"),
         // This is not the actual vanilla situation, but no logic
         // actually depends on tablets so that's fine.
-        // TODO: this is a workaround to remove the dupe tablets for 1.0,
-        // use a more robust solution later.
         new(name: "Estate Owl", vanillaItem: "Pink Ancient Tablet of Knowledge"),
-        new(name: "Ruins Owl", vanillaItem: "Life Seed"),
-        new(name: "Watchtowers Owl", vanillaItem: "Life Seed")
+        new(name: "Ruins Owl", vanillaItem: null),
+        new(name: "Watchtowers Owl", vanillaItem: null)
     );
 
     public static readonly Pool Levers = new(
@@ -313,6 +311,21 @@ internal class Pool
         new(name: "Key-Manor Library", vanillaItem: "Yellow Key")
     );
 
+    public static readonly CG.Dictionary<string, Pool> Predefined = new()
+    {
+        {"Spells", Spells},
+        {"Weapons", Weapons},
+        {"Giant Souls", GiantSouls},
+        {"Shrines", Shrines},
+        {"Shiny Things", ShinyThings},
+        {"Seeds", Seeds},
+        {"Soul Orbs", SoulOrbs},
+        {"Truth Tablets", TruthTablets},
+        {"Levers", Levers},
+        {"Doors", Doors},
+        {"Keys", Keys}
+    };
+
     public static readonly CG.List<Pool> All = new()
     {
         Spells,
@@ -332,9 +345,9 @@ internal class Pool
 internal class PoolLocation
 {
     public string Name;
-    public string VanillaItem;
+    public string? VanillaItem;
 
-    public PoolLocation(string name, string vanillaItem)
+    public PoolLocation(string name, string? vanillaItem)
     {
         Name = name;
         VanillaItem = vanillaItem;

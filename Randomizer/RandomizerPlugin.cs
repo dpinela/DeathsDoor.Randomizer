@@ -40,15 +40,18 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             gs.Derandomize(rng);
             lm = LogicLoader.Load();
             var ctx = new DDRandoContext(lm, gs);
-            var randoLocs = RandomizableLocations(lm);
+            var pb = new PoolBuilder();
+            AddBuiltinPools(pb, gs);
+            AddSwordToPool(pb, gs);
+            FillLeftoverLocations(pb);
             var stage0 = new RC.Randomization.RandomizationStage
             {
                 groups = new RC.Randomization.RandomizationGroup[]
                 {
                     new()
                     {
-                        Items = VanillaItems(randoLocs, lm),
-                        Locations = MakeLocations(randoLocs, lm),
+                        Items = pb.MakeItems(lm),
+                        Locations = pb.MakeLocations(lm),
                         Label = "Main Group",
                         Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
                     }
@@ -194,39 +197,54 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
-    private CG.List<PoolLocation> RandomizableLocations(RC.Logic.LogicManager lm)
+    private void AddBuiltinPools(PoolBuilder pb, GenerationSettings gs)
     {
-        var pls = new CG.List<PoolLocation>();
-        foreach (var pool in Pool.All)
+        foreach (var (name, pool) in Pool.Predefined)
         {
-            foreach (var loc in pool.Content)
+            if (gs.Pools[name])
             {
-                if (lm.GetLogicDef(loc.Name.Replace(" ", "_")) != null) {
-                    pls.Add(loc);
+                foreach (var pe in pool.Content)
+                {
+                    pb.AddLocation(pe.Name);
+                    if (pe.VanillaItem != null)
+                    {
+                        pb.AddItem(pe.VanillaItem);
+                    }
                 }
             }
         }
-        return pls;
     }
 
-    private RC.IRandoItem[] VanillaItems(CG.List<PoolLocation> locs, RC.Logic.LogicManager lm)
+    private void AddSwordToPool(PoolBuilder pb, GenerationSettings gs)
     {
-        return locs.Select(loc => loc.VanillaItem.Replace(" ", "_"))
-            .Select(name => new RC.RandoItem() { item = lm.GetItemStrict(name) })
-            .ToArray();
+        if (gs.StartWeapon == StartWeapon.Sword)
+        {
+            return;
+        }
+        var weaponItem = gs.StartWeapon switch
+        {
+            StartWeapon.Umbrella => "Discarded_Umbrella",
+            StartWeapon.Hammer => "Thunder_Hammer",
+            StartWeapon.Daggers => "Rogue_Daggers",
+            StartWeapon.Greatsword => "Reaper's_Greatsword",
+            _ => throw new System.InvalidOperationException($"invalid non-default weapon: {gs.StartWeapon}")
+        };
+        var n = pb.RemoveItem(weaponItem);
+        pb.AddItem("Reaper's_Sword", n);
     }
 
-    private RC.IRandoLocation[] MakeLocations(CG.List<PoolLocation> locs, RC.Logic.LogicManager lm)
+    private void FillLeftoverLocations(PoolBuilder pb)
     {
-        return locs.Select(loc => loc.Name.Replace(" ", "_"))
-            .Select(name => {
-                var loc = new RC.RandoLocation() { logic = lm.GetLogicDefStrict(name) };
-                if (name == "Green_Ancient_Tablet_of_Knowledge")
-                {
-                    loc.AddCost(new PlantedPotCost(lm, 50));
-                }
-                return loc;
-            })
-            .ToArray();
+        var totalItems = pb.Items.Values.Sum();
+        var totalLocations = pb.Locations.Values.Sum();
+        if (totalItems == totalLocations)
+        {
+            return;
+        }
+        if (totalItems > totalLocations)
+        {
+            throw new System.InvalidOperationException($"{totalItems} in pool but only {totalLocations}; not supported");
+        }
+        pb.AddItem("Life_Seed", totalLocations - totalItems);
     }
 }
