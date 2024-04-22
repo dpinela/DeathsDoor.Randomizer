@@ -223,14 +223,14 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
         var weaponItem = gs.StartWeapon switch
         {
-            StartWeapon.Umbrella => "Discarded_Umbrella",
-            StartWeapon.Hammer => "Thunder_Hammer",
-            StartWeapon.Daggers => "Rogue_Daggers",
-            StartWeapon.Greatsword => "Reaper's_Greatsword",
+            StartWeapon.Umbrella => "Discarded Umbrella",
+            StartWeapon.Hammer => "Thunder Hammer",
+            StartWeapon.Daggers => "Rogue Daggers",
+            StartWeapon.Greatsword => "Reaper's Greatsword",
             _ => throw new System.InvalidOperationException($"invalid non-default weapon: {gs.StartWeapon}")
         };
         var n = pb.RemoveItem(weaponItem);
-        pb.AddItem("Reaper's_Sword", n);
+        pb.AddItem("Reaper's Sword", n);
     }
 
     private void FillLeftoverLocations(PoolBuilder pb)
