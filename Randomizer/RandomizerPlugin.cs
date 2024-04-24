@@ -10,7 +10,7 @@ using static System.Linq.Enumerable;
 namespace DDoor.Randomizer;
 
 [Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.1.0.0")]
-[Bep.BepInDependency("deathsdoor.itemchanger", "1.2")]
+[Bep.BepInDependency("deathsdoor.itemchanger", "1.3")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
     private RC.Logic.LogicManager? lm;
@@ -38,12 +38,15 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             var gs = modSettings!.GetGS();
             var rng = new System.Random(gs.Seed);
             gs.Derandomize(rng);
-            lm = LogicLoader.Load();
-            var ctx = new DDRandoContext(lm, gs);
             var pb = new PoolBuilder();
+            var lmb = LogicLoader.Load();
             AddBuiltinPools(pb, gs);
             AddSwordToPool(pb, gs);
-            FillLeftoverLocations(pb);
+            AddDupeSeeds(pb, gs);
+            var (minSeeds, maxSeeds) = BalancePool(pb);
+            LogicLoader.DefineConsolidatedSeedItems(lmb, minSeeds, maxSeeds);
+            lm = new(lmb);
+            var ctx = new DDRandoContext(lm, gs);
             var stage0 = new RC.Randomization.RandomizationStage
             {
                 groups = new RC.Randomization.RandomizationGroup[]
@@ -88,6 +91,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 );
             }
 
+            GameSave.currentSave.SetCountKey(minSeedsKey, minSeeds);
+            GameSave.currentSave.SetCountKey(maxSeedsKey, maxSeeds);
             gs.SaveTo(GameSave.currentSave);
             if (gs.StartLightState == StartLightState.Night)
             {
@@ -125,13 +130,20 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
-    
-
     private const string isRandoKey = "Randomizer-is_rando";
+    private const string minSeedsKey = "Randomizer-min_seeds";
+    private const string maxSeedsKey = "Randomizer-max_seeds";
 
     private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
     {
-        lm ??= LogicLoader.Load();
+        if (lm == null)
+        {
+            var lmb = LogicLoader.Load();
+            var minSeeds = GameSave.currentSave.GetCountKey(minSeedsKey);
+            var maxSeeds = GameSave.currentSave.GetCountKey(maxSeedsKey);
+            LogicLoader.DefineConsolidatedSeedItems(lmb, minSeeds, maxSeeds);
+            lm = new(lmb);
+        }
         var gs = new GenerationSettings();
         gs.LoadFrom(GameSave.currentSave);
         var ctx = new DDRandoContext(lm, gs);
@@ -197,7 +209,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
-    private void AddBuiltinPools(PoolBuilder pb, GenerationSettings gs)
+    private static void AddBuiltinPools(PoolBuilder pb, GenerationSettings gs)
     {
         foreach (var (name, pool) in Pool.Predefined)
         {
@@ -215,7 +227,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
-    private void AddSwordToPool(PoolBuilder pb, GenerationSettings gs)
+    private static void AddSwordToPool(PoolBuilder pb, GenerationSettings gs)
     {
         if (gs.StartWeapon == StartWeapon.Sword)
         {
@@ -229,22 +241,48 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             StartWeapon.Greatsword => "Reaper's Greatsword",
             _ => throw new System.InvalidOperationException($"invalid non-default weapon: {gs.StartWeapon}")
         };
-        var n = pb.RemoveItem(weaponItem);
+        var n = pb.RemoveItemAll(weaponItem);
         pb.AddItem("Reaper's Sword", n);
     }
 
-    private void FillLeftoverLocations(PoolBuilder pb)
+    private static void AddDupeSeeds(PoolBuilder pb, GenerationSettings gs)
+    {
+        if (gs.Pools["Seeds"])
+        {
+            pb.AddItem("Life Seed", gs.DupeSeeds);
+        }
+    }
+
+    private static (int, int) BalancePool(PoolBuilder pb)
     {
         var totalItems = pb.Items.Values.Sum();
         var totalLocations = pb.Locations.Values.Sum();
         if (totalItems == totalLocations)
         {
-            return;
+            return (1, 1);
         }
         if (totalItems > totalLocations)
         {
-            throw new System.InvalidOperationException($"{totalItems} in pool but only {totalLocations}; not supported");
+            var excessItems = totalItems - totalLocations;
+            var n = pb.Items.TryGetValue("Life Seed", out var x) ? x : 0;
+            if (n <= excessItems)
+            {
+                throw new System.InvalidOperationException($"not enough life seeds in pool to make room for extra items; have {n}, need at least {excessItems + 1}");
+            }
+            // Consolidate away as many seeds as there are excess items.
+            // The remaining pool of seeds is thus n - excessItems.
+            var remainingSeeds = n - excessItems;
+            var q = excessItems / remainingSeeds;
+            var r = excessItems % remainingSeeds;
+            pb.RemoveItemAll("Life Seed");
+            pb.AddItem($"Life Seed x{1 + q}", remainingSeeds - r);
+            pb.AddItem($"Life Seed x{2 + q}", r);
+            return r == 0 ? (1 + q, 1 + q) : (1 + q, 2 + q);
         }
-        pb.AddItem("Life_Seed", totalLocations - totalItems);
+        else
+        {
+            pb.AddItem("100 Souls", totalLocations - totalItems);
+            return (1, 1);
+        }
     }
 }

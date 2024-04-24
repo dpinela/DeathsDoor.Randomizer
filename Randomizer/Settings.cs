@@ -11,10 +11,12 @@ internal class Settings
     private BepConfig.ConfigEntry<StartLightState> _StartLightState;
     private BepConfig.ConfigEntry<StartWeapon> _StartWeapon;
     private CG.Dictionary<string, BepConfig.ConfigEntry<bool>> _Pools = new();
+    private BepConfig.ConfigEntry<int> _DupeSeeds;
 
     private const string SeedGroup = "Seed";
     private const string StartGroup = "Start";
     private const string PoolsGroup = "Pools";
+    private const string DupesGroup = "Duplicates";
 
     public Settings(BepConfig.ConfigFile config)
     {
@@ -25,6 +27,7 @@ internal class Settings
             _Pools[k] = config.Bind(PoolsGroup, k, true);
         }
         _StartWeapon = config.Bind(StartGroup, "Weapon", StartWeapon.Sword, "Which weapon to give at the start of the game");
+        _DupeSeeds = config.Bind(DupesGroup, "Extra Life Seeds", 0, "Add extra life seeds to the game");
     }
 
     public GenerationSettings GetGS()
@@ -38,7 +41,8 @@ internal class Settings
         {
             StartLightState = _StartLightState.Value,
             StartWeapon = _StartWeapon.Value,
-            Seed = Hash31(seed)
+            Seed = Hash31(seed),
+            DupeSeeds = _DupeSeeds.Value,
         };
         foreach (var (k, entry) in _Pools)
         {

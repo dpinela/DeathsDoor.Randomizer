@@ -13,6 +13,10 @@ public class PoolBuilder
 
     public void AddItem(string item, int howMany = 1)
     {
+        if (howMany == 0)
+        {
+            return;
+        }
         if (!items.TryGetValue(item, out var n))
         {
             n = 0;
@@ -20,7 +24,16 @@ public class PoolBuilder
         items[item] = n + howMany;
     }
 
-    public int RemoveItem(string item)
+    public void RemoveItem(string item, int howMany = 1)
+    {
+        if (!(items.TryGetValue(item, out var n) && n >= howMany))
+        {
+            throw new System.InvalidOperationException($"can't remove {howMany} of item {item}: only {n} in pool");
+        }
+        items[item] = n - howMany;
+    }
+
+    public int RemoveItemAll(string item)
     {
         if (items.TryGetValue(item, out var n))
         {
