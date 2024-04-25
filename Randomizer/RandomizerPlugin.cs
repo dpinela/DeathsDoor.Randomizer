@@ -107,7 +107,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 StartWeapon.Umbrella => "umbrella",
                 StartWeapon.Greatsword => "sword_heavy",
                 StartWeapon.Hammer => "hammer",
-                _ => throw new System.InvalidOperationException("BUG: StartLightState should not be Random at this point")
+                _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
             };
             data.StartingWeapon = startWeaponId;
             // Actually equip the chosen weapon.
