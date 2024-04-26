@@ -130,33 +130,37 @@ Inner_Furnace_Entrance:
     Inner_Furnace_Post_Burner_4 |
     Inner_Furnace_Post_Burner_7
 
+// None of the Furnace burners work unless the very first one is lit.
+stateless Activated_Furnace_Burners:
+    Inner_Furnace_Entrance + Fire
+
 Inner_Furnace_Post_Burner_1:
-    Inner_Furnace_Entrance + Fire | Inner_Furnace_Post_Burner_2
+    Inner_Furnace_Entrance + Fire + Activated_Furnace_Burners | Inner_Furnace_Post_Burner_2
 
 Inner_Furnace_Post_Burner_2:
-    Inner_Furnace_Post_Burner_1 + Fire
+    Inner_Furnace_Post_Burner_1 + Fire + Activated_Furnace_Burners
 
 Inner_Furnace_Post_Burner_3:
-    Inner_Furnace_Post_Burner_2 + Fire
+    Inner_Furnace_Post_Burner_2 + Fire + Activated_Furnace_Burners
 
 Inner_Furnace_Post_Burner_4:
-    Inner_Furnace_Post_Burner_3 + Fire | Inner_Furnace_Post_Burner_5
+    Inner_Furnace_Post_Burner_3 + Fire + Activated_Furnace_Burners | Inner_Furnace_Post_Burner_5
 
 Inner_Furnace_Post_Burner_5:
-    Inner_Furnace_Post_Burner_4 + Fire
+    Inner_Furnace_Post_Burner_4 + Fire + Activated_Furnace_Burners
 
 Inner_Furnace_Post_Burner_6:
-    Inner_Furnace_Post_Burner_5 + Fire
+    Inner_Furnace_Post_Burner_5 + Fire + Activated_Furnace_Burners
 
 Inner_Furnace_Post_Burner_7:
-    Inner_Furnace_Post_Burner_6 + Fire | Inner_Furnace_Post_Burner_8
+    Inner_Furnace_Post_Burner_6 + Fire + Activated_Furnace_Burners | Inner_Furnace_Post_Burner_8
 
 Inner_Furnace_Post_Burner_8:
-    Inner_Furnace_Post_Burner_7 + Fire | Inner_Furnace_Post_Burner_9
+    Inner_Furnace_Post_Burner_7 + Fire + Activated_Furnace_Burners | Inner_Furnace_Post_Burner_9
 
 Inner_Furnace_Post_Burner_9:
     lvl_GrandmaBasement[d_basementtoboss] |
-    Inner_Furnace_Post_Burner_8 + Fire
+    Inner_Furnace_Post_Burner_8 + Fire + Activated_Furnace_Burners
 
 Grandma_Room:
     boss_grandma[sdoor_grandmaboss] |
