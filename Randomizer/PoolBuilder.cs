@@ -5,11 +5,17 @@ namespace DDoor.Randomizer;
 
 public class PoolBuilder
 {
+    private string name;
     private CG.Dictionary<string, int> items = new();
     private CG.Dictionary<string, int> locations = new();
 
     public CG.IReadOnlyDictionary<string, int> Items => items;
     public CG.IReadOnlyDictionary<string, int> Locations => locations;
+
+    public PoolBuilder(string name)
+    {
+        this.name = name;
+    }
 
     public void AddItem(string item, int howMany = 1)
     {
@@ -52,7 +58,7 @@ public class PoolBuilder
         locations[location] = n + howMany;
     }
 
-    internal RC.IRandoItem[] MakeItems(RC.Logic.LogicManager lm)
+    private RC.IRandoItem[] MakeItems(RC.Logic.LogicManager lm)
     {
         var list = new CG.List<RC.IRandoItem>();
         foreach (var (name, n) in items)
@@ -66,7 +72,7 @@ public class PoolBuilder
         return list.ToArray();
     }
 
-    internal RC.IRandoLocation[] MakeLocations(RC.Logic.LogicManager lm)
+    private RC.IRandoLocation[] MakeLocations(RC.Logic.LogicManager lm)
     {
         var list = new CG.List<RC.IRandoLocation>();
         foreach (var (name, n) in locations)
@@ -83,5 +89,16 @@ public class PoolBuilder
         }
         list.Sort((a, b) => a.Name.CompareTo(b.Name));
         return list.ToArray();
+    }
+
+    internal RC.Randomization.RandomizationGroup MakeGroup(RC.Logic.LogicManager lm)
+    {
+        return new()
+        {
+            Items = MakeItems(lm),
+            Locations = MakeLocations(lm),
+            Label = name,
+            Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
+        };
     }
 }

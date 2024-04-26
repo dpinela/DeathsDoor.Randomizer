@@ -38,27 +38,36 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             var gs = modSettings!.GetGS();
             var rng = new System.Random(gs.Seed);
             gs.Derandomize(rng);
-            var pb = new PoolBuilder();
-            var lmb = LogicLoader.Load();
+
+            var pools = new CG.List<PoolBuilder>();
+            var pb = new PoolBuilder("Main Group");
             AddBuiltinPools(pb, gs);
             AddSwordToPool(pb, gs);
             AddDupeSeeds(pb, gs);
             var (minSeeds, maxSeeds) = BalancePool(pb);
+            pools.Add(pb);
+            if (gs.DupeSeeds > 0 && !gs.Pools["Seeds"])
+            {
+                var seedPB = new PoolBuilder("Seeds Group");
+                seedPB.AddItem("Life Seed", 50 + gs.DupeSeeds);
+                foreach (var loc in Pool.Predefined["Seeds"].Content)
+                {
+                    seedPB.AddLocation(loc.Name);
+                }
+                (minSeeds, maxSeeds) = BalancePool(seedPB);
+                pools.Add(seedPB);
+            }
+
+            var lmb = LogicLoader.Load();
             LogicLoader.DefineConsolidatedSeedItems(lmb, minSeeds, maxSeeds);
             lm = new(lmb);
+
             var ctx = new DDRandoContext(lm, gs);
+            AddVanillaSword(ctx, gs);
+
             var stage0 = new RC.Randomization.RandomizationStage
             {
-                groups = new RC.Randomization.RandomizationGroup[]
-                {
-                    new()
-                    {
-                        Items = pb.MakeItems(lm),
-                        Locations = pb.MakeLocations(lm),
-                        Label = "Main Group",
-                        Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
-                    }
-                },
+                groups = pools.Select(p => p.MakeGroup(lm)).ToArray(),
                 strategy = new(),
                 label = "stage0"
             };
@@ -81,14 +90,21 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 new[] { stage0 },
                 monitor
             );
-            var placements = rando.Run()[0][0];
+            var placementGroups = rando.Run()[0];
             var data = IC.SaveData.Open();
-            foreach (var p in placements)
+            foreach (var g in placementGroups)
             {
-                data.Place(
+                foreach (var p in g)
+                {
+                    data.Place(
                     item: p.Item.Name.Replace("_", " "),
                     location: p.Location.Name.Replace("_", " ")
-                );
+                    );
+                }
+            }
+            foreach (var (loc, item) in ctx.Preplacements)
+            {
+                data.Place(item: item, location: loc);
             }
 
             GameSave.currentSave.SetCountKey(minSeedsKey, minSeeds);
@@ -109,6 +125,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 StartWeapon.Hammer => "hammer",
                 _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
             };
+            
             data.StartingWeapon = startWeaponId;
             // Actually equip the chosen weapon.
             // (IC does not do this for you)
@@ -147,6 +164,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         var gs = new GenerationSettings();
         gs.LoadFrom(GameSave.currentSave);
         var ctx = new DDRandoContext(lm, gs);
+        AddVanillaSword(ctx, gs);
         var pm = new RC.Logic.ProgressionManager(lm, ctx);
         pm.mu.AddWaypoints(lm.Waypoints);
         pm.mu.AddTransitions(lm.TransitionLookup.Values);
@@ -167,6 +185,12 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         
         foreach (var entry in tlog)
         {
+            // Preplacements are already accounted for in the vanilla update
+            // entries we created above.
+            if (ctx.Preplacements.ContainsKey(entry.LocationName))
+            {
+                continue;
+            }
             if (!save.NamedPlacements.TryGetValue(entry.LocationName, out var item))
             {
                 Logger.LogError($"Helper log generation: unnamed item at {entry.LocationName}");
@@ -206,6 +230,15 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             {
                 writer.WriteLine(loc);
             }
+        }
+    }
+
+    private static void AddVanillaSword(DDRandoContext ctx, GenerationSettings gs)
+    {
+        if (gs.StartWeapon != StartWeapon.Sword && !gs.Pools["Weapons"])
+        {
+            var loc = GenerationSettings.StartWeaponItem(gs.StartWeapon).Replace("_", " ");
+            ctx.Preplacements[loc] = "Reaper's Sword";
         }
     }
 

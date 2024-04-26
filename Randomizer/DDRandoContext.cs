@@ -9,20 +9,14 @@ internal class DDRandoContext : RC.RandoContext
 
     private GenerationSettings gs;
 
+    public readonly CG.Dictionary<string, string> Preplacements = new();
+
     public DDRandoContext(RC.Logic.LogicManager lm, GenerationSettings gs) : base(lm)
     {
         this.gs = gs;
         var things = new CG.List<RC.ILogicItem>();
 
-        var weapon = lm.GetItemStrict(gs.StartWeapon switch
-        {
-            StartWeapon.Sword => "Reaper's_Sword",
-            StartWeapon.Umbrella => "Discarded_Umbrella",
-            StartWeapon.Hammer => "Thunder_Hammer",
-            StartWeapon.Daggers => "Rogue_Daggers",
-            StartWeapon.Greatsword => "Reaper's_Greatsword",
-            _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
-        });
+        var weapon = lm.GetItemStrict(GenerationSettings.StartWeaponItem(gs.StartWeapon));
         
         things.Add(weapon);
         var lightStateTerm = lm.GetTermStrict(gs.StartLightState switch
@@ -52,7 +46,7 @@ internal class DDRandoContext : RC.RandoContext
             {
                 foreach (var pe in pool.Content)
                 {
-                    if (pe.VanillaItem != null)
+                    if (pe.VanillaItem != null && !Preplacements.ContainsKey(pe.Name))
                     {
                         var loc = LM.GetLogicDefStrict(pe.Name.Replace(" ", "_"));
                         var item = LM.GetItemStrict(pe.VanillaItem.Replace(" ", "_"));
@@ -60,6 +54,13 @@ internal class DDRandoContext : RC.RandoContext
                     }
                 }
             }
+        }
+
+        foreach (var (locName, itemName) in Preplacements)
+        {
+            var loc = LM.GetLogicDefStrict(locName.Replace(" ", "_"));
+            var item = LM.GetItemStrict(itemName.Replace(" ", "_"));
+            yield return new RC.GeneralizedPlacement(item, loc);
         }
 
         var potItem = LM.GetItemStrict(LogicLoader.PotsTerm);

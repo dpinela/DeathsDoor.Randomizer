@@ -47,6 +47,16 @@ public class GenerationSettings
             Pools[k] = save.IsKeyUnlocked(poolKeyPrefix + k);
         }
     }
+
+    public static string StartWeaponItem(StartWeapon w) => w switch
+    {
+        StartWeapon.Sword => "Reaper's_Sword",
+        StartWeapon.Umbrella => "Discarded_Umbrella",
+        StartWeapon.Hammer => "Thunder_Hammer",
+        StartWeapon.Daggers => "Rogue_Daggers",
+        StartWeapon.Greatsword => "Reaper's_Greatsword",
+        _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
+    };
 }
 
 public enum StartLightState
