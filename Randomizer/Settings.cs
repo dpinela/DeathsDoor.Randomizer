@@ -1,7 +1,5 @@
 using BepConfig = BepInEx.Configuration;
 using CG = System.Collections.Generic;
-using Text = System.Text;
-using Crypto = System.Security.Cryptography;
 
 namespace DDoor.Randomizer;
 
@@ -41,7 +39,7 @@ internal class Settings
         {
             StartLightState = _StartLightState.Value,
             StartWeapon = _StartWeapon.Value,
-            Seed = Hash31(seed),
+            Seed = seed,
             DupeSeeds = _DupeSeeds.Value,
         };
         foreach (var (k, entry) in _Pools)
@@ -49,14 +47,5 @@ internal class Settings
             gs.Pools[k] = entry.Value;
         }
         return gs;
-    }
-
-    private static int Hash31(string s)
-    {
-        var encoded = new Text.UTF8Encoding().GetBytes(s);
-        using var sha = Crypto.SHA256.Create();
-        var h = sha.ComputeHash(encoded);
-        var u = (uint)h[0] | ((uint)h[1] << 8) | ((uint)h[2] << 16) | (((uint)h[3] & 0x7f) << 24);
-        return (int)u;
     }
 }

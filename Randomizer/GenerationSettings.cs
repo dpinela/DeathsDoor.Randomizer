@@ -1,4 +1,6 @@
 using CG = System.Collections.Generic;
+using IO = System.IO;
+using Json = Newtonsoft.Json;
 
 namespace DDoor.Randomizer;
 
@@ -8,7 +10,7 @@ public class GenerationSettings
     public StartWeapon StartWeapon = StartWeapon.Sword;
     public CG.Dictionary<string, bool> Pools = new();
     public int DupeSeeds = 0;
-    public int Seed = 777_777_777;
+    public string Seed = "";
 
     public void Derandomize(System.Random rng)
     {
@@ -22,6 +24,13 @@ public class GenerationSettings
             var i = rng.Next((int)StartWeapon.Random);
             StartWeapon = (StartWeapon)i;
         }
+    }
+
+    public string ToJSON()
+    {
+        // We are relying on IC's bundled copy of Newtonsoft.JSON for this.
+        // Fine for now, but beware of expanding it.
+        return Json.JsonConvert.SerializeObject(this, Json.Formatting.Indented, new Json.Converters.StringEnumConverter());
     }
 
     private const string startLightKey = "Randomizer-start_light";

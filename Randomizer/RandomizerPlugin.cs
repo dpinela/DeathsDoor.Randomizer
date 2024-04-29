@@ -5,6 +5,8 @@ using RC = RandomizerCore;
 using IC = DDoor.ItemChanger;
 using CG = System.Collections.Generic;
 using IO = System.IO;
+using Crypto = System.Security.Cryptography;
+using Text = System.Text;
 using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
@@ -36,7 +38,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         try
         {
             var gs = modSettings!.GetGS();
-            var rng = new System.Random(gs.Seed);
+            IO.File.WriteAllText(IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Settings.json"), gs.ToJSON());
+            var rng = new System.Random(Hash31(gs.Seed));
             gs.Derandomize(rng);
 
             var pools = new CG.List<PoolBuilder>();
@@ -140,11 +143,21 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
 
             WriteHelperLog(GenerateHelperLog(new()));
+            
         }
         catch (System.Exception err)
         {
             Logger.LogError($"Randomization failed: {err}");
         }
+    }
+
+    private static int Hash31(string s)
+    {
+        var encoded = new Text.UTF8Encoding().GetBytes(s);
+        using var sha = Crypto.SHA256.Create();
+        var h = sha.ComputeHash(encoded);
+        var u = (uint)h[0] | ((uint)h[1] << 8) | ((uint)h[2] << 16) | (((uint)h[3] & 0x7f) << 24);
+        return (int)u;
     }
 
     private const string isRandoKey = "Randomizer-is_rando";
