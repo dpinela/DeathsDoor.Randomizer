@@ -36,7 +36,7 @@ There are some additional pieces of software to enhance your randomizer experien
 [RID]: https://github.com/dpinela/DeathsDoor.RecentItemsDisplay
 [DDRT]: https://github.com/SpR3AD1/DD_rando_tracker
 
-# Randomized pools
+# Randomizable pools
 
 - Spells and their upgrades
 - Weapons
@@ -48,6 +48,28 @@ There are some additional pieces of software to enhance your randomizer experien
 - Levers
 - Doors
 - Green, Yellow and Pink Keys
+
+# Configuration
+
+This randomizer offers the following configuration settings:
+
+- Seed: the main seed used for all randomization. May be any string; if left blank, a random seed is generated
+  for each new file.
+- Light State: whether to start the game in daytime, nighttime, or to choose randomly between the two.
+  (defaults to Day)
+- Weapon: which weapon to start the game with (defaults to Sword). Can also be randomized.
+- Pools: whether to add each of the above randomizable pools to the overall pool.
+  For pools that are not selected, all their locations are left as vanilla and their items will not be found elsewhere.
+- Extra Life Seeds: adds additional life seeds to the item pool, to make it easier to plant pots for healing or
+  to unlock the Green Ancient Tablet of Knowledge check. Use of this setting will create items bearing multiple
+  life seeds if enough are added.
+
+To edit these settings, we recommend use of the [BepInEx configuration manager][biecfg] mod, which provides an
+in-game GUI for mod settings (it also works with a few other Death's Door mods). Alternatively, you may edit the
+`config/deathsdoor.randomizer.cfg` file in your BepInEx installation folder directly; launching the game with the
+randomizer installed will generate this file if it doesn't already exist.
+
+[biecfg]: https://github.com/BepInEx/BepInEx.ConfigurationManager
 
 # Logic
 
