@@ -229,8 +229,6 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             .GroupBy(name => IC.Predefined.TryGetLocation(name, out var loc) ? loc.Area : IC.Area.Unknown)
             .OrderBy(g => g.Key);
         
-        var sortedLocations = new CG.List<string>(uncheckedReachableLocations);
-        sortedLocations.Sort();
         var fileLocation = IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Helper Log.txt");
         using var helperLog = IO.File.Create(fileLocation);
         using var writer = new IO.StreamWriter(helperLog);
