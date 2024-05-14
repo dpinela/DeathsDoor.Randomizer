@@ -5,7 +5,7 @@ namespace DDoor.Randomizer;
 
 internal class CompositeItem : RC.ILogicItem
 {
-    private readonly RC.ILogicItem[] components;
+    public RC.ILogicItem[] components;
 
     public string Name { get; }
 

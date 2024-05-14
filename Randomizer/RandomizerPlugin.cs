@@ -7,11 +7,12 @@ using CG = System.Collections.Generic;
 using IO = System.IO;
 using Crypto = System.Security.Cryptography;
 using Text = System.Text;
+using Reflection = System.Reflection;
 using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
 
-[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.1.0.0")]
+[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.2.0.0")]
 [Bep.BepInDependency("deathsdoor.itemchanger", "1.3")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
@@ -67,6 +68,13 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
             var ctx = new DDRandoContext(lm, gs);
             AddVanillaSword(ctx, gs);
+            AddVanillaPools(ctx, pb);
+
+            // Store the context for later use by the helper log.
+            IO.File.WriteAllText(
+                RandoContextFileLocation(),
+                RC.Json.JsonUtil.SerializeToString(ctx)
+            );
 
             var stage0 = new RC.Randomization.RandomizationStage
             {
@@ -100,8 +108,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 foreach (var p in g)
                 {
                     data.Place(
-                    item: p.Item.Name.Replace("_", " "),
-                    location: p.Location.Name.Replace("_", " ")
+                        item: p.Item.Name.Replace("_", " "),
+                        location: p.Location.Name.Replace("_", " ")
                     );
                 }
             }
@@ -112,7 +120,6 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
             GameSave.currentSave.SetCountKey(minSeedsKey, minSeeds);
             GameSave.currentSave.SetCountKey(maxSeedsKey, maxSeeds);
-            gs.SaveTo(GameSave.currentSave);
             if (gs.StartLightState == StartLightState.Night)
             {
                 // SaveData.populateDataStructure will copy this flag
@@ -164,20 +171,22 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     private const string minSeedsKey = "Randomizer-min_seeds";
     private const string maxSeedsKey = "Randomizer-max_seeds";
 
+    private static string RandoContextFileLocation() => IO.Path.Combine(
+        UE.Application.persistentDataPath,
+        "SAVEDATA",
+        $"Save_{GameSave.currentSave.saveId}-DDRandoContext.json"
+    );
+
     private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
     {
-        if (lm == null)
+        var ctxLoc = RandoContextFileLocation();
+        var ctx = RC.Json.JsonUtil.DeserializeFromFile<DDRandoContext>(ctxLoc);
+        if (ctx == null)
         {
-            var lmb = LogicLoader.Load();
-            var minSeeds = GameSave.currentSave.GetCountKey(minSeedsKey);
-            var maxSeeds = GameSave.currentSave.GetCountKey(maxSeedsKey);
-            LogicLoader.DefineConsolidatedSeedItems(lmb, minSeeds, maxSeeds);
-            lm = new(lmb);
+            Logger.LogError($"stored context at {ctxLoc} is null?");
+            return new();
         }
-        var gs = new GenerationSettings();
-        gs.LoadFrom(GameSave.currentSave);
-        var ctx = new DDRandoContext(lm, gs);
-        AddVanillaSword(ctx, gs);
+        var lm = ctx.LM;
         var pm = new RC.Logic.ProgressionManager(lm, ctx);
         pm.mu.AddWaypoints(lm.Waypoints);
         pm.mu.AddTransitions(lm.TransitionLookup.Values);
@@ -250,6 +259,20 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         {
             var loc = GenerationSettings.StartWeaponItem(gs.StartWeapon).Replace("_", " ");
             ctx.Preplacements[loc] = "Reaper's Sword";
+        }
+    }
+
+    private static void AddVanillaPools(DDRandoContext ctx, PoolBuilder pb)
+    {
+        foreach (var pool in Pool.Predefined.Values)
+        {
+            foreach (var pe in pool.Content)
+            {
+                if (!(pb.ContainsLocation(pe.Name) || ctx.Preplacements.ContainsKey(pe.Name)) && pe.VanillaItem != null)
+                {
+                    ctx.VanillaPlacements[pe.Name] = pe.VanillaItem;
+                }
+            }
         }
     }
 

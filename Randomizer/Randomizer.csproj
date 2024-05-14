@@ -142,9 +142,6 @@
     <Reference Include="AlternativeGameModes">
       <HintPath>$(LocalRefs)/AlternativeGameModes.dll</HintPath>
     </Reference>
-    <Reference Include="RandomizerCore">
-      <HintPath>$(LocalRefs)/RandomizerCore.dll</HintPath>
-    </Reference>
     <Reference Include="ItemChanger">
       <HintPath>$(LocalRefs)/ItemChanger.dll</HintPath>
     </Reference>
@@ -159,5 +156,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="RandomizerCore" Version="2.0.0" />
+    <PackageReference Include="RandomizerCore.Json" Version="1.0.0" />
   </ItemGroup>
 </Project>

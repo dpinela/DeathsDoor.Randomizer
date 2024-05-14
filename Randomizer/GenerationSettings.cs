@@ -33,30 +33,6 @@ public class GenerationSettings
         return Json.JsonConvert.SerializeObject(this, Json.Formatting.Indented, new Json.Converters.StringEnumConverter());
     }
 
-    private const string startLightKey = "Randomizer-start_light";
-    private const string startWeaponKey = "Randomizer-start_weapon";
-    private const string poolKeyPrefix = "Randomizer-pool_";
-
-    public void SaveTo(GameSave save)
-    {
-        save.SetCountKey(startLightKey, (int)StartLightState);
-        save.SetCountKey(startWeaponKey, (int)StartWeapon);
-        foreach (var (k, on) in Pools)
-        {
-            save.SetKeyState(poolKeyPrefix + k, on);
-        }
-    }
-
-    public void LoadFrom(GameSave save)
-    {
-        StartLightState = (StartLightState)save.GetCountKey(startLightKey);
-        StartWeapon = (StartWeapon)save.GetCountKey(startWeaponKey);
-        foreach (var k in Pool.Predefined.Keys)
-        {
-            Pools[k] = save.IsKeyUnlocked(poolKeyPrefix + k);
-        }
-    }
-
     public static string StartWeaponItem(StartWeapon w) => w switch
     {
         StartWeapon.Sword => "Reaper's_Sword",

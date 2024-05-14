@@ -58,6 +58,9 @@ public class PoolBuilder
         locations[location] = n + howMany;
     }
 
+    public bool ContainsLocation(string location) =>
+        locations.TryGetValue(location, out var n) && n > 0;
+
     private RC.IRandoItem[] MakeItems(RC.Logic.LogicManager lm)
     {
         var list = new CG.List<RC.IRandoItem>();

@@ -2,14 +2,23 @@ namespace DDoor.Randomizer;
 
 using CG = System.Collections.Generic;
 using RC = RandomizerCore;
+using static System.Linq.Enumerable;
 
 internal class DDRandoContext : RC.RandoContext
 {
     private const string initDoor = "lvl_hallofdoors[bus_overridespawn]";
 
-    private GenerationSettings gs;
+    public GenerationSettings gs;
 
-    public readonly CG.Dictionary<string, string> Preplacements = new();
+    public CG.Dictionary<string, string> Preplacements = new();
+    public CG.Dictionary<string, string> VanillaPlacements = new();
+
+    // RandomizerCore.Json specifically relies on this constructor existing.
+    // Used only for deserialization purposes; gs will be set during that process.
+    public DDRandoContext(RC.Logic.LogicManager lm) : base(lm)
+    {
+        gs = null!;
+    }
 
     public DDRandoContext(RC.Logic.LogicManager lm, GenerationSettings gs) : base(lm)
     {
@@ -40,23 +49,7 @@ internal class DDRandoContext : RC.RandoContext
             yield return new RC.GeneralizedPlacement(from, to);
         }
 
-        foreach (var (name, pool) in Pool.Predefined)
-        {
-            if (!gs.Pools[name])
-            {
-                foreach (var pe in pool.Content)
-                {
-                    if (pe.VanillaItem != null && !Preplacements.ContainsKey(pe.Name))
-                    {
-                        var loc = LM.GetLogicDefStrict(pe.Name.Replace(" ", "_"));
-                        var item = LM.GetItemStrict(pe.VanillaItem.Replace(" ", "_"));
-                        yield return new RC.GeneralizedPlacement(item, loc);
-                    }
-                }
-            }
-        }
-
-        foreach (var (locName, itemName) in Preplacements)
+        foreach (var (locName, itemName) in Preplacements.Concat(VanillaPlacements))
         {
             var loc = LM.GetLogicDefStrict(locName.Replace(" ", "_"));
             var item = LM.GetItemStrict(itemName.Replace(" ", "_"));
