@@ -435,6 +435,18 @@ Key-Manor_After_Spinny_Pot_Room:
 Key-Manor_Library:
     Ceramic_Manor_Library
 
+Crow-Manor_After_Torch_Puzzle:
+    Ceramic_Manor_Lobby
+
+Crow-Manor_Imp_Loft:
+    Ceramic_Manor_Left
+
+Crow-Manor_Library:
+    Ceramic_Manor_Library
+
+Crow-Manor_Bedroom:
+    Ceramic_Manor_Left
+
 Pot-Manor_Lobby:
     Ceramic_Manor_Lobby
 
@@ -635,11 +647,23 @@ Key-Lockstone_West:
 Key-Lockstone_North:
     Lockstone_Central + Lever-Lockstone_North_Puzzle
 
+Crow-Lockstone_West:
+    Lockstone_Central
+
+Crow-Lockstone_West_Locked:
+    Lockstone_Central + Pink_Key>4
+
+Crow-Lockstone_South_West:
+    Lockstone_Southwest_Crow
+
+Crow-Lockstone_East:
+    Lockstone_East_Crow
+
 Pot-Lockstone_West_Crow:
     Lockstone_Central
 
 Pot-Lockstone_West_Keyed_Crow:
-    Lockstone_West_Keyed_Crow
+    Lockstone_Central + Pink_Key>4
 
 Pot-Lockstone_Entrance:
     Lockstone_Central
@@ -864,8 +888,8 @@ Seed-Dungeon_Fire_Puzzle_Near_Water_Arena:
 Seed-Dungeon_Water_Arena_Left_Exit:
     Dungeon_Water_Arena
 
-Seed-Dungeon_Above_Crow_2:
-    Dungeon_Crow_2
+Seed-Dungeon_Above_Rightmost_Crow:
+    Dungeon_Rightmost_Crow
 
 Seed-Dungeon_Right_Above_Key:
     Dungeon_Main_Hall
@@ -891,8 +915,8 @@ Lever-Dungeon_Entrance_Right_Gate:
 Lever-Dungeon_Entrance_Left_Gate:
     Dungeon_Main_Hall
 
-Lever-Dungeon_Above_Crow_2:
-    Dungeon_Crow_2
+Lever-Dungeon_Above_Rightmost_Crow:
+    Dungeon_Rightmost_Crow
 
 Key-Dungeon_Hall:
     Dungeon_Main_Hall + Fire
@@ -903,6 +927,18 @@ Key-Dungeon_Right:
 Key-Dungeon_Near_Water_Arena:
     Dungeon_Water_Arena + Fire
 
+Crow-Dungeon_Hall:
+    Dungeon_Main_Hall
+
+Crow-Dungeon_Water_Arena:
+    Dungeon_Water_Arena
+
+Crow-Dungeon_Cobweb:
+    Dungeon_Big_Door + Fire
+
+Crow-Dungeon_Rightmost:
+    Dungeon_Rightmost_Crow
+
 Pot-Dungeon_Cobweb_Room:
     Dungeon_Big_Door
 
@@ -912,8 +948,8 @@ Pot-Dungeon_Water_Arena:
 Pot-Dungeon_Hall:
     Dungeon_Main_Hall
 
-Pot-Dungeon_Crow_2:
-    Dungeon_Crow_2
+Pot-Dungeon_Rightmost_Crow:
+    Dungeon_Rightmost_Crow
 
 // Flooded Fortress
 

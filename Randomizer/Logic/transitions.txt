@@ -126,7 +126,11 @@ lvl_GrandmaMansion[sdoor_mansion]:
     Ceramic_Manor_Lobby + Ceramic_Manor_Door + $NO_JEFFERSON
 
 lvl_GrandmaMansion[hod_anc_mansion]:
-    Ceramic_Manor_Lobby + Yellow_Key>2 + Daytime
+    Ceramic_Manor_Lobby + Daytime +
+        Crow-Manor_After_Torch_Puzzle +
+        Crow-Manor_Imp_Loft +
+        Crow-Manor_Library +
+        Crow-Manor_Bedroom
 
 lvl_GrandmaMansion[d_gardenstomansion]:
     Ceramic_Manor_Lobby
@@ -187,10 +191,10 @@ lvl_frozenfortress[sdoor_fortress]:
 
 lvl_frozenfortress[hod_anc_fortress]:
     Lockstone_Central + Daytime +
-        Lockstone_West_Crow/ +
-        Lockstone_West_Keyed_Crow/ +
-        Lockstone_Southwest_Crow/ +
-        Lockstone_East_Crow/
+        Crow-Lockstone_East +
+        Crow-Lockstone_West +
+        Crow-Lockstone_West_Locked +
+        Crow-Lockstone_South_West
 
 lvl_frozenfortress[d_sailortofortress]:
     Lockstone_Entrance
@@ -238,10 +242,10 @@ lvl_Forest[sdoor_forest_dung]:
 
 lvl_Forest[hod_anc_forest]:
     Dungeon_Big_Door + Daytime +
-        Dungeon_Water_Arena/ +
-        Dungeon_Crow_2/ +
-        Dungeon_Spider_Crow/ +
-        Dungeon_Hall_Crow/
+        Crow-Dungeon_Hall +
+        Crow-Dungeon_Water_Arena +
+        Crow-Dungeon_Cobweb +
+        Crow-Dungeon_Rightmost
 
 lvl_Forest[forest_buggy]:
     Ruins_Outside_Front_Gate

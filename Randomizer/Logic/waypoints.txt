@@ -197,6 +197,10 @@ Lockstone_Central:
 Lockstone_Southwest_Upper:
     Lockstone_Central + Hookshot
 
+Lockstone_Southwest_Crow:
+    Lockstone_Central + Lever-Lockstone_Dual_Laser_Puzzle |
+    Lockstone_Lord_Opengate
+
 Lockstone_East:
     Lockstone_Central + Lever-Lockstone_East_Lower
     // | Lockstone_East_Upper (does falling behind the grate from above count as a skip?)
@@ -239,16 +243,6 @@ Lockstone_Lord_Deadbolt:
 
 Lockstone_Lord_Theodoor:
     Lockstone_Lord_Theodoor_Lamp + Fire
-
-Lockstone_West_Crow:
-    Lockstone_Central
-
-Lockstone_West_Keyed_Crow:
-    Lockstone_Central + Pink_Key>4
-
-Lockstone_Southwest_Crow:
-    Lockstone_Central + Lever-Lockstone_Dual_Laser_Puzzle |
-    Lockstone_Lord_Opengate
 
 Lockstone_East_Crow:
     Lockstone_East + Lever-Lockstone_Tracking_Beam_Puzzle + Lever-Lockstone_Vertical_Laser_Puzzle |
@@ -347,7 +341,7 @@ Ruins_Outside_Main_Dungeon_Gate:
 Ruins_Forest_Settlement:
     Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Lever-Ruins_Entrance_Ladder_Shortcut) |
     Dungeon_Main_Hall |
-    Dungeon_Crow_2 + Lever-Dungeon_Above_Crow_2
+    Dungeon_Rightmost_Crow + Lever-Dungeon_Above_Rightmost_Crow
 
 Dungeon_Lobby:
     lvl_Forest[sdoor_forest_dung] |
@@ -368,7 +362,7 @@ Dungeon_Main_Hall:
     // technically redundant as Water Arena is only reachable from
     // Main Hall or Big Door in the first place
     Dungeon_Water_Arena |
-    Dungeon_Crow_2 |
+    Dungeon_Rightmost_Crow |
     Dungeon_Lobby + Lever-Dungeon_Entrance_Left_Gate |
     Dungeon_Lobby + Lever-Dungeon_Entrance_Right_Gate |
     Ruins_Forest_Settlement + Lever-Ruins_Upper_Dungeon_Entrance |
@@ -378,15 +372,9 @@ Dungeon_Water_Arena:
     Dungeon_Big_Door + Bomb |
     Dungeon_Main_Hall + Green_Key>3
 
-Dungeon_Crow_2:
+Dungeon_Rightmost_Crow:
     Dungeon_Main_Hall + Green_Key>3 |
-    Ruins_Forest_Settlement + Lever-Dungeon_Above_Crow_2
-
-Dungeon_Spider_Crow:
-    Dungeon_Big_Door + Fire
-
-Dungeon_Hall_Crow:
-    Dungeon_Main_Hall
+    Ruins_Forest_Settlement + Lever-Dungeon_Above_Rightmost_Crow
 
 Fortress_Entrance:
     lvl_Swamp[d_swamp_enter] |

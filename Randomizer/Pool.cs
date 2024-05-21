@@ -114,7 +114,7 @@ internal class Pool
         "Seed-Ruins On Settlement Wall",
         "Seed-Ruins Behind Boxes",
         "Seed-Ruins Down Through Bomb Wall",
-        "Seed-Dungeon Above Crow 2",
+        "Seed-Dungeon Above Rightmost Crow",
         "Seed-Dungeon Right Above Key",
         "Seed-Dungeon Avarice Bridge",
         "Seed-Fortress Watchtower",
@@ -255,7 +255,7 @@ internal class Pool
         new("Lever-Ruins Main Gate"),
         new("Lever-Dungeon Entrance Right Gate"),
         new("Lever-Dungeon Entrance Left Gate"),
-        new("Lever-Dungeon Above Crow 2"),
+        new("Lever-Dungeon Above Rightmost Crow"),
         new("Lever-Fortress Bomb"),
         new("Lever-Fortress Main Gate"),
         new("Lever-Fortress Central Shortcut"),
@@ -311,6 +311,21 @@ internal class Pool
         new(name: "Key-Manor Library", vanillaItem: "Yellow Key")
     );
 
+    public static readonly Pool CrowSouls = new(
+        new("Crow-Manor After Torch Puzzle"),
+        new("Crow-Manor Imp Loft"),
+        new("Crow-Manor Library"),
+        new("Crow-Manor Bedroom"),
+        new("Crow-Dungeon Hall"),
+        new("Crow-Dungeon Water Arena"),
+        new("Crow-Dungeon Cobweb"),
+        new("Crow-Dungeon Rightmost"),
+        new("Crow-Lockstone East"),
+        new("Crow-Lockstone West"),
+        new("Crow-Lockstone West Locked"),
+        new("Crow-Lockstone South West")
+    );
+
     public static readonly CG.Dictionary<string, Pool> Predefined = new()
     {
         {"Spells", Spells},
@@ -323,22 +338,8 @@ internal class Pool
         {"Truth Tablets", TruthTablets},
         {"Levers", Levers},
         {"Doors", Doors},
-        {"Keys", Keys}
-    };
-
-    public static readonly CG.List<Pool> All = new()
-    {
-        Spells,
-        Weapons,
-        GiantSouls,
-        Shrines,
-        ShinyThings,
-        Seeds,
-        SoulOrbs,
-        TruthTablets,
-        Levers,
-        Doors,
-        Keys
+        {"Keys", Keys},
+        {"Crow Souls", CrowSouls}
     };
 }
 
