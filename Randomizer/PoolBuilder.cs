@@ -58,6 +58,11 @@ public class PoolBuilder
         locations[location] = n + howMany;
     }
 
+    public void RemoveLocation(string location)
+    {
+        locations.Remove(location);
+    }
+
     public bool ContainsLocation(string location) =>
         locations.TryGetValue(location, out var n) && n > 0;
 

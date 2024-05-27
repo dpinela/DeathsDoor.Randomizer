@@ -10,6 +10,9 @@ public class GenerationSettings
     public StartWeapon StartWeapon = StartWeapon.Sword;
     public CG.Dictionary<string, bool> Pools = new();
     public int DupeSeeds = 0;
+    public int DupeVitalityShards = 0;
+    public int DupeMagicShards = 0;
+    public bool IncludeBelltowerKey;
     public string Seed = "";
 
     public void Derandomize(System.Random rng)

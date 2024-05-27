@@ -320,6 +320,31 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
+    private static void AddDupeShards(PoolBuilder pb, GenerationSettings gs)
+    {
+        if (gs.Pools["Shrines"])
+        {
+            pb.AddItem("Vitality Shard", gs.DupeVitalityShards);
+            pb.AddItem("Magic Shard", gs.DupeMagicShards);
+        }
+    }
+
+    private static void ExcludeBelltowerKey(PoolBuilder pb, GenerationSettings gs, DDRandoContext ctx)
+    {
+        const string keyLoc = "Rusty Belltower Key";
+
+        if (gs.Pools["Shiny Things"] && !gs.IncludeBelltowerKey)
+        {
+            pb.RemoveLocation(keyLoc);
+            // If the key location does not have an item placed, the belltower
+            // gate will expect the vanilla key to be obtained, and will not
+            // open with the one given by rando.
+            // This is a shortcoming of how IC implements drop items.
+            // Place a duplicate key at that location to work around this.
+            ctx.Preplacements[keyLoc] = keyLoc;
+        }
+    }
+
     private static (int, int) BalancePool(PoolBuilder pb)
     {
         var totalItems = pb.Items.Values.Sum();

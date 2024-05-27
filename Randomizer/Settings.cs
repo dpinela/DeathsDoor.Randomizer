@@ -10,11 +10,15 @@ internal class Settings
     private BepConfig.ConfigEntry<StartWeapon> _StartWeapon;
     private CG.Dictionary<string, BepConfig.ConfigEntry<bool>> _Pools = new();
     private BepConfig.ConfigEntry<int> _DupeSeeds;
+    private BepConfig.ConfigEntry<int> _DupeVitalityShards;
+    private BepConfig.ConfigEntry<int> _DupeMagicShards;
+    private BepConfig.ConfigEntry<bool> _IncludeBelltowerKey;
 
     private const string SeedGroup = "Seed";
     private const string StartGroup = "Start";
     private const string PoolsGroup = "Pools";
     private const string DupesGroup = "Duplicates";
+    private const string LongLocationsGroup = "Long Locations";
 
     public Settings(BepConfig.ConfigFile config)
     {
@@ -26,6 +30,9 @@ internal class Settings
         }
         _StartWeapon = config.Bind(StartGroup, "Weapon", StartWeapon.Sword, "Which weapon to give at the start of the game");
         _DupeSeeds = config.Bind(DupesGroup, "Extra Life Seeds", 0, "Add extra life seeds to the game");
+        _DupeVitalityShards = config.Bind(DupesGroup, "Extra Vitality Shards", 0, "Add extra vitality shards to the game");
+        _DupeMagicShards = config.Bind(DupesGroup, "Extra Magic Shards", 0, "Add extra magic shards to the game");
+        _IncludeBelltowerKey = config.Bind(LongLocationsGroup, "Include Rusty Belltower Key", true, "When Shiny Things are randomized, include the Rusty Belltower Key location in the pool (item is always in the pool)");
     }
 
     public GenerationSettings GetGS()
@@ -41,6 +48,9 @@ internal class Settings
             StartWeapon = _StartWeapon.Value,
             Seed = seed,
             DupeSeeds = _DupeSeeds.Value,
+            DupeVitalityShards = _DupeVitalityShards.Value,
+            DupeMagicShards = _DupeMagicShards.Value,
+            IncludeBelltowerKey = _IncludeBelltowerKey.Value,
         };
         foreach (var (k, entry) in _Pools)
         {
