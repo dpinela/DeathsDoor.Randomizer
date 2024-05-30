@@ -48,6 +48,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             AddBuiltinPools(pb, gs);
             AddSwordToPool(pb, gs);
             AddDupeSeeds(pb, gs);
+            AddDupeShards(pb, gs);
+            ExcludeBelltowerKey(pb, gs);
             var (minSeeds, maxSeeds) = BalancePool(pb);
             pools.Add(pb);
             if (gs.DupeSeeds > 0 && !gs.Pools["Seeds"])
@@ -69,6 +71,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             var ctx = new DDRandoContext(lm, gs);
             AddVanillaSword(ctx, gs);
             AddVanillaPools(ctx, pb);
+            RemoveVanillaBelltowerKey(ctx, gs);
 
             // Store the context for later use by the helper log.
             IO.File.WriteAllText(
@@ -328,20 +331,27 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             pb.AddItem("Magic Shard", gs.DupeMagicShards);
         }
     }
+    
+    private const string belltowerKeyLoc = "Rusty Belltower Key";
 
-    private static void ExcludeBelltowerKey(PoolBuilder pb, GenerationSettings gs, DDRandoContext ctx)
+    private static void ExcludeBelltowerKey(PoolBuilder pb, GenerationSettings gs)
     {
-        const string keyLoc = "Rusty Belltower Key";
-
         if (gs.Pools["Shiny Things"] && !gs.IncludeBelltowerKey)
         {
-            pb.RemoveLocation(keyLoc);
+            pb.RemoveLocation(belltowerKeyLoc);
+        }
+    }
+
+    private static void RemoveVanillaBelltowerKey(DDRandoContext ctx, GenerationSettings gs)
+    {
+        if (gs.Pools["Shiny Things"] && !gs.IncludeBelltowerKey)
+        {
             // If the key location does not have an item placed, the belltower
             // gate will expect the vanilla key to be obtained, and will not
             // open with the one given by rando.
             // This is a shortcoming of how IC implements drop items.
-            // Place a duplicate key at that location to work around this.
-            ctx.Preplacements[keyLoc] = keyLoc;
+            // Place a dummy item at that location to work around this.
+            ctx.Preplacements[belltowerKeyLoc] = "100 Souls";
         }
     }
 
