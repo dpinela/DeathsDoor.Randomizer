@@ -63,6 +63,9 @@ public class PoolBuilder
         locations.Remove(location);
     }
 
+    public int CountItem(string item) =>
+        items.TryGetValue(item, out var n) ? n : 0;
+
     public bool ContainsLocation(string location) =>
         locations.TryGetValue(location, out var n) && n > 0;
 

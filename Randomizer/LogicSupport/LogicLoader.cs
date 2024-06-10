@@ -56,12 +56,16 @@ internal static class LogicLoader
         return lmb;
     }
 
-    public static void DefineConsolidatedSeedItems(RC.Logic.LogicManagerBuilder lmb, int minSeeds, int maxSeeds)
+    public static void DefineConsolidatedItems(RC.Logic.LogicManagerBuilder lmb, CG.Dictionary<string, (int, int)> bounds)
     {
-        var term = lmb.GetTerm("Life_Seed");
-        for (var n = minSeeds; n <= maxSeeds; n++)
+        foreach (var (item, (min, max)) in bounds)
         {
-            lmb.AddItem(new RC.LogicItems.SingleItem($"Life_Seed_x{n}", new RC.TermValue(term, n)));
+            var termName = item.Replace(" ", "_");
+            var term = lmb.GetTerm(termName);
+            for (var n = min; n <= max; n++)
+            {
+                lmb.AddItem(new RC.LogicItems.SingleItem($"{termName}_x{n}", new RC.TermValue(term, n)));
+            }
         }
     }
 }

@@ -50,7 +50,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             AddDupeSeeds(pb, gs);
             AddDupeShards(pb, gs);
             ExcludeBelltowerKey(pb, gs);
-            var (minSeeds, maxSeeds) = BalancePool(pb);
+            var bounds = BalancePool(pb);
             pools.Add(pb);
             if (gs.DupeSeeds > 0 && !gs.Pools["Seeds"])
             {
@@ -60,12 +60,40 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 {
                     seedPB.AddLocation(loc.Name);
                 }
-                (minSeeds, maxSeeds) = BalancePool(seedPB);
+                bounds["Life Seed"] = BalancePool(seedPB)["Life Seed"];
                 pools.Add(seedPB);
+            }
+            if (gs.DupeVitalityShards > 0 && !gs.Pools["Shrines"])
+            {
+                var shrinePB = new PoolBuilder("Vitality Shards Group");
+                shrinePB.AddItem("Vitality Shard", 8 + gs.DupeVitalityShards);
+                foreach (var loc in Pool.Predefined["Shrines"].Content)
+                {
+                    if (loc.VanillaItem == "Vitality Shard")
+                    {
+                        shrinePB.AddLocation(loc.Name);
+                    }
+                }
+                bounds["Vitality Shard"] = BalancePool(shrinePB)["Vitality Shard"];
+                pools.Add(shrinePB);
+            }
+            if (gs.DupeMagicShards > 0 && !gs.Pools["Shrines"])
+            {
+                var shrinePB = new PoolBuilder("Magic Shards Group");
+                shrinePB.AddItem("Magic Shard", 8 + gs.DupeMagicShards);
+                foreach (var loc in Pool.Predefined["Shrines"].Content)
+                {
+                    if (loc.VanillaItem == "Magic Shard")
+                    {
+                        shrinePB.AddLocation(loc.Name);
+                    }
+                }
+                bounds["Magic Shard"] = BalancePool(shrinePB)["Magic Shard"];
+                pools.Add(shrinePB);
             }
 
             var lmb = LogicLoader.Load();
-            LogicLoader.DefineConsolidatedSeedItems(lmb, minSeeds, maxSeeds);
+            LogicLoader.DefineConsolidatedItems(lmb, bounds);
             lm = new(lmb);
 
             var ctx = new DDRandoContext(lm, gs);
@@ -121,8 +149,6 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 data.Place(item: item, location: loc);
             }
 
-            GameSave.currentSave.SetCountKey(minSeedsKey, minSeeds);
-            GameSave.currentSave.SetCountKey(maxSeedsKey, maxSeeds);
             if (gs.StartLightState == StartLightState.Night)
             {
                 // SaveData.populateDataStructure will copy this flag
@@ -171,8 +197,6 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     }
 
     private const string isRandoKey = "Randomizer-is_rando";
-    private const string minSeedsKey = "Randomizer-min_seeds";
-    private const string maxSeedsKey = "Randomizer-max_seeds";
 
     private static string RandoContextFileLocation() => IO.Path.Combine(
         UE.Application.persistentDataPath,
@@ -355,36 +379,65 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         }
     }
 
-    private static (int, int) BalancePool(PoolBuilder pb)
+    private static readonly string[] compressibleItems = new string[]
+    {
+        "Life Seed",
+        "Vitality Shard",
+        "Magic Shard"
+    };
+
+    private CG.Dictionary<string, (int, int)> BalancePool(PoolBuilder pb)
     {
         var totalItems = pb.Items.Values.Sum();
         var totalLocations = pb.Locations.Values.Sum();
         if (totalItems == totalLocations)
         {
-            return (1, 1);
+            return new(0);
         }
         if (totalItems > totalLocations)
         {
             var excessItems = totalItems - totalLocations;
-            var n = pb.Items.TryGetValue("Life Seed", out var x) ? x : 0;
-            if (n <= excessItems)
+            var compressibleItemCounts = compressibleItems.Select(pb.CountItem).ToArray();
+            var totalCompressibleItems = compressibleItemCounts.Sum();
+            if (excessItems > totalCompressibleItems - compressibleItems.Length)
             {
-                throw new System.InvalidOperationException($"not enough life seeds in pool to make room for extra items; have {n}, need at least {excessItems + 1}");
+                throw new System.InvalidOperationException($"not enough compressible items in pool to make room for extra items; have {totalCompressibleItems}, need at least {excessItems + compressibleItems.Length}");
             }
-            // Consolidate away as many seeds as there are excess items.
-            // The remaining pool of seeds is thus n - excessItems.
-            var remainingSeeds = n - excessItems;
-            var q = excessItems / remainingSeeds;
-            var r = excessItems % remainingSeeds;
-            pb.RemoveItemAll("Life Seed");
-            pb.AddItem($"Life Seed x{1 + q}", remainingSeeds - r);
-            pb.AddItem($"Life Seed x{2 + q}", r);
-            return r == 0 ? (1 + q, 1 + q) : (1 + q, 2 + q);
+
+            // Split the excess items (the amount we need to shrink the item pool by)
+            // proportionally among the compressible item kinds.
+            var excessItemsByKind = compressibleItemCounts.Select(n => excessItems * n / totalCompressibleItems).ToArray();
+            for (var i = 0; i < excessItems - excessItemsByKind.Sum(); i++)
+            {
+                excessItemsByKind[i]++;
+            }
+
+            var bounds = new CG.Dictionary<string, (int, int)>();
+
+            // Within each compressible item kind, consolidate away as many items as
+            // there are excess items in that kind.
+            for (var i = 0; i < compressibleItems.Length; i++)
+            {
+                if (excessItemsByKind[i] == 0)
+                {
+                    continue;
+                }
+                var remainingItems = compressibleItemCounts[i] - excessItemsByKind[i];
+                Logger.LogInfo($"removing {excessItemsByKind[i]} and keeping {remainingItems} of {compressibleItems[i]}");
+                var q = excessItemsByKind[i] / remainingItems;
+                var r = excessItemsByKind[i] % remainingItems;
+                pb.RemoveItemAll(compressibleItems[i]);
+                pb.AddItem($"{compressibleItems[i]} x{1 + q}", remainingItems - r);
+                pb.AddItem($"{compressibleItems[i]} x{2 + q}", r);
+                bounds[compressibleItems[i]] = (1 + q, r == 0 ? 1 + q : 2 + q);
+            }
+
+            return bounds;
         }
         else
         {
             pb.AddItem("100 Souls", totalLocations - totalItems);
-            return (1, 1);
+            return new(0);
         }
     }
 }
