@@ -407,7 +407,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             // Split the excess items (the amount we need to shrink the item pool by)
             // proportionally among the compressible item kinds.
             var excessItemsByKind = compressibleItemCounts.Select(n => excessItems * n / totalCompressibleItems).ToArray();
-            for (var i = 0; i < excessItems - excessItemsByKind.Sum(); i++)
+            var rest = excessItems - excessItemsByKind.Sum();
+            for (var i = 0; i < rest; i++)
             {
                 excessItemsByKind[i]++;
             }
