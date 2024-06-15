@@ -1,5 +1,8 @@
 namespace DDoor.Randomizer;
 
+using HL = HarmonyLib;
+using UE = UnityEngine;
+using IO = System.IO;
 using CG = System.Collections.Generic;
 using RC = RandomizerCore;
 using static System.Linq.Enumerable;
@@ -108,4 +111,59 @@ internal class DDRandoContext : RC.RandoContext
     };
 
     private record class Transition(string FromScene, string Door, string ToScene);
+
+    internal static DDRandoContext? current;
+
+    private static string FileLocation(string saveId) => IO.Path.Combine(
+        UE.Application.persistentDataPath,
+        "SAVEDATA",
+        $"Save_{saveId}-DDRandoContext.json"
+    );
+
+    internal void Save()
+    {
+        IO.File.WriteAllText(
+            FileLocation(GameSave.currentSave.saveId),
+            RC.Json.JsonUtil.SerializeToString(this)
+        );
+        current = this;
+    }
+
+    [HL.HarmonyPatch(typeof(SaveSlot), nameof(SaveSlot.LoadSave))]
+    private static class LoadPatch
+    {
+        private static void Prefix(SaveSlot __instance)
+        {
+            try
+            {
+                current = RC.Json.JsonUtil.DeserializeFromFile<DDRandoContext>(FileLocation(__instance.saveId));
+            }
+            catch (IO.FileNotFoundException)
+            {
+                current = null;
+            }
+            catch (System.Exception err)
+            {
+                current = null;
+                RandomizerPlugin.LogError($"Error loading context for save ID {__instance.saveId}: {err}");
+            }
+        }
+    }
+
+    [HL.HarmonyPatch(typeof(SaveSlot), nameof(SaveSlot.EraseSave))]
+    private static class ErasePatch
+    {
+        private static void Postfix(SaveSlot __instance)
+        {
+            try
+            {
+                IO.File.Delete(FileLocation(__instance.saveId));
+                RandomizerPlugin.LogInfo($"Saved context deleted for save ID {__instance.saveId}");
+            }
+            catch (IO.IOException)
+            {
+                RandomizerPlugin.LogInfo($"No saved context deleted for save ID {__instance.saveId}");
+            }
+        }
+    }
 }

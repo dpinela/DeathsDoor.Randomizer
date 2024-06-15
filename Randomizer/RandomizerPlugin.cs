@@ -1,3 +1,4 @@
+using HL = HarmonyLib;
 using UE = UnityEngine;
 using Bep = BepInEx;
 using AGM = DDoor.AlternativeGameModes;
@@ -7,7 +8,6 @@ using CG = System.Collections.Generic;
 using IO = System.IO;
 using Crypto = System.Security.Cryptography;
 using Text = System.Text;
-using Reflection = System.Reflection;
 using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
@@ -21,17 +21,49 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
     public void Start()
     {
-        AGM.AlternativeGameModes.Add("START RANDO", StartRando);
-
-        IC.SaveData.OnTrackerLogUpdate += tlog =>
+        try
         {
-            if (tlog != null && GameSave.GetSaveData().IsKeyUnlocked(isRandoKey))
+            Instance = this;
+
+            AGM.AlternativeGameModes.Add("START RANDO", StartRando);
+
+            IC.SaveData.OnTrackerLogUpdate += tlog =>
             {
-                WriteHelperLog(GenerateHelperLog(tlog));
-            }
-        };
-        
-        modSettings = new(Config);
+                if (tlog != null && GameSave.GetSaveData().IsKeyUnlocked(isRandoKey))
+                {
+                    WriteHelperLog(GenerateHelperLog(tlog));
+                }
+            };
+            
+            modSettings = new(Config);
+            new HL.Harmony("deathsdoor.randomizer").PatchAll();
+            InitStatus = 1;
+        }
+        catch (System.Exception err)
+        {
+            InitStatus = 2;
+            throw err;
+        }
+    }
+
+    public int InitStatus { get; internal set; } = 0;
+
+    private static RandomizerPlugin? Instance = null;
+
+    internal static void LogInfo(string msg)
+    {
+        if (Instance != null)
+        {
+            Instance.Logger.LogInfo(msg);
+        }
+    }
+
+    internal static void LogError(string msg)
+    {
+        if (Instance != null)
+        {
+            Instance.Logger.LogError(msg);
+        }
     }
 
     private void StartRando()
@@ -102,10 +134,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             RemoveVanillaBelltowerKey(ctx, gs);
 
             // Store the context for later use by the helper log.
-            IO.File.WriteAllText(
-                RandoContextFileLocation(),
-                RC.Json.JsonUtil.SerializeToString(ctx)
-            );
+            ctx.Save();
 
             var stage0 = new RC.Randomization.RandomizationStage
             {
@@ -200,21 +229,9 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
     private const string isRandoKey = "Randomizer-is_rando";
 
-    private static string RandoContextFileLocation() => IO.Path.Combine(
-        UE.Application.persistentDataPath,
-        "SAVEDATA",
-        $"Save_{GameSave.currentSave.saveId}-DDRandoContext.json"
-    );
-
     private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
     {
-        var ctxLoc = RandoContextFileLocation();
-        var ctx = RC.Json.JsonUtil.DeserializeFromFile<DDRandoContext>(ctxLoc);
-        if (ctx == null)
-        {
-            Logger.LogError($"stored context at {ctxLoc} is null?");
-            return new();
-        }
+        var ctx = DDRandoContext.current!;
         var lm = ctx.LM;
         var pm = new RC.Logic.ProgressionManager(lm, ctx);
         pm.mu.AddWaypoints(lm.Waypoints);
