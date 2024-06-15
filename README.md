@@ -12,11 +12,13 @@ To use this mod, you will need:
 - [AlternativeGameModes][AGM]
 - [ItemChanger][IC]
 - [RandomizerCore][RC-r]
+- [RandomizerCore.Json][RCJ]
 
 [bie]: https://docs.bepinex.dev/articles/user_guide/installation/index.html
 [AGM]: https://github.com/dpinela/DeathsDoor.AlternativeGameModes/releases
 [IC]: https://github.com/dpinela/DeathsDoor.ItemChanger/releases
 [RC-r]: https://github.com/homothetyhk/RandomizerCore/releases
+[RCJ]: https://github.com/homothetyhk/RandomizerCore.Json/releases
 
 After installing BepInEx, install this mod, ItemChanger and RandomizerCore onto the BepInEx
 plugins directory. Then launch the game, select an empty save slot, and press left or right
@@ -48,6 +50,7 @@ There are some additional pieces of software to enhance your randomizer experien
 - Levers
 - Doors
 - Green, Yellow and Pink Keys
+- Crow Souls
 
 # Configuration
 
@@ -63,6 +66,16 @@ This randomizer offers the following configuration settings:
 - Extra Life Seeds: adds additional life seeds to the item pool, to make it easier to plant pots for healing or
   to unlock the Green Ancient Tablet of Knowledge check. Use of this setting will create items bearing multiple
   life seeds if enough are added.
+- Extra Vitality Shards: adds additional vitality shards to the pool,
+  making it easier to get health upgrades and also allowing maximum health to go over the
+  vanilla limit of 6.
+- Extra Magic Shards: adds additional magic shards to the pool,
+  making it easier to get upgrades and also allowing magic points to go over the
+  vanilla limit of 6.
+- Include Rusty Belltower Key: allows the Rusty Belltower Key location to be removed
+  from the pool if Tablets are randomized.
+- Green Tablet Door Cost: changes the number of planted pots required to open the tablet
+  door in Estate to any number between 0 and 50.
 
 To edit these settings, we recommend use of the [BepInEx configuration manager][biecfg] mod, which provides an
 in-game GUI for mod settings (it also works with a few other Death's Door mods). Alternatively, you may edit the
