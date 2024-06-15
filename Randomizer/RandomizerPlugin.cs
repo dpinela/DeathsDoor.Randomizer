@@ -109,7 +109,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
             var stage0 = new RC.Randomization.RandomizationStage
             {
-                groups = pools.Select(p => p.MakeGroup(lm)).ToArray(),
+                groups = pools.Select(p => p.MakeGroup(lm, gs.GreenTabletDoorCost)).ToArray(),
                 strategy = new(),
                 label = "stage0"
             };
@@ -164,6 +164,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 StartWeapon.Hammer => "hammer",
                 _ => throw new System.InvalidOperationException("BUG: StartWeapon should not be Random at this point")
             };
+
+            data.GreenTabletDoorCost = gs.GreenTabletDoorCost;
             
             data.StartingWeapon = startWeaponId;
             // Actually equip the chosen weapon.

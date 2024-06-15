@@ -13,6 +13,7 @@ public class GenerationSettings
     public int DupeVitalityShards = 0;
     public int DupeMagicShards = 0;
     public bool IncludeBelltowerKey;
+    public int GreenTabletDoorCost = 50;
     public string Seed = "";
 
     public void Derandomize(System.Random rng)

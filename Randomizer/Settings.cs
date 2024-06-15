@@ -13,6 +13,7 @@ internal class Settings
     private BepConfig.ConfigEntry<int> _DupeVitalityShards;
     private BepConfig.ConfigEntry<int> _DupeMagicShards;
     private BepConfig.ConfigEntry<bool> _IncludeBelltowerKey;
+    private BepConfig.ConfigEntry<int> _GreenTabletDoorCost;
 
     private const string SeedGroup = "Seed";
     private const string StartGroup = "Start";
@@ -33,6 +34,9 @@ internal class Settings
         _DupeVitalityShards = config.Bind(DupesGroup, "Extra Vitality Shards", 0, "Add extra vitality shards to the game");
         _DupeMagicShards = config.Bind(DupesGroup, "Extra Magic Shards", 0, "Add extra magic shards to the game");
         _IncludeBelltowerKey = config.Bind(LongLocationsGroup, "Include Rusty Belltower Key", true, "When Shiny Things are randomized, include the Rusty Belltower Key location in the pool (item is always in the pool)");
+        _GreenTabletDoorCost = config.Bind(LongLocationsGroup, "Green Tablet Door Cost", 50, new BepConfig.ConfigDescription(
+            "Number of planted pots required to open the tablet door in Estate",
+            new BepConfig.AcceptableValueRange<int>(0, 50)));
     }
 
     public GenerationSettings GetGS()
@@ -51,6 +55,7 @@ internal class Settings
             DupeVitalityShards = _DupeVitalityShards.Value,
             DupeMagicShards = _DupeMagicShards.Value,
             IncludeBelltowerKey = _IncludeBelltowerKey.Value,
+            GreenTabletDoorCost = _GreenTabletDoorCost.Value,
         };
         foreach (var (k, entry) in _Pools)
         {

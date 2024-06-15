@@ -83,7 +83,7 @@ public class PoolBuilder
         return list.ToArray();
     }
 
-    private RC.IRandoLocation[] MakeLocations(RC.Logic.LogicManager lm)
+    private RC.IRandoLocation[] MakeLocations(RC.Logic.LogicManager lm, int greenDoorCost)
     {
         var list = new CG.List<RC.IRandoLocation>();
         foreach (var (name, n) in locations)
@@ -93,7 +93,7 @@ public class PoolBuilder
                 var loc = new RC.RandoLocation() { logic = lm.GetLogicDefStrict(name.Replace(" ", "_")) };
                 if (name == "Green Ancient Tablet of Knowledge")
                 {
-                    loc.AddCost(new PlantedPotCost(lm, 50));
+                    loc.AddCost(new PlantedPotCost(lm, greenDoorCost));
                 }
                 list.Add(loc);
             }
@@ -102,12 +102,12 @@ public class PoolBuilder
         return list.ToArray();
     }
 
-    internal RC.Randomization.RandomizationGroup MakeGroup(RC.Logic.LogicManager lm)
+    internal RC.Randomization.RandomizationGroup MakeGroup(RC.Logic.LogicManager lm, int greenDoorCost)
     {
         return new()
         {
             Items = MakeItems(lm),
-            Locations = MakeLocations(lm),
+            Locations = MakeLocations(lm, greenDoorCost),
             Label = name,
             Strategy = new RC.Randomization.DefaultGroupPlacementStrategy(3)
         };
