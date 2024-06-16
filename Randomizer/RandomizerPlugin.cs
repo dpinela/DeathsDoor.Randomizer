@@ -130,8 +130,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
             var ctx = new DDRandoContext(lm, gs);
             AddVanillaSword(ctx, gs);
-            AddVanillaPools(ctx, pb);
             RemoveVanillaBelltowerKey(ctx, gs);
+            AddVanillaPools(ctx, pb);
 
             // Store the context for later use by the helper log.
             ctx.Save();
