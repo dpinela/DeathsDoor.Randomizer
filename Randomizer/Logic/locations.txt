@@ -570,7 +570,7 @@ Lever-Sailor_Greatsword_Gate:
 // Castle Lockstone
 
 Magic_Shrine-Lockstone_Secret_West:
-    Lockstone_Jailed_Seed + Lever-Lockstone_Secret_West
+    Lockstone_Jailed_Seed + Lever-Lockstone_Shrine
 
 Ancient_Crown:
     Lockstone_Central
@@ -629,7 +629,7 @@ Lever-Lockstone_Vertical_Laser_Puzzle:
 Lever-Lockstone_North_Puzzle:
     Lockstone_Central
 
-Lever-Lockstone_Secret_West:
+Lever-Lockstone_Shrine:
     (Lockstone_Central | Lockstone_Jailed_Seed) + Hookshot
 
 Lever-Lockstone_Hookshot_Puzzle:
