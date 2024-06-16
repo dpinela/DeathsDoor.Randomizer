@@ -1,4 +1,4 @@
-# 1.2 (??? June 2024)
+# 1.2 (16 June 2024)
 
 This release adds a new pool, Crow Souls, containing the 12 ghost crows
 that open the doors to the Avarices in Hall of Doors.
