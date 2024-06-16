@@ -13,6 +13,8 @@ As the new crow items are numbered after their positions on the respective
 Ancient Door, locations that had formerly been named for the Crow 2 of the
 Any% or 100% routes in Mushroom Dungeon now refer to the "Rightmost Crow" instead.
 
+The "Locksone Secret West" lever is now known as the "Lockstone Shrine" lever.
+
 # 1.1 (29 April 2024)
 
 New configuration options:
