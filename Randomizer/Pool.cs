@@ -241,7 +241,7 @@ internal class Pool
         new("Lever-Lockstone Tracking Beam Puzzle"),
         new("Lever-Lockstone Vertical Laser Puzzle"),
         new("Lever-Lockstone North Puzzle"),
-        new("Lever-Lockstone Secret West"),
+        new("Lever-Lockstone Shrine"),
         new("Lever-Lockstone Hookshot Puzzle"),
         new("Lever-Lockstone Upper Puzzle"),
         new("Lever-Lockstone Upper Dual Laser Puzzle"),
