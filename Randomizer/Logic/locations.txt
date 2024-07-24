@@ -332,7 +332,8 @@ Soul_Orb-Garden_of_Peace:
 Green_Ancient_Tablet_of_Knowledge:
     // The pot requirement is handled separately by a logic cost,
     // to make it easier to change to arbitary values.
-    Estate_North + Nighttime
+    // Unlike other tablet doors, this one is accessible even during daytime.
+    Estate_North
 
 Estate_Owl:
     Estate_Garden_of_Life_End + Nighttime

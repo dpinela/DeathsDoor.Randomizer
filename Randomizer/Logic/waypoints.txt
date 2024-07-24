@@ -236,7 +236,7 @@ Lockstone_Lord_Lockstone:
     Lockstone_Central + Fire
 
 Lockstone_Lord_Opengate:
-    Lockstone_Central + Lever-Lockstone_Hookshot_Puzzle + Fire
+    Lockstone_Central + Hookshot + Lever-Lockstone_Hookshot_Puzzle + Fire
 
 Lockstone_Lord_Deadbolt:
     Lockstone_East_Upper_Keyed_Door + Hookshot + Fire
