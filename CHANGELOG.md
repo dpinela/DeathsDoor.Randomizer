@@ -1,3 +1,9 @@
+# 1.2.1 (24 July 2024)
+
+Logic fixes:
+- The tablet door in Estate no longer requires Night access
+- Lord Opengate now requires Hookshot to reach
+
 # 1.2 (16 June 2024)
 
 This release adds a new pool, Crow Souls, containing the 12 ghost crows
