@@ -1,0 +1,11 @@
+Crypt_Main_Room:
+    ORIG | lvlConnect_Graveyard_Gardens[d_crypttogardens] // can roll through the gate when coming from below
+
+Ruins_Outside_Main_Dungeon_Gate:
+    // you can roll through the Dungeon gate backwards
+    ORIG | Dungeon_Lobby
+
+Dungeon_Lobby:
+    // you can roll through both the cobweb and the locked gate
+    // in the corridor
+    ORIG | Dungeon_Big_Door

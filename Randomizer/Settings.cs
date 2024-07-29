@@ -9,6 +9,7 @@ internal class Settings
     private BepConfig.ConfigEntry<StartLightState> _StartLightState;
     private BepConfig.ConfigEntry<StartWeapon> _StartWeapon;
     private CG.Dictionary<string, BepConfig.ConfigEntry<bool>> _Pools = new();
+    private CG.Dictionary<string, BepConfig.ConfigEntry<bool>> _Skips = new();
     private BepConfig.ConfigEntry<int> _DupeSeeds;
     private BepConfig.ConfigEntry<int> _DupeVitalityShards;
     private BepConfig.ConfigEntry<int> _DupeMagicShards;
@@ -18,6 +19,7 @@ internal class Settings
     private const string SeedGroup = "Seed";
     private const string StartGroup = "Start";
     private const string PoolsGroup = "Pools";
+    private const string SkipsGroup = "Skips";
     private const string DupesGroup = "Duplicates";
     private const string LongLocationsGroup = "Long Locations";
 
@@ -28,6 +30,11 @@ internal class Settings
         foreach (var k in Pool.Predefined.Keys)
         {
             _Pools[k] = config.Bind(PoolsGroup, k, true);
+        }
+        foreach (var addon in LogicLoader.LogicAddons())
+        {
+            UnityEngine.Debug.Log($"addon: {addon}");
+            _Skips[addon] = config.Bind(SkipsGroup, addon, false);
         }
         _StartWeapon = config.Bind(StartGroup, "Weapon", StartWeapon.Sword, "Which weapon to give at the start of the game");
         _DupeSeeds = config.Bind(DupesGroup, "Extra Life Seeds", 0, "Add extra life seeds to the game");
@@ -60,6 +67,10 @@ internal class Settings
         foreach (var (k, entry) in _Pools)
         {
             gs.Pools[k] = entry.Value;
+        }
+        foreach (var (k, entry) in _Skips)
+        {
+            gs.Skips[k] = entry.Value;
         }
         return gs;
     }

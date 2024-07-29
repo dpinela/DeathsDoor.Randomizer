@@ -9,6 +9,7 @@ public class GenerationSettings
     public StartLightState StartLightState = StartLightState.Day;
     public StartWeapon StartWeapon = StartWeapon.Sword;
     public CG.Dictionary<string, bool> Pools = new();
+    public CG.Dictionary<string, bool> Skips = new();
     public int DupeSeeds = 0;
     public int DupeVitalityShards = 0;
     public int DupeMagicShards = 0;

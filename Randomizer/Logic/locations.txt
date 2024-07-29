@@ -830,7 +830,6 @@ Soul_Orb-Ruins_Upper_Bomb_Wall:
 
 Soul_Orb-Ruins_Lower_Hookshot:
     Ruins_Forest_Settlement + Hookshot
-    // there is a skip to get this without hookshot, but it may require haste>=2?
 
 Yellow_Ancient_Tablet_of_Knowledge:
     Ruins_Outside_Front_Gate + Nighttime

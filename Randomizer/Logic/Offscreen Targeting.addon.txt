@@ -1,0 +1,10 @@
+Lost_Cemetery_Opened_Exit_to_Sailor:
+    ORIG | Lost_Cemetery_Steadhone // using a well-aimed arrow offscreen
+
+Soul_Orb-Ruins_Lower_Bomb_Wall:
+    // precise offscreen arrow on a bomb flower
+    ORIG | Ruins_Outside_Main_Dungeon_Gate
+
+Fortress_Entrance:
+    // requires aiming an offscreen arrow at a switch
+    ORIG | Fortress_Frog_King_Statue

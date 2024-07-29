@@ -46,12 +46,11 @@ Lost_Cemetery_Steadhone:
         Pink_Key>4 |
         Lever-Catacombs_Tower
     )
-    // geometry skip from Sailor
 
 // This particular lamp is on the Jefferson quest path, so we need to track it.
 // If/when we do room rando, we may have to track other lamps and gates similarly.
 stateless Lost_Cemetery_Opened_Exit_to_Sailor:
-    Lost_Cemetery_Steadhone + Fire // or a well-aimed arrow offscreen
+    Lost_Cemetery_Steadhone + Fire
 
 Lost_Cemetery_Summit:
     Lost_Cemetery_Central + Lever-Guardian_of_the_Door_Access |
@@ -88,8 +87,7 @@ stateless Grey_Crow_Boss:
     Giant_Soul_of_Betty
 
 Crypt_Main_Room:
-    lvlConnect_Graveyard_Gardens[d_graveyardtocrypt] |
-    lvlConnect_Graveyard_Gardens[d_crypttogardens] // can roll through the gate when coming from below
+    lvlConnect_Graveyard_Gardens[d_graveyardtocrypt]
 
 Estate_South:
     lvl_GrandmaGardens[d_crypttogardens] |
@@ -203,7 +201,6 @@ Lockstone_Southwest_Crow:
 
 Lockstone_East:
     Lockstone_Central + Lever-Lockstone_East_Lower
-    // | Lockstone_East_Upper (does falling behind the grate from above count as a skip?)
 
 Lockstone_East_Upper:
     Lockstone_Central + (Hookshot | Lever-Lockstone_Upper_Shortcut)
@@ -321,9 +318,8 @@ stateless Watchtowers_Boomers_Torch_1:
 
 stateless Watchtowers_Boomers_Torch_2:
     // can also hit it from Watchtowers_First_Pot_Area from a corner of
-    // the boomers platform but the torch is also barely visible so maybe
-    // count as a skip?
-    Watchtowers_Ice_Skating_Start + Nighttime + Hookshot + Fire
+    // the boomers platform
+    (Watchtowers_Ice_Skating_Start | Watchtowers_First_Pot_Area) + Nighttime + Hookshot + Fire
 
 Betty_Room:
     boss_betty[sdoor_betty] | boss_betty[d_mountaintopstobetty]
@@ -335,22 +331,23 @@ Ruins_Outside_Front_Gate:
 Ruins_Outside_Main_Dungeon_Gate:
     lvl_Forest[sdoor_forest] |
     Ruins_Outside_Front_Gate + Lever-Ruins_Main_Gate |
-    Ruins_Forest_Settlement |
-    Dungeon_Lobby
+    Ruins_Forest_Settlement
 
 Ruins_Forest_Settlement:
     Ruins_Outside_Main_Dungeon_Gate + (Green_Key>3 | Lever-Ruins_Entrance_Ladder_Shortcut) |
     Dungeon_Main_Hall |
     Dungeon_Rightmost_Crow + Lever-Dungeon_Above_Rightmost_Crow
 
+stateless Opened_Dungeon_Main_Gate:
+    Ruins_Forest_Settlement + Magical_Forest_Horn + Daytime
+
 Dungeon_Lobby:
-    lvl_Forest[sdoor_forest_dung] |
-    Ruins_Outside_Main_Dungeon_Gate + Ruins_Forest_Settlement + Magical_Forest_Horn + Daytime |
-    Dungeon_Big_Door |
+    Ruins_Outside_Main_Dungeon_Gate + Opened_Dungeon_Main_Gate |
     Dungeon_Main_Hall + Lever-Dungeon_Entrance_Left_Gate |
     Dungeon_Main_Hall + Lever-Dungeon_Entrance_Right_Gate
 
 Dungeon_Big_Door:
+    lvl_Forest[sdoor_forest_dung] |
     Dungeon_Lobby + Fire |
     Dungeon_Main_Hall + Bomb |
     Dungeon_Water_Arena |
@@ -377,15 +374,17 @@ Dungeon_Rightmost_Crow:
     Ruins_Forest_Settlement + Lever-Dungeon_Above_Rightmost_Crow
 
 Fortress_Entrance:
-    lvl_Swamp[d_swamp_enter] |
-    Fortress_Frog_King_Encounter
+    lvl_Swamp[d_swamp_enter]
 
 Fortress_Watchtower_Lower:
     Fortress_Entrance + Lever-Fortress_Watchtower_Lower
 
+Fortress_Frog_King_Statue:
+    Fortress_Entrance | Fortress_Frog_King_Encounter
+
 Fortress_Frog_King_Encounter:
     lvl_Swamp[sdoor_swamp] |
-    Fortress_Entrance + Lever-Fortress_Statue + Lever-Fortress_Pre-Main_Gate
+    Fortress_Frog_King_Statue + Lever-Fortress_Statue + Lever-Fortress_Pre-Main_Gate
 
 Fortress_Inside_Main_Gate:
     Fortress_Frog_King_Encounter + (Bomb | Hookshot) + Lever-Fortress_Main_Gate
