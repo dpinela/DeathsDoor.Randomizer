@@ -342,15 +342,15 @@ stateless Opened_Dungeon_Main_Gate:
     Ruins_Forest_Settlement + Magical_Forest_Horn + Daytime
 
 Dungeon_Lobby:
+    lvl_Forest[sdoor_forest_dung] |
     Ruins_Outside_Main_Dungeon_Gate + Opened_Dungeon_Main_Gate |
     Dungeon_Main_Hall + Lever-Dungeon_Entrance_Left_Gate |
     Dungeon_Main_Hall + Lever-Dungeon_Entrance_Right_Gate
 
 Dungeon_Big_Door:
-    lvl_Forest[sdoor_forest_dung] |
     Dungeon_Lobby + Fire |
     Dungeon_Main_Hall + Bomb |
-    Dungeon_Water_Arena |
+    Dungeon_Water_Arena | // + Arrow
     Ruins_Forest_Settlement + Lever-Ruins_Upper_Dungeon_Entrance
 
 Dungeon_Main_Hall:

@@ -960,7 +960,7 @@ Seed-Fortress_Watchtower:
     Fortress_Watchtower_Lower + Lever-Fortress_Watchtower_Upper
 
 Seed-Fortress_Statue:
-    Fortress_Entrance
+    Fortress_Frog_King_Statue
 
 Seed-Fortress_Bridge:
     Fortress_Bridge + (Bomb | Hookshot)
@@ -969,7 +969,7 @@ Seed-Fortress_Intro_Crate:
     Fortress_Entrance
 
 Seed-Fortress_East_After_Statue:
-    Fortress_Entrance
+    Fortress_Frog_King_Statue
 
 Soul_Orb-Fortress_Bomb:
     Fortress_Watchtower_Lower + Bomb
@@ -993,7 +993,7 @@ Lever-Fortress_Central_Shortcut:
     Fortress_Inside_Main_Gate + Bomb
 
 Lever-Fortress_Statue:
-    Fortress_Entrance
+    Fortress_Frog_King_Statue
 
 Lever-Fortress_Watchtower_Lower:
     Fortress_Entrance
@@ -1005,7 +1005,7 @@ Lever-Fortress_Bridge:
     Fortress_Breakable_Bridges
 
 Lever-Fortress_Pre-Main_Gate:
-    Fortress_Entrance + Lever-Fortress_Statue |
+    Fortress_Frog_King_Statue + Lever-Fortress_Statue |
     Fortress_Frog_King_Encounter
 
 Lever-Fortress_North_West:
