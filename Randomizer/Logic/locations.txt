@@ -197,7 +197,14 @@ Soul_Orb-Cemetery_Cave:
     Lost_Cemetery_Steadhone
 
 Cyan_Ancient_Tablet_of_Knowledge:
-    Lost_Cemetery_Central + Lost_Cemetery_Steadhone + Lost_Cemetery_Summit + Lost_Cemetery_Right_Arena + Nighttime
+    // The first waypoint is the location of the tablet itself,
+    // and also of one of the crows.
+    // The remaining four are the locations of the other 6 crows.
+    Lost_Cemetery_Right_Arena + Nighttime +
+        Lost_Cemetery_Central/ +
+        Lost_Cemetery_Steadhone/ +
+        Lost_Cemetery_Belltower/ +
+        Lost_Cemetery_Summit/
 
 Purple_Ancient_Tablet_of_Knowledge:
     Lost_Cemetery_Steadhone + Nighttime + Mysterious_Locket
