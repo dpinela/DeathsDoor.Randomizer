@@ -256,7 +256,7 @@ lvl_Forest[d_swamp_enter]:
 // Flooded Fortress
 
 lvl_Swamp[sdoor_swamp]:
-    Fortress_Frog_King_Encounter + Flooded_Fortress_Door
+    Fortress_Frog_King_Encounter + Flooded_Fortress_Door + $NO_JEFFERSON
 
 lvl_Swamp[d_swamp_enter]:
     Fortress_Entrance
@@ -267,7 +267,7 @@ lvl_Swamp[d_frog_boss]:
 // Throne of the Frog King
 
 boss_frog[sdoor_frogboss]:
-    Frog_King_Room + Throne_of_the_Frog_King_Door
+    Frog_King_Room + Throne_of_the_Frog_King_Door + $NO_JEFFERSON
 
 boss_frog[d_frog_boss]:
     Frog_King_Room
