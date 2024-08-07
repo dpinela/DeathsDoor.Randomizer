@@ -161,9 +161,10 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 new[] { stage0 },
                 monitor
             );
-            var placementGroups = rando.Run()[0];
+            var placementGroups = rando.Run();
+            PlacementsHash.Save(placementGroups);
             var data = IC.SaveData.Open();
-            foreach (var g in placementGroups)
+            foreach (var g in placementGroups[0])
             {
                 foreach (var p in g)
                 {
