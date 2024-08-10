@@ -1,0 +1,2 @@
+Can_Hit_Bell:
+    ORIG | Lost_Cemetery_Summit + Bomb
