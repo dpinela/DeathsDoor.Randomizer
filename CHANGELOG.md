@@ -1,3 +1,19 @@
+# 1.3 (11 August 2024)
+
+New features:
+
+- Optional skip logic for geometry exploits,
+  offscreen targeting, gate rolls, and early night.
+- Support for custom logic add-ons.
+- A hash derived from all item placements, which
+  can be checked at the phone booth in Hall of Doors.
+
+Logic fixes:
+
+- The ancient door leading to Bomb Avarice is no longer considered reachable
+  with just the Mushroom Dungeon door.
+- The passage from North to South Estate now requires bombs.
+
 # 1.2.1 (24 July 2024)
 
 Logic fixes:

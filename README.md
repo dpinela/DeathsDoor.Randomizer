@@ -20,9 +20,9 @@ To use this mod, you will need:
 [RC-r]: https://github.com/homothetyhk/RandomizerCore/releases
 [RCJ]: https://github.com/homothetyhk/RandomizerCore.Json/releases
 
-After installing BepInEx, install this mod, ItemChanger and RandomizerCore onto the BepInEx
-plugins directory. Then launch the game, select an empty save slot, and press left or right
-while the "Start" option is selected until it reads "Start Rando". Select that to start
+After installing BepInEx, install this mod, ItemChanger, RandomizerCore and RandomizerCore.Json
+onto the BepInEx plugins directory. Then launch the game, select an empty save slot, and press
+left or right while the "Start" option is selected until it reads "Start Rando". Select that to start
 a randomized game.
 
 # Recommended additions
@@ -52,6 +52,35 @@ There are some additional pieces of software to enhance your randomizer experien
 - Green, Yellow and Pink Keys
 - Crow Souls
 
+# Skips
+
+This randomizer includes optional logic for the following skip types:
+
+- Geometry Exploits: tricks that rely on rolling or landing onto walls, gates or other surfaces
+  that aren't flat ground.
+- Offscreen Targeting: tricks that involve hitting enemies or switches that aren't visible on
+  screen from where you take the shot.
+- Gate Rolls: skips that require rolling into a room transition to bypass locked gates.
+- Early Night: the skip that uses a bomb fired from a railing to hit the belltower's bell,
+  bypassing the need for the Rusty Belltower Key.
+
+For more details on which specific tricks are included in each of these categories, see the
+corresponding `.addon.txt` files in your randomizer installation.
+
+## Custom logic packs
+
+In addition to the skip types mentioned above, the randomizer also can load custom logic packs
+that modify existing waypoint, transition or location logic. To install one, write your logic
+in a file with the extension `.addon.txt` and place it in the same directory as the Randomizer.dll
+file in your BepInEx installation. The custom logic pack will appear under the Skips section of
+the settings, with the name of the corresponding file minus the `.addon.txt` extension.
+
+Each logic pack that is applied fully replaces the logic for the locations/transitions/waypoints that it
+specifies; if you only want to add to existing logic, the special keyword `ORIG` can be used to include
+the original logic in your custom logic expression.
+
+For examples of how to write a logic pack, see the `.addon.txt` files included with the randomizer.
+
 # Configuration
 
 This randomizer offers the following configuration settings:
@@ -63,6 +92,7 @@ This randomizer offers the following configuration settings:
 - Weapon: which weapon to start the game with (defaults to Sword). Can also be randomized.
 - Pools: whether to add each of the above randomizable pools to the overall pool.
   For pools that are not selected, all their locations are left as vanilla and their items will not be found elsewhere.
+- Skips: whether to add each of the above skip types to the logic.
 - Extra Life Seeds: adds additional life seeds to the item pool, to make it easier to plant pots for healing or
   to unlock the Green Ancient Tablet of Knowledge check. Use of this setting will create items bearing multiple
   life seeds if enough are added.
@@ -84,9 +114,17 @@ randomizer installed will generate this file if it doesn't already exist.
 
 [biecfg]: https://github.com/BepInEx/BepInEx.ConfigurationManager
 
+# Hash
+
+In multiplayer settings, like races or co-op games, it may be necessary to verify that
+all players are on identical seeds. For this purpose, the randomizer calculates a hash
+based on all its item placements, which can be consulted at the phone booth in Hall of
+Doors, near the start of the game. It appears formatted as a phone number of the form
+(N) NNN NNN NNN.
+
 # Logic
 
-The logic for this randomizer is in the `Randomizer/Logic` directory, in three
+The base logic for this randomizer is in the `Randomizer/Logic` directory, in three
 files:
 
 - locations.txt - contains logic for all randomizable locations, plus flower pots.
@@ -101,6 +139,9 @@ constraints.
 The logic is written under the assumption that the player can always return to the starting
 point of the game - the main lobby of Hall of Doors - at any time; ItemChanger includes
 the necessary patches to ensure that this remains the case when the randomizer is active.
+
+The base logic approximately follows the Restricted ruleset used for speedrunning; movement
+or tricks that aren't allowed by that ruleset should usually be in a custom logic pack.
 
 [IC-predef]: https://github.com/dpinela/DeathsDoor.ItemChanger/blob/main/ItemChanger/Predefined.cs
 
@@ -128,8 +169,9 @@ Thanks to MrKoiCarp and TheDancingGrad for naming many of the items and location
 game.
 
 Thanks to all the people in the DD discord who tried this mod's precursor, [Plando][],
-and helped find bugs, SpR3AD in particular.
+and helped find bugs, [SpR3AD][] in particular.
 
 [RC]: https://github.com/homothetyhk/RandomizerCore
 [R4]: https://github.com/homothetyhk/RandomizerMod
 [Plando]: https://github.com/dpinela/DeathsDoor.Plando
+[SpR3AD]: https://github.com/SpR3AD1
