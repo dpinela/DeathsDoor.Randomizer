@@ -92,7 +92,7 @@ Crypt_Main_Room:
 Estate_South:
     lvl_GrandmaGardens[d_crypttogardens] |
     lvl_GrandmaGardens[sdoor_gardens] |
-    Estate_North + Lever-Garden_of_Joy + Lever-Garden_of_Peace
+    Estate_North + Lever-Garden_of_Joy + Lever-Garden_of_Peace + Bomb
 
 Estate_North:
     lvl_GrandmaGardens[d_gardenstomansion] |

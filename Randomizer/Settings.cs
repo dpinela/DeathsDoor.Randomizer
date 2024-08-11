@@ -33,7 +33,6 @@ internal class Settings
         }
         foreach (var addon in LogicLoader.LogicAddons())
         {
-            UnityEngine.Debug.Log($"addon: {addon}");
             _Skips[addon] = config.Bind(SkipsGroup, addon, false);
         }
         _StartWeapon = config.Bind(StartGroup, "Weapon", StartWeapon.Sword, "Which weapon to give at the start of the game");
