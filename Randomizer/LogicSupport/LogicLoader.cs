@@ -58,9 +58,7 @@ internal static class LogicLoader
         {
             if (enabledAddons.TryGetValue(addon, out var on) && on)
             {
-                var loc = IO.Path.Combine(logicDir, addon + addonFileSuffix);
-                using var s = IO.File.OpenRead(loc);
-                lmb.DeserializeFile(LFT.LogicEdit, fmt, s);
+                LoadLogicFile(LFT.LogicEdit, addon + addonFileSuffix);
             }
         }
 
