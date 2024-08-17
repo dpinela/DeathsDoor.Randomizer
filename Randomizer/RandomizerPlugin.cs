@@ -243,7 +243,20 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         {
             if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
             {
-                pm.mu.AddEntry(new HelperLogUpdateEntry(logic, reachableLocations));
+                // Locations with costs should only appear in the helper log
+                // once those costs can actually be paid.
+                if (loc == "Green Ancient Tablet of Knowledge")
+                {
+                    pm.mu.AddEntry(new HelperLogCostedUpdateEntry(
+                        logic,
+                        new PlantedPotCost(lm, ctx.gs.GreenTabletDoorCost),
+                        reachableLocations
+                    ));
+                }
+                else
+                {
+                    pm.mu.AddEntry(new HelperLogUpdateEntry(logic, reachableLocations));
+                }
             }
         }
         foreach (var gp in ctx.EnumerateExistingPlacements())
