@@ -42,6 +42,7 @@ Lost_Cemetery_Right_Arena:
 Lost_Cemetery_Steadhone:
     lvl_Graveyard[d_graveyardtosailorcaves] + Lost_Cemetery_Opened_Exit_to_Sailor |
     Lost_Cemetery_Belltower |
+    Lost_Cemetery_Summit + Lever-Cemetery_Sewer |
     Lost_Cemetery_Central + (
         Pink_Key>4 |
         Lever-Catacombs_Tower
