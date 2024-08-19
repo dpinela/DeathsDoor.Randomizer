@@ -12,7 +12,7 @@ using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
 
-[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.3.0.0")]
+[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.3.1.0")]
 [Bep.BepInDependency("deathsdoor.itemchanger", "1.4")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {

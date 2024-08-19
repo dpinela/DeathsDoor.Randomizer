@@ -1,3 +1,12 @@
+# 1.3.1 (19 August 2024)
+
+Bug fixes:
+
+- The Green Ancient Tablet of Knowledge location no longer appears in the helper log
+  before all necessary pots can be planted
+- Going down the Cemetery sewer ladder is now considered in logic
+- Logic no longer expects you to take Jefferson through Avarice doors
+
 # 1.3 (11 August 2024)
 
 New features:
