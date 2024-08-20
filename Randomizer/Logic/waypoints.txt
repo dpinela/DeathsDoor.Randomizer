@@ -28,7 +28,7 @@ Grove_of_Spirits:
 Lost_Cemetery_Central:
     lvl_Graveyard[tdoor_gy] |
     lvl_Graveyard[sdoor_graveyard] |
-    lvl_Graveyard[d_graveyardtocrypt] + Lever-Catacombs_Tower |
+    Lost_Cemetery_Steadhone + Lever-Catacombs_Tower |
     Lost_Cemetery_Right_Arena
 
 Lost_Cemetery_Right_Arena:
