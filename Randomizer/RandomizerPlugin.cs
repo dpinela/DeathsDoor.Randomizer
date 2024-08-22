@@ -16,7 +16,6 @@ namespace DDoor.Randomizer;
 [Bep.BepInDependency("deathsdoor.itemchanger", "1.4")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
-    private RC.Logic.LogicManager? lm;
     private Settings? modSettings;
 
     public void Start()
@@ -126,7 +125,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
             var lmb = LogicLoader.Load(gs.Skips);
             LogicLoader.DefineConsolidatedItems(lmb, bounds);
-            lm = new(lmb);
+            var lm = new RC.Logic.LogicManager(lmb);
 
             var ctx = new DDRandoContext(lm, gs);
             AddVanillaSword(ctx, gs);
@@ -211,6 +210,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
 
             WriteHelperLog(GenerateHelperLog(new()));
+            WriteSpoilerLog(GenerateSpoilerLog(placementGroups));
             
         }
         catch (System.Exception err)
@@ -233,37 +233,10 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     private CG.HashSet<string> GenerateHelperLog(CG.List<IC.TrackerLogEntry> tlog)
     {
         var ctx = DDRandoContext.current!;
-        var lm = ctx.LM;
-        var pm = new RC.Logic.ProgressionManager(lm, ctx);
-        pm.mu.AddWaypoints(lm.Waypoints);
-        pm.mu.AddTransitions(lm.TransitionLookup.Values);
         var save = IC.SaveData.Open();
         var reachableLocations = new CG.HashSet<string>();
-        foreach (var loc in save.NamedPlacements.Keys)
-        {
-            if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
-            {
-                // Locations with costs should only appear in the helper log
-                // once those costs can actually be paid.
-                if (loc == "Green Ancient Tablet of Knowledge")
-                {
-                    pm.mu.AddEntry(new HelperLogCostedUpdateEntry(
-                        logic,
-                        new PlantedPotCost(lm, ctx.gs.GreenTabletDoorCost),
-                        reachableLocations
-                    ));
-                }
-                else
-                {
-                    pm.mu.AddEntry(new HelperLogUpdateEntry(logic, reachableLocations));
-                }
-            }
-        }
-        foreach (var gp in ctx.EnumerateExistingPlacements())
-        {
-            pm.mu.AddEntry(new HelperLogVanillaUpdateEntry(gp.Location, gp.Item));
-        }
-        pm.mu.StartUpdating();
+        var pm = NewPM(ctx, (loc) => reachableLocations.Add(loc), save.NamedPlacements.Keys);
+        var lm = ctx.LM;
         
         foreach (var entry in tlog)
         {
@@ -292,6 +265,79 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         return reachableLocations;
     }
 
+    private static CG.IEnumerable<(string, string)> GenerateSpoilerLog(CG.List<CG.List<RC.RandoPlacement>[]> placements)
+    {
+        var ctx = DDRandoContext.current!;
+        var reachableLocations = new CG.List<string>();
+        var locations = placements
+            .SelectMany(x => x)
+            .SelectMany(x => x)
+            .Select(x => x.Location.Name);
+        var pm = NewPM(ctx, reachableLocations.Add, locations);
+        var placementMap = new CG.Dictionary<string, CG.List<string>>();
+        foreach (var p in placements.SelectMany(x => x).SelectMany(x => x))
+        {
+            if (!placementMap.TryGetValue(p.Location.Name, out var items))
+            {
+                items = new();
+                placementMap[p.Location.Name] = items;
+            }
+            items.Add(p.Item.Name);
+        }
+
+        for (var i = 0; i < reachableLocations.Count; i++)
+        {
+            var uloc = reachableLocations[i].Replace(" ", "_");
+            if (!placementMap.TryGetValue(uloc, out var items))
+            {
+                continue;
+            }
+            foreach (var item in items)
+            {
+                yield return (item, uloc);
+                // This extends the reachableLocations list, and thus the loop,
+                // if the item is a progression item.
+                pm.Add(ctx.LM.GetItemStrict(item));
+            }
+        }
+    }
+
+    private static RC.Logic.ProgressionManager NewPM(DDRandoContext ctx, System.Action<string> addToReachable, CG.IEnumerable<string> randomizedLocations)
+    {
+        var lm = ctx.LM;
+        var pm = new RC.Logic.ProgressionManager(lm, ctx);
+        pm.mu.AddWaypoints(lm.Waypoints);
+        pm.mu.AddTransitions(lm.TransitionLookup.Values);
+        foreach (var loc in randomizedLocations)
+        {
+            // this underscore nonsense is going to cause problems;
+            // save data doesn't have them but RC output does
+            if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
+            {
+                // Locations with costs should only appear in the helper log
+                // once those costs can actually be paid.
+                if (loc == "Green Ancient Tablet of Knowledge")
+                {
+                    pm.mu.AddEntry(new HelperLogCostedUpdateEntry(
+                        logic,
+                        new PlantedPotCost(lm, ctx.gs.GreenTabletDoorCost),
+                        addToReachable
+                    ));
+                }
+                else
+                {
+                    pm.mu.AddEntry(new HelperLogUpdateEntry(logic, addToReachable));
+                }
+            }
+        }
+        foreach (var gp in ctx.EnumerateExistingPlacements())
+        {
+            pm.mu.AddEntry(new HelperLogVanillaUpdateEntry(gp.Location, gp.Item));
+        }
+        pm.mu.StartUpdating();
+        return pm;
+    }
+
     private static void WriteHelperLog(CG.IEnumerable<string> uncheckedReachableLocations)
     {
         var locationsByArea = uncheckedReachableLocations
@@ -310,6 +356,18 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             {
                 writer.WriteLine(loc);
             }
+        }
+    }
+
+    private static void WriteSpoilerLog(CG.IEnumerable<(string, string)> slog)
+    {
+        var fileLocation = IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Spoiler Log.ddplando");
+        using var spoilerLog = IO.File.Create(fileLocation);
+        using var writer = new IO.StreamWriter(spoilerLog);
+
+        foreach (var (item, loc) in slog)
+        {
+            writer.WriteLine($"{item} @ {loc}".Replace("_", " "));
         }
     }
 

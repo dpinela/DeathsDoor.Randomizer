@@ -8,13 +8,13 @@ internal class HelperLogCostedUpdateEntry : RC.Logic.UpdateEntry
 {
     private RC.Logic.ILogicDef location;
     private RC.Logic.LogicCost cost;
-    private CG.HashSet<string> reachableLocations;
+    private System.Action<string> addToReachable;
 
-    public HelperLogCostedUpdateEntry(RC.Logic.ILogicDef location, RC.Logic.LogicCost cost, CG.HashSet<string> reachableLocations)
+    public HelperLogCostedUpdateEntry(RC.Logic.ILogicDef location, RC.Logic.LogicCost cost, System.Action<string> addToReachable)
     {
         this.location = location;
         this.cost = cost;
-        this.reachableLocations = reachableLocations;
+        this.addToReachable = addToReachable;
     }
 
     public override bool CanGet(RC.Logic.ProgressionManager pm) => location.CanGet(pm) && cost.CanGet(pm);
@@ -26,6 +26,6 @@ internal class HelperLogCostedUpdateEntry : RC.Logic.UpdateEntry
 
     public override void OnAdd(RC.Logic.ProgressionManager pm)
     {
-        reachableLocations.Add(location.Name.Replace("_", " "));
+        addToReachable(location.Name.Replace("_", " "));
     }
 }

@@ -6,12 +6,12 @@ namespace DDoor.Randomizer;
 internal class HelperLogUpdateEntry : RC.Logic.UpdateEntry
 {
     private RC.Logic.ILogicDef location;
-    private CG.HashSet<string> reachableLocations;
+    private System.Action<string> addToReachable;
 
-    public HelperLogUpdateEntry(RC.Logic.ILogicDef location, CG.HashSet<string> reachableLocations)
+    public HelperLogUpdateEntry(RC.Logic.ILogicDef location, System.Action<string> addToReachable)
     {
         this.location = location;
-        this.reachableLocations = reachableLocations;
+        this.addToReachable = addToReachable;
     }
 
     public override bool CanGet(RC.Logic.ProgressionManager pm) => location.CanGet(pm);
@@ -20,6 +20,6 @@ internal class HelperLogUpdateEntry : RC.Logic.UpdateEntry
 
     public override void OnAdd(RC.Logic.ProgressionManager pm)
     {
-        reachableLocations.Add(location.Name.Replace("_", " "));
+        addToReachable(location.Name.Replace("_", " "));
     }
 }
