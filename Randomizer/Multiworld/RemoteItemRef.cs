@@ -10,6 +10,7 @@ internal record class RemoteItemRef(int Index) : IC.Item
 
     public void Trigger()
     {
-        // TODO: later
+        IC.CornerPopup.Show(this);
+        MWConnection.SendItem(MainThread.ItemByIndex(Index));
     }
 }

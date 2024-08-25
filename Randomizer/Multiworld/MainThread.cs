@@ -44,6 +44,11 @@ internal class MainThread : UE.MonoBehaviour
         return $"{ownerName}'s {itemName}";
     }
 
+    internal static RemoteItem ItemByIndex(int index)
+    {
+        return Instance!.SaveData!.RemoteItems[index];
+    }
+
     public void ShowMWStatus(string s)
     {
         UE.Debug.Log(s);
