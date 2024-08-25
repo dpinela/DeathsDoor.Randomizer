@@ -133,6 +133,9 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>$(LocalRefs)/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(LocalRefs)/UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>$(LocalRefs)/Unity.TextMeshPro.dll</HintPath>
     </Reference>
