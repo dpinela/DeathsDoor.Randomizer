@@ -47,7 +47,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
     public int InitStatus { get; internal set; } = 0;
 
-    private static RandomizerPlugin? Instance = null;
+    internal static RandomizerPlugin? Instance = null;
 
     internal static void LogInfo(string msg)
     {
@@ -69,98 +69,15 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     {
         try
         {
-            var gs = modSettings!.GetGS();
+            var seed = GenerateRando();
+            var ctx = seed.Context;
+            var gs = ctx.gs;
+            var placementGroups = seed.Placements;
+
             IO.File.WriteAllText(IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Settings.json"), gs.ToJSON());
-            var rng = new System.Random(Hash31(gs.Seed));
-            gs.Derandomize(rng);
-
-            var pools = new CG.List<PoolBuilder>();
-            var pb = new PoolBuilder("Main Group");
-            AddBuiltinPools(pb, gs);
-            AddSwordToPool(pb, gs);
-            AddDupeSeeds(pb, gs);
-            AddDupeShards(pb, gs);
-            ExcludeBelltowerKey(pb, gs);
-            var bounds = BalancePool(pb);
-            pools.Add(pb);
-            if (gs.DupeSeeds > 0 && !gs.Pools["Seeds"])
-            {
-                var seedPB = new PoolBuilder("Seeds Group");
-                seedPB.AddItem("Life Seed", 50 + gs.DupeSeeds);
-                foreach (var loc in Pool.Predefined["Seeds"].Content)
-                {
-                    seedPB.AddLocation(loc.Name);
-                }
-                bounds["Life Seed"] = BalancePool(seedPB)["Life Seed"];
-                pools.Add(seedPB);
-            }
-            if (gs.DupeVitalityShards > 0 && !gs.Pools["Shrines"])
-            {
-                var shrinePB = new PoolBuilder("Vitality Shards Group");
-                shrinePB.AddItem("Vitality Shard", 8 + gs.DupeVitalityShards);
-                foreach (var loc in Pool.Predefined["Shrines"].Content)
-                {
-                    if (loc.VanillaItem == "Vitality Shard")
-                    {
-                        shrinePB.AddLocation(loc.Name);
-                    }
-                }
-                bounds["Vitality Shard"] = BalancePool(shrinePB)["Vitality Shard"];
-                pools.Add(shrinePB);
-            }
-            if (gs.DupeMagicShards > 0 && !gs.Pools["Shrines"])
-            {
-                var shrinePB = new PoolBuilder("Magic Shards Group");
-                shrinePB.AddItem("Magic Shard", 8 + gs.DupeMagicShards);
-                foreach (var loc in Pool.Predefined["Shrines"].Content)
-                {
-                    if (loc.VanillaItem == "Magic Shard")
-                    {
-                        shrinePB.AddLocation(loc.Name);
-                    }
-                }
-                bounds["Magic Shard"] = BalancePool(shrinePB)["Magic Shard"];
-                pools.Add(shrinePB);
-            }
-
-            var lmb = LogicLoader.Load(gs.Skips);
-            LogicLoader.DefineConsolidatedItems(lmb, bounds);
-            var lm = new RC.Logic.LogicManager(lmb);
-
-            var ctx = new DDRandoContext(lm, gs);
-            AddVanillaSword(ctx, gs);
-            RemoveVanillaBelltowerKey(ctx, gs);
-            AddVanillaPools(ctx, pb);
-
             // Store the context for later use by the helper log.
             ctx.Save();
 
-            var stage0 = new RC.Randomization.RandomizationStage
-            {
-                groups = pools.Select(p => p.MakeGroup(lm, gs.GreenTabletDoorCost)).ToArray(),
-                strategy = new(),
-                label = "stage0"
-            };
-            var monitor = new RC.RandoMonitor();
-            monitor.OnSendEvent += (etype, msg) =>
-            {
-                Logger.LogInfo($"Rando Run: {etype}: {msg}");
-            };
-            monitor.OnError += (err) =>
-            {
-                if (err is RC.Exceptions.UnreachableLocationException ule)
-                {
-                    Logger.LogError(ule.GetVerboseMessage());
-                    throw new System.Exception("dead");
-                }
-            };
-            var rando = new RC.Randomization.Randomizer(
-                rng,
-                ctx,
-                new[] { stage0 },
-                monitor
-            );
-            var placementGroups = rando.Run();
             PlacementsHash.Save(placementGroups);
             var data = IC.SaveData.Open();
             foreach (var g in placementGroups[0])
@@ -210,13 +127,107 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
 
             WriteHelperLog(GenerateHelperLog(new()));
-            WriteSpoilerLog(GenerateSpoilerLog(placementGroups));
+            WriteSpoilerLog(GenerateSpoilerLog(placementGroups.SelectMany(x => x).SelectMany(x => x)));
             
         }
         catch (System.Exception err)
         {
             Logger.LogError($"Randomization failed: {err}");
         }
+    }
+
+    internal static GenerationSettings GetGenerationSettings() => Instance!.modSettings!.GetGS();
+
+    internal Seed GenerateRando()
+    {
+        var gs = GetGenerationSettings();
+        var rng = new System.Random(Hash31(gs.Seed));
+        gs.Derandomize(rng);
+
+        var pools = new CG.List<PoolBuilder>();
+        var pb = new PoolBuilder("Main Group");
+        AddBuiltinPools(pb, gs);
+        AddSwordToPool(pb, gs);
+        AddDupeSeeds(pb, gs);
+        AddDupeShards(pb, gs);
+        ExcludeBelltowerKey(pb, gs);
+        var bounds = BalancePool(pb);
+        pools.Add(pb);
+        if (gs.DupeSeeds > 0 && !gs.Pools["Seeds"])
+        {
+            var seedPB = new PoolBuilder("Seeds Group");
+            seedPB.AddItem("Life Seed", 50 + gs.DupeSeeds);
+            foreach (var loc in Pool.Predefined["Seeds"].Content)
+            {
+                seedPB.AddLocation(loc.Name);
+            }
+            bounds["Life Seed"] = BalancePool(seedPB)["Life Seed"];
+            pools.Add(seedPB);
+        }
+        if (gs.DupeVitalityShards > 0 && !gs.Pools["Shrines"])
+        {
+            var shrinePB = new PoolBuilder("Vitality Shards Group");
+            shrinePB.AddItem("Vitality Shard", 8 + gs.DupeVitalityShards);
+            foreach (var loc in Pool.Predefined["Shrines"].Content)
+            {
+                if (loc.VanillaItem == "Vitality Shard")
+                {
+                    shrinePB.AddLocation(loc.Name);
+                }
+            }
+            bounds["Vitality Shard"] = BalancePool(shrinePB)["Vitality Shard"];
+            pools.Add(shrinePB);
+        }
+        if (gs.DupeMagicShards > 0 && !gs.Pools["Shrines"])
+        {
+            var shrinePB = new PoolBuilder("Magic Shards Group");
+            shrinePB.AddItem("Magic Shard", 8 + gs.DupeMagicShards);
+            foreach (var loc in Pool.Predefined["Shrines"].Content)
+            {
+                if (loc.VanillaItem == "Magic Shard")
+                {
+                    shrinePB.AddLocation(loc.Name);
+                }
+            }
+            bounds["Magic Shard"] = BalancePool(shrinePB)["Magic Shard"];
+            pools.Add(shrinePB);
+        }
+
+        var lmb = LogicLoader.Load(gs.Skips);
+        LogicLoader.DefineConsolidatedItems(lmb, bounds);
+        var lm = new RC.Logic.LogicManager(lmb);
+
+        var ctx = new DDRandoContext(lm, gs);
+        AddVanillaSword(ctx, gs);
+        RemoveVanillaBelltowerKey(ctx, gs);
+        AddVanillaPools(ctx, pb);
+
+        var stage0 = new RC.Randomization.RandomizationStage
+        {
+            groups = pools.Select(p => p.MakeGroup(lm, gs.GreenTabletDoorCost)).ToArray(),
+            strategy = new(),
+            label = "stage0"
+        };
+        var monitor = new RC.RandoMonitor();
+        monitor.OnSendEvent += (etype, msg) =>
+        {
+            Logger.LogInfo($"Rando Run: {etype}: {msg}");
+        };
+        monitor.OnError += (err) =>
+        {
+            if (err is RC.Exceptions.UnreachableLocationException ule)
+            {
+                Logger.LogError(ule.GetVerboseMessage());
+                throw new System.Exception("dead");
+            }
+        };
+        var rando = new RC.Randomization.Randomizer(
+            rng,
+            ctx,
+            new[] { stage0 },
+            monitor
+        );
+        return new(rando.Run(), ctx);
     }
 
     private static int Hash31(string s)
@@ -265,17 +276,14 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         return reachableLocations;
     }
 
-    private static CG.IEnumerable<(string, string)> GenerateSpoilerLog(CG.List<CG.List<RC.RandoPlacement>[]> placements)
+    internal static CG.IEnumerable<(string, string)> GenerateSpoilerLog(CG.IEnumerable<RC.RandoPlacement> flatPlacements)
     {
         var ctx = DDRandoContext.current!;
         var reachableLocations = new CG.List<string>();
-        var locations = placements
-            .SelectMany(x => x)
-            .SelectMany(x => x)
-            .Select(x => x.Location.Name);
+        var locations = flatPlacements.Select(x => x.Location.Name);
         var pm = NewPM(ctx, reachableLocations.Add, locations);
         var placementMap = new CG.Dictionary<string, CG.List<string>>();
-        foreach (var p in placements.SelectMany(x => x).SelectMany(x => x))
+        foreach (var p in flatPlacements)
         {
             if (!placementMap.TryGetValue(p.Location.Name, out var items))
             {

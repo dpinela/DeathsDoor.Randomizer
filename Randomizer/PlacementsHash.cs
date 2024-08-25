@@ -13,20 +13,23 @@ internal static class PlacementsHash
 {
     public static void Save(CG.List<CG.List<RC.RandoPlacement>[]> placements)
     {
-        var h = FullHash(placements);
-        var trunc = (uint)h[0] | ((uint)h[1] << 8) | ((uint)h[2] << 16) | ((uint)h[3] << 24);
+        var trunc = UintHash(placements.SelectMany(x => x).SelectMany(x => x));
         GameSave.currentSave.SetCountKey(hashSaveKey, (int)trunc);
     }
 
     private const string hashSaveKey = "Randomizer-hash";
 
-    private static byte[] FullHash(CG.List<CG.List<RC.RandoPlacement>[]> placements) {
+    public static uint UintHash(CG.IEnumerable<RC.RandoPlacement> placements)
+    {
+        var h = FullHash(placements);
+        return (uint)h[0] | ((uint)h[1] << 8) | ((uint)h[2] << 16) | ((uint)h[3] << 24);
+    }
+
+    private static byte[] FullHash(CG.IEnumerable<RC.RandoPlacement> placements) {
         var utf8 = new Text.UTF8Encoding();
         using var sha = Crypto.SHA256.Create();
         using var hstream = new Crypto.CryptoStream(IO.Stream.Null, sha, Crypto.CryptoStreamMode.Write);
         var sortedPlacements = placements
-            .SelectMany(x => x)
-            .SelectMany(x => x)
             .OrderBy(p => p.Location.Name)
             .ThenBy(p => p.Item.Name);
         var fieldSep = new byte[] {(byte)'\t'};

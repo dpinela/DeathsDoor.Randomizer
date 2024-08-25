@@ -145,6 +145,9 @@
     <Reference Include="ItemChanger">
       <HintPath>$(LocalRefs)/ItemChanger.dll</HintPath>
     </Reference>
+    <Reference Include="MultiWorldLib">
+      <HintPath>$(LocalRefs)/MultiWorldLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
