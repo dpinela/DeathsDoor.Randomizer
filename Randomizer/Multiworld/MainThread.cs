@@ -15,7 +15,7 @@ internal class MainThread : UE.MonoBehaviour
     // values are either strings or RemoteItemRefs
     public CG.Dictionary<string, object> ItemReplacements = new();
 
-    private static MainThread? Instance;
+    internal static MainThread? Instance;
 
     public void Start()
     {
@@ -109,6 +109,14 @@ internal class MainThread : UE.MonoBehaviour
     }
 
     public int MWPlayerId() => SaveData == null ? -1 : SaveData.PlayerId;
+
+    public void DisconnectMW()
+    {
+        BaseSeed = null;
+        SaveData = null;
+        ItemReplacements.Clear();
+        ShowMWStatus("");
+    }
 
     public void ReconnectMW()
     {

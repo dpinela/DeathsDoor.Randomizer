@@ -32,7 +32,7 @@ internal class MWSettings
     private void Disconnect()
     {
         MWConnection.Terminate();
-        MainThread.Invoke(mt => mt.ShowMWStatus(""));
+        MainThread.Invoke(mt => mt.DisconnectMW());
     }
 
     private void Start()

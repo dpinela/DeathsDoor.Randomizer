@@ -12,11 +12,13 @@ using static System.Linq.Enumerable;
 
 namespace DDoor.Randomizer;
 
-[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.3.1.0")]
-[Bep.BepInDependency("deathsdoor.itemchanger", "1.4")]
+[Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.4.0.0")]
+[Bep.BepInDependency("deathsdoor.itemchanger", "1.5")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
     private Settings? modSettings;
+    // MW-SPECIFIC CODE ALERT
+    private Multiworld.MainThread? mwManager;
 
     public void Start()
     {
@@ -35,6 +37,11 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             };
             
             modSettings = new(Config);
+
+            // MW-SPECIFIC CODE ALERT
+            new Multiworld.MWSettings(Config);
+            mwManager = gameObject.AddComponent<Multiworld.MainThread>();
+            
             new HL.Harmony("deathsdoor.randomizer").PatchAll();
             InitStatus = 1;
         }
@@ -69,7 +76,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
     {
         try
         {
-            var seed = GenerateRando();
+            // MW-SPECIFIC CODE ALERT
+            var seed = mwManager!.BaseSeed ?? GenerateRando();
             var ctx = seed.Context;
             var gs = ctx.gs;
             var placementGroups = seed.Placements;
@@ -84,10 +92,30 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             {
                 foreach (var p in g)
                 {
-                    data.Place(
-                        item: p.Item.Name.Replace("_", " "),
-                        location: p.Location.Name.Replace("_", " ")
-                    );
+                    var locName = p.Location.Name.Replace("_", " ");
+                    // MW-SPECIFIC CODE ALERT
+                    if (mwManager!.ItemReplacements.TryGetValue(p.Location.Name, out var it))
+                    {
+                        if (it is string name)
+                        {
+                            data.Place(item: name.Replace("_", " "), location: locName);
+                        }
+                        else if (it is IC.Item custom)
+                        {
+                            data.Place(item: custom, location: locName);
+                        }
+                        else
+                        {
+                            LogError($"unknown item {it}");
+                        }
+                    }
+                    else
+                    {
+                        data.Place(
+                            item: p.Item.Name.Replace("_", " "),
+                            location: locName
+                        );
+                    }
                 }
             }
             foreach (var (loc, item) in ctx.Preplacements)
@@ -127,8 +155,15 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
 
             WriteHelperLog(GenerateHelperLog(new()));
-            WriteSpoilerLog(GenerateSpoilerLog(placementGroups.SelectMany(x => x).SelectMany(x => x)));
-            
+            //WriteSpoilerLog(GenerateSpoilerLog(placementGroups.SelectMany(x => x).SelectMany(x => x)));
+
+            // MW-SPECIFIC CODE ALERT
+            var mw = mwManager!.SaveData;
+            if (mw != null)
+            {
+                Multiworld.MWConnection.Join(mw.ServerAddr, mw.PlayerId, mw.RandoId, mw.RemoteNicknames[mw.PlayerId]);
+                mwManager.ShowMWStatus("");
+            }
         }
         catch (System.Exception err)
         {
