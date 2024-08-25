@@ -183,7 +183,7 @@ internal class MWConnection : IDisposable
                     case MWMsgDef.MWResultMessage resultMsg:
                         MainThread.Invoke(mt =>
                         {
-                            mt.SaveData = new(
+                            mt.PreparedSaveData = new(
                                 _serverAddr,
                                 resultMsg.PlayerId,
                                 resultMsg.RandoId,
@@ -208,8 +208,8 @@ internal class MWConnection : IDisposable
                                 {
                                     UE.Debug.Log($"MW: Multiworld[{locName}] = {name}");
                                     var item = new RemoteItem(name, pid);
-                                    mt.ItemReplacements[locName] = new RemoteItemRef(mt.SaveData.RemoteItems.Count);
-                                    mt.SaveData.RemoteItems.Add(item);
+                                    mt.ItemReplacements[locName] = new RemoteItemRef(mt.PreparedSaveData.RemoteItems.Count);
+                                    mt.PreparedSaveData.RemoteItems.Add(item);
                                 }
                             }
                             mt.ShowMWStatus($"Ready to join - hash: {resultMsg.GeneratedHash}");

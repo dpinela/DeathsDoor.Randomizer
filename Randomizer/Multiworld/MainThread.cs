@@ -11,7 +11,7 @@ internal class MainThread : UE.MonoBehaviour
     private readonly static CC.ConcurrentQueue<System.Action<MainThread>> callbacks = new();
 
     public Seed? BaseSeed;
-    public SaveData? SaveData;
+    public SaveData? PreparedSaveData;
     // values are either strings or RemoteItemRefs
     public CG.Dictionary<string, object> ItemReplacements = new();
 
@@ -37,16 +37,18 @@ internal class MainThread : UE.MonoBehaviour
 
     internal static string ItemNameByIndex(int index)
     {
-        var save = Instance!.SaveData!;
+        var save = SaveData.Current!;
         var item = save.RemoteItems[index];
         var ownerName = save.RemoteNicknames[item.PlayerId];
-        var itemName = item.Name.Replace("_", " ");
+        var i = item.Name.LastIndexOf("_(");
+        var itemName = i == -1 ? item.Name : item.Name.Substring(0, i);
+        itemName = itemName.Replace("_", " ");
         return $"{ownerName}'s {itemName}";
     }
 
     internal static RemoteItem ItemByIndex(int index)
     {
-        return Instance!.SaveData!.RemoteItems[index];
+        return SaveData.Current!.RemoteItems[index];
     }
 
     public void ShowMWStatus(string s)
@@ -56,11 +58,11 @@ internal class MainThread : UE.MonoBehaviour
 
     public void ResendUnconfirmedItems()
     {
-        if (SaveData == null)
+        if (SaveData.Current == null)
         {
             return;
         }
-        foreach (var ri in SaveData.RemoteItems)
+        foreach (var ri in SaveData.Current.RemoteItems)
         {
             if (ri.State == RemoteItemState.Collected)
             {
@@ -71,11 +73,11 @@ internal class MainThread : UE.MonoBehaviour
 
     public bool ConfirmRemoteCheck(string name, int playerId)
     {
-        if (SaveData == null)
+        if (SaveData.Current == null)
         {
             return false;
         }
-        foreach (var ri in SaveData.RemoteItems)
+        foreach (var ri in SaveData.Current.RemoteItems)
         {
             if (ri.PlayerId == playerId && ri.Name == name)
             {
@@ -88,17 +90,17 @@ internal class MainThread : UE.MonoBehaviour
 
     public void ConfirmEjectMW(int numConfirmedItems)
     {
-        if (SaveData == null)
+        if (SaveData.Current == null)
         {
             return;
         }
-        var n = SaveData.RemoteItems.Count(ri => ri.State == RemoteItemState.Collected);
+        var n = SaveData.Current.RemoteItems.Count(ri => ri.State == RemoteItemState.Collected);
         if (numConfirmedItems != n)
         {
             UE.Debug.Log($"MW: eject confirmation failed: confirmed {numConfirmedItems} but had {n} awaiting confirmation");
             return;
         }
-        foreach (var ri in SaveData.RemoteItems)
+        foreach (var ri in SaveData.Current.RemoteItems)
         {
             if (ri.State == RemoteItemState.Collected)
             {
@@ -108,32 +110,33 @@ internal class MainThread : UE.MonoBehaviour
         UE.Debug.Log($"MW: ejected");
     }
 
-    public int MWPlayerId() => SaveData == null ? -1 : SaveData.PlayerId;
+    public int MWPlayerId() => SaveData.Current == null ? -1 : SaveData.Current.PlayerId;
 
     public void DisconnectMW()
     {
         BaseSeed = null;
-        SaveData = null;
+        PreparedSaveData = null;
         ItemReplacements.Clear();
         ShowMWStatus("");
     }
 
     public void ReconnectMW()
     {
-        if (SaveData != null)
+        var mw = SaveData.Current;
+        if (mw != null)
         {
             MWConnection.Terminate();
-            MWConnection.Join(SaveData.ServerAddr, SaveData.PlayerId, SaveData.RandoId, SaveData.RemoteNicknames[SaveData.PlayerId]);
+            MWConnection.Join(mw.ServerAddr, mw.PlayerId, mw.RandoId, mw.RemoteNicknames[mw.PlayerId]);
         }
     }
 
     public void EjectMW()
     {
-        if (SaveData == null)
+        if (SaveData.Current == null)
         {
             return;
         }
-        var othersItems = SaveData.RemoteItems.Where(ri => ri.State == RemoteItemState.Uncollected).ToList();
+        var othersItems = SaveData.Current.RemoteItems.Where(ri => ri.State == RemoteItemState.Uncollected).ToList();
         MWConnection.SendManyItems(othersItems);
     }
 

@@ -158,11 +158,12 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             //WriteSpoilerLog(GenerateSpoilerLog(placementGroups.SelectMany(x => x).SelectMany(x => x)));
 
             // MW-SPECIFIC CODE ALERT
-            var mw = mwManager!.SaveData;
+            var mw = mwManager!.PreparedSaveData;
             if (mw != null)
             {
                 Multiworld.MWConnection.Join(mw.ServerAddr, mw.PlayerId, mw.RandoId, mw.RemoteNicknames[mw.PlayerId]);
                 mwManager.ShowMWStatus("");
+                Multiworld.SaveData.Current = mw;
             }
         }
         catch (System.Exception err)
