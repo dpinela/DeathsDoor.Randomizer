@@ -45,6 +45,15 @@ internal static class SaveDataManager
             SaveData.Current = null;
             RandomizerPlugin.LogError($"Error loading MW data for save ID {__instance.saveId}: {err}");
         }
+
+        if (SaveData.Current != null)
+        {
+            MWConnection.Join(SaveData.Current.ServerAddr, SaveData.Current.PlayerId, SaveData.Current.RandoId, SaveData.Current.RemoteNicknames[SaveData.Current.PlayerId]);
+        }
+        else
+        {
+            MWConnection.Terminate();
+        }
     }
 
     [HL.HarmonyPatch(typeof(GameSave), nameof(GameSave.Save))]
@@ -58,6 +67,7 @@ internal static class SaveDataManager
             // file if serialization fails.
             var json = Json.JsonConvert.SerializeObject(save);
             IO.File.WriteAllText(FileLocation(__instance.saveId), json);
+            MWConnection.NotifySaved();
         }
     }
 

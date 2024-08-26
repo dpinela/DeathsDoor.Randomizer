@@ -51,6 +51,13 @@ internal class MainThread : UE.MonoBehaviour
         return SaveData.Current!.RemoteItems[index];
     }
 
+    public void ClearPreparedData()
+    {
+        BaseSeed = null;
+        PreparedSaveData = null;
+        ItemReplacements.Clear();
+    }
+
     public void ShowMWStatus(string s)
     {
         UE.Debug.Log(s);

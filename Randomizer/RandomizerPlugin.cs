@@ -164,6 +164,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                 Multiworld.MWConnection.Join(mw.ServerAddr, mw.PlayerId, mw.RandoId, mw.RemoteNicknames[mw.PlayerId]);
                 mwManager.ShowMWStatus("");
                 Multiworld.SaveData.Current = mw;
+                mwManager!.ClearPreparedData();
             }
         }
         catch (System.Exception err)
