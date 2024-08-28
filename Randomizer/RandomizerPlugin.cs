@@ -294,12 +294,12 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             {
                 continue;
             }
-            if (!save.NamedPlacements.TryGetValue(entry.LocationName, out var item))
+            if (entry.ItemName == "")
             {
-                Logger.LogError($"Helper log generation: unnamed item at {entry.LocationName}");
+                // anonymous item; can't possibly have an effect on logic
                 continue;
             }
-            var randoItem = lm.GetItemStrict(item.Replace(" ", "_"));
+            var randoItem = lm.GetItemStrict(entry.ItemName.Replace(" ", "_"));
             // no location-dependent items exist in this rando,
             // so we don't need to use the Add(ILogicItem, ILogicDef) overload.
             pm.Add(randoItem);

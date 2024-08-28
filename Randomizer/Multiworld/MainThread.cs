@@ -149,11 +149,25 @@ internal class MainThread : UE.MonoBehaviour
 
     public bool ReceiveRemoteItem(string itemName, string from)
     {
-        if (!IC.Predefined.TryGetItem(itemName.Replace("_", " "), out var it))
+        itemName = itemName.Replace("_", " ");
+        if (!IC.Predefined.TryGetItem(itemName, out var it))
         {
             return false;
         }
-        IC.CornerPopup.Show(IC.ItemIcons.Get(it.Icon), $"{it.DisplayName} from {from}");
+        var displayName = it.DisplayName;
+        var icon = it.Icon;
+        // Since this item isn't at a predefined location and has instead appeared
+        // out of thin air, IC does not add it to the tracker log for us.
+        IC.SaveData.Open().AddToTrackerLog(new()
+        {
+            LocationIsVirtual = true,
+            LocationName = from,
+            ItemName = itemName,
+            ItemDisplayName = displayName,
+            ItemIcon = icon,
+            GameTime = GameTimeTracker.instance.GetTime()
+        });
+        IC.CornerPopup.Show(IC.ItemIcons.Get(icon), $"{displayName}\nfrom {from}");
         it.Trigger();
         return true;
     }
