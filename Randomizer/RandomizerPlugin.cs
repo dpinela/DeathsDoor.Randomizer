@@ -283,14 +283,17 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
         var ctx = DDRandoContext.current!;
         var save = IC.SaveData.Open();
         var reachableLocations = new CG.HashSet<string>();
-        var pm = NewPM(ctx, (loc) => reachableLocations.Add(loc), save.NamedPlacements.Keys);
+        var allLocations = new CG.HashSet<string>();
+        allLocations.UnionWith(save.NamedPlacements.Keys);
+        allLocations.UnionWith(save.UnnamedPlacements.Keys);
+        var pm = NewPM(ctx, (loc) => reachableLocations.Add(loc), allLocations);
         var lm = ctx.LM;
         
         foreach (var entry in tlog)
         {
             // Preplacements are already accounted for in the vanilla update
             // entries we created above.
-            if (ctx.Preplacements.ContainsKey(entry.LocationName))
+            if (!entry.LocationIsVirtual && ctx.Preplacements.ContainsKey(entry.LocationName))
             {
                 continue;
             }
@@ -307,7 +310,10 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
 
         foreach (var entry in tlog)
         {
-            reachableLocations.Remove(entry.LocationName);
+            if (!entry.LocationIsVirtual)
+            {
+                reachableLocations.Remove(entry.LocationName);
+            }
         }
 
         return reachableLocations;
