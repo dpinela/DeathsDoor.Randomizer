@@ -14,6 +14,7 @@ namespace DDoor.Randomizer;
 
 [Bep.BepInPlugin("deathsdoor.randomizer", "Randomizer", "1.4.0.0")]
 [Bep.BepInDependency("deathsdoor.itemchanger", "1.5")]
+[Bep.BepInDependency("deathsdoor.magicui", "1.8")]
 internal class RandomizerPlugin : Bep.BaseUnityPlugin
 {
     private Settings? modSettings;
@@ -155,14 +156,12 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             GameSave.currentSave.SetKeyState("crow_cut1", true, true);
 
             WriteHelperLog(GenerateHelperLog(new()));
-            //WriteSpoilerLog(GenerateSpoilerLog(placementGroups.SelectMany(x => x).SelectMany(x => x)));
 
             // MW-SPECIFIC CODE ALERT
             var mw = mwManager!.PreparedSaveData;
             if (mw != null)
             {
                 Multiworld.MWConnection.Join(mw.ServerAddr, mw.PlayerId, mw.RandoId, mw.RemoteNicknames[mw.PlayerId]);
-                mwManager.ShowMWStatus("");
                 Multiworld.SaveData.Current = mw;
                 mwManager!.ClearPreparedData();
             }
@@ -365,7 +364,7 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             // save data doesn't have them but RC output does
             if (lm.LogicLookup.TryGetValue(loc.Replace(" ", "_"), out var logic))
             {
-                // Locations with costs should only appear in the helper log
+                // Locations with costs should only appear in the helper/spoiler log
                 // once those costs can actually be paid.
                 if (loc == "Green Ancient Tablet of Knowledge")
                 {
@@ -407,18 +406,6 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
             {
                 writer.WriteLine(loc);
             }
-        }
-    }
-
-    private static void WriteSpoilerLog(CG.IEnumerable<(string, string)> slog)
-    {
-        var fileLocation = IO.Path.Combine(UE.Application.persistentDataPath, "SAVEDATA", "Randomizer Spoiler Log.ddplando");
-        using var spoilerLog = IO.File.Create(fileLocation);
-        using var writer = new IO.StreamWriter(spoilerLog);
-
-        foreach (var (item, loc) in slog)
-        {
-            writer.WriteLine($"{item} @ {loc}".Replace("_", " "));
         }
     }
 

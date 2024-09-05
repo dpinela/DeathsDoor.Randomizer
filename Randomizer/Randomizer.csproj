@@ -151,6 +151,9 @@
     <Reference Include="MultiWorldLib">
       <HintPath>$(LocalRefs)/MultiWorldLib.dll</HintPath>
     </Reference>
+    <Reference Include="MagicUI">
+      <HintPath>$(LocalRefs)/MagicUI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

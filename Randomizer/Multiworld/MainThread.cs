@@ -1,5 +1,6 @@
 using UE = UnityEngine;
 using IC = DDoor.ItemChanger;
+using MUI = MagicUI;
 using CC = System.Collections.Concurrent;
 using CG = System.Collections.Generic;
 using static System.Linq.Enumerable;
@@ -17,9 +18,27 @@ internal class MainThread : UE.MonoBehaviour
 
     internal static MainThread? Instance;
 
+    private MUI.Elements.StackLayout? layout;
+
+    private const int uiFontSize = 28;
+
     public void Start()
     {
         Instance = this;
+
+        var root = new MUI.Core.LayoutRoot(true, "Multiworld Status Display");
+        layout = new(root, "Status Lines");
+        layout.Children.Add(MakeTextRow(layout, "Status"));
+        layout.HorizontalAlignment = MUI.Core.HorizontalAlignment.Right;
+        layout.VerticalAlignment = MUI.Core.VerticalAlignment.Top;
+    }
+
+    private static MUI.Elements.TextObject MakeTextRow(MUI.Core.Layout layout, string name)
+    {
+        var row = new MUI.Elements.TextObject(layout.LayoutRoot, name);
+        row.Text = "";
+        row.FontSize = uiFontSize;
+        return row;
     }
 
     public static void Invoke(System.Action<MainThread> f)
@@ -60,7 +79,7 @@ internal class MainThread : UE.MonoBehaviour
 
     public void ShowMWStatus(string s)
     {
-        UE.Debug.Log(s);
+        ((MUI.Elements.TextObject)layout!.Children[0]).Text = s;
     }
 
     public void ResendUnconfirmedItems()
@@ -121,6 +140,7 @@ internal class MainThread : UE.MonoBehaviour
 
     public void DisconnectMW()
     {
+        MWConnection.Terminate();
         BaseSeed = null;
         PreparedSaveData = null;
         ItemReplacements.Clear();

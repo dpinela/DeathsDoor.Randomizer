@@ -227,6 +227,7 @@ internal class MWConnection : IDisposable
                         });
                         MainThread.Invoke(mt =>
                         {
+                            mt.ShowMWStatus("");
                             mt.ResendUnconfirmedItems();
                         });
                         Log("MW: joined");
@@ -403,10 +404,12 @@ internal class MWConnection : IDisposable
             var i = _serverAddr.IndexOf(':');
             if (i != -1 && int.TryParse(_serverAddr.Substring(i + 1), out var port))
             {
+                Log($"Trying to connect to {_serverAddr.Substring(0, i)}:{port}");
                 _client = new(_serverAddr.Substring(0, i), port);
             }
             else
             {
+                Log($"Trying to connect to {_serverAddr}:{MWLib.Consts.DEFAULT_PORT}");
                 _client = new(_serverAddr, MWLib.Consts.DEFAULT_PORT);
             }
             _conn = _client.GetStream();
