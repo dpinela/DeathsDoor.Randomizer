@@ -159,7 +159,10 @@ internal class MWConnection : IDisposable
                         _commandQueue.Add(() => Log($"MW: Joined the room with {rcMsg.Ready} players: {string.Join(", ", rcMsg.Names)}"));
                         MainThread.Invoke(mt =>
                         {
-                            mt.ShowMWStatus($"Joined to room with {string.Join(", ", rcMsg.Names)}");
+                            var lines = new string[rcMsg.Names.Length + 1];
+                            lines[0] = "Joined to room with:";
+                            rcMsg.Names.CopyTo(lines, 1);
+                            mt.ShowMWStatus(lines);
                         });
                         break;
                     case MWMsgDef.MWPingMessage:
@@ -227,7 +230,7 @@ internal class MWConnection : IDisposable
                         });
                         MainThread.Invoke(mt =>
                         {
-                            mt.ShowMWStatus("");
+                            mt.ShowMWStatus();
                             mt.ResendUnconfirmedItems();
                         });
                         Log("MW: joined");

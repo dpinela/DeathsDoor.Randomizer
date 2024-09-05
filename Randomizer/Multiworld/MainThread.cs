@@ -28,7 +28,6 @@ internal class MainThread : UE.MonoBehaviour
 
         var root = new MUI.Core.LayoutRoot(true, "Multiworld Status Display");
         layout = new(root, "Status Lines");
-        layout.Children.Add(MakeTextRow(layout, "Status"));
         layout.HorizontalAlignment = MUI.Core.HorizontalAlignment.Right;
         layout.VerticalAlignment = MUI.Core.VerticalAlignment.Top;
     }
@@ -77,9 +76,28 @@ internal class MainThread : UE.MonoBehaviour
         ItemReplacements.Clear();
     }
 
-    public void ShowMWStatus(string s)
+    public void ShowMWStatus(params string[] s)
     {
-        ((MUI.Elements.TextObject)layout!.Children[0]).Text = s;
+        var rows = layout!.Children;
+        if (s.Length > rows.Count)
+        {
+            for (var j = rows.Count; j < s.Length; j++)
+            {
+                rows.Add(MakeTextRow(layout, $"Row {j}"));
+            }
+        }
+        for (var i = 0; i < s.Length; i++)
+        {
+            var row = ((MUI.Elements.TextObject)rows[i]);
+            row.Text = s[i];
+            row.Visibility = MUI.Core.Visibility.Visible;
+        }
+        for (var i = s.Length; i < rows.Count; i++)
+        {
+            var row = ((MUI.Elements.TextObject)rows[i]);
+            row.Text = "";
+            row.Visibility = MUI.Core.Visibility.Collapsed;
+        }
     }
 
     public void ResendUnconfirmedItems()
@@ -144,7 +162,7 @@ internal class MainThread : UE.MonoBehaviour
         BaseSeed = null;
         PreparedSaveData = null;
         ItemReplacements.Clear();
-        ShowMWStatus("");
+        ShowMWStatus();
     }
 
     public void ReconnectMW()
