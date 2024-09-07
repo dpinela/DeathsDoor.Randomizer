@@ -9,7 +9,7 @@ internal record class RemoteItemRef(int Index) : IC.Item
     public string DisplayName => MainThread.ItemNameByIndex(Index);
 
     [Json.JsonIgnore]
-    public string Icon => "Arrow"; // TODO: hahahahahahahahaha
+    public string Icon => "MWItem"; // TODO: hahahahahahahahaha
 
     public void Trigger()
     {

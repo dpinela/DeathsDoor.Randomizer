@@ -36,6 +36,8 @@ internal class RandomizerPlugin : Bep.BaseUnityPlugin
                     WriteHelperLog(GenerateHelperLog(tlog));
                 }
             };
+
+            IC.ItemIcons.AddPath(IO.Path.GetDirectoryName(typeof(RandomizerPlugin).Assembly.Location));
             
             modSettings = new(Config);
 
