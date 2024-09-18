@@ -133,7 +133,7 @@ lvl_GrandmaMansion[hod_anc_mansion]:
         Crow-Manor_Bedroom
 
 lvl_GrandmaMansion[d_gardenstomansion]:
-    Ceramic_Manor_Lobby
+    lvl_GrandmaMansion[d_gardenstomansion]
 
 lvl_GrandmaMansion[d_mansiontobasement]:
     Ceramic_Manor_Lobby + Fire + Yellow_Key>2

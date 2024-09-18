@@ -9,3 +9,6 @@ Dungeon_Lobby:
     // you can roll through both the cobweb and the locked gate
     // in the corridor
     ORIG | Dungeon_Big_Door
+
+lvl_GrandmaMansion[d_gardenstomansion]:
+    ORIG | Ceramic_Manor_Lobby
