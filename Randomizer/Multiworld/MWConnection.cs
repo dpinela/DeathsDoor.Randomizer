@@ -28,6 +28,7 @@ internal class MWConnection : IDisposable
     private SyncCollections.BlockingCollection<Action> _commandQueue;
     private ulong _uid;
     private bool _joinConfirmed;
+    private string _lastItemReceived;
     private Collections.List<MWMsg.MWMessage> _messagesHeldUntilJoin = new();
 
     public static MWConnection Current { get; private set; }
@@ -205,7 +206,13 @@ internal class MWConnection : IDisposable
                                 var (pid, name) = ParseMWItemName(itemName);
                                 if (pid == -1 || pid == resultMsg.PlayerId)
                                 {
-                                    mt.ItemReplacements[locName] = name;
+                                    var strippedItemName = ParseLocalCheckName(name);
+                                    if (strippedItemName == null)
+                                    {
+                                        Log($"MW: unknown item {name} in result");
+                                        continue;
+                                    }
+                                    mt.ItemReplacements[locName] = strippedItemName;
                                 }
                                 else
                                 {
@@ -291,13 +298,29 @@ internal class MWConnection : IDisposable
                             Log($"MW: received data with unknown label {recvMsg.Label}");
                             break;
                         }
+                        // Ignore consecutive arrivals of the same item.
+                        // This should not happen in theory, but we suspect a bug
+                        // in the MW server or the Hollow Knight MW or Rando mods might be
+                        // causing it to happen.
+                        if (recvMsg.Content == _lastItemReceived)
+                        {
+                            Log($"MW: ignored duplicate item {recvMsg.Content} from {recvMsg.From}");
+                            break;
+                        }
+                        _lastItemReceived = recvMsg.Content;
+                        var strippedItemName = ParseLocalCheckName(recvMsg.Content);
+                        if (strippedItemName == null)
+                        {
+                            Log($"MW: received unknown item {recvMsg.Content}");
+                            break;
+                        }
                         Log($"MW: got {recvMsg.Content} from {recvMsg.From}");
                         MainThread.Invoke(mt =>
                         {
-                            var ok = mt.ReceiveRemoteItem(recvMsg.Content, recvMsg.From);
+                            var ok = mt.ReceiveRemoteItem(strippedItemName, recvMsg.From);
                             if (!ok)
                             {
-                                Log($"MW: received unknown item {recvMsg.Content}");
+                                Log($"MW: received unknown item {strippedItemName}");
                             }
                         });
                         _commandQueue.Add(() =>
@@ -384,13 +407,11 @@ internal class MWConnection : IDisposable
         return (-1, name);
     }
 
-    private static int ParseLocalCheckName(string name)
+    private static string ParseLocalCheckName(string name)
     {
-        if (!name.EndsWith(")")) return -1;
-        var i = name.LastIndexOf('(');
-        if (i == -1) return -1;
-        if (int.TryParse(name.Substring(i + 1, name.Length - i - 2), out var n)) return n;
-        return -1;
+        var i = name.LastIndexOf("_(");
+        if (i == -1) return null;
+        return name.Substring(0, i);
     }
 
     public void Connect(string serverAddr, string nickname, string roomName)
@@ -547,9 +568,13 @@ internal class MWConnection : IDisposable
     {
         var slog = RandomizerPlugin.GenerateSpoilerLog(placements);
         var items = new Collections.List<(string, string)>();
-        foreach (var p in placements)
+        for (var i = 0; i < placements.Count; i++)
         {
-            items.Add((p.Item.Name, p.Location.Name));
+            var p = placements[i];
+            // Number items just so we can distinguish different copies of the
+            // same item for the duplicate item detection.
+            var itemName = $"{p.Item.Name}_({i})";
+            items.Add((itemName, p.Location.Name));
         }
         var itemArr = items.ToArray();
         var hash = PlacementsHash.UintHash(placements);
