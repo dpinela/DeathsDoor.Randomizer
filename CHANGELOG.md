@@ -1,3 +1,14 @@
+# 1.4 (29 September 2024)
+
+New features:
+
+- Multiworld support, compatible with the Hollow Knight and Haiku randomizers.
+
+Bug fixes:
+
+- Rolling backwards through the first two-pot gate in Ceramic Manor now requires
+  Gate Rolls to be in logic.
+
 # 1.3.1 (19 August 2024)
 
 Bug fixes:
