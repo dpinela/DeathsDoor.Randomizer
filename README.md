@@ -13,14 +13,16 @@ To use this mod, you will need:
 - [ItemChanger][IC]
 - [RandomizerCore][RC-r]
 - [RandomizerCore.Json][RCJ]
+- [MultiWorldLib][MWL]
 
 [bie]: https://docs.bepinex.dev/articles/user_guide/installation/index.html
 [AGM]: https://github.com/dpinela/DeathsDoor.AlternativeGameModes/releases
 [IC]: https://github.com/dpinela/DeathsDoor.ItemChanger/releases
 [RC-r]: https://github.com/homothetyhk/RandomizerCore/releases
 [RCJ]: https://github.com/homothetyhk/RandomizerCore.Json/releases
+[MWL]: https://github.com/Shadudev/HollowKnight.MultiWorld/releases/tag/common-files-is263-mw122
 
-After installing BepInEx, install this mod, ItemChanger, RandomizerCore and RandomizerCore.Json
+After installing BepInEx, install this mod, ItemChanger, RandomizerCore, RandomizerCore.Json and MultiWorldLib
 onto the BepInEx plugins directory. Then launch the game, select an empty save slot, and press
 left or right while the "Start" option is selected until it reads "Start Rando". Select that to start
 a randomized game.
