@@ -1,0 +1,30 @@
+// heavy to the right and roll down-right from behind the bin
+// near the umbrella check
+Surveillance_Device:
+    ORIG | Hall_of_Doors_Lobby + (Reaper's_Sword | Rogue_Daggers | Reaper's_Greatsword | Discarded_Umbrella)
+
+Soul_Orb-Bomb_Secret:
+    ORIG | Hall_of_Doors_Lobby + (Reaper's_Sword | Rogue_Daggers | Reaper's_Greatsword | Discarded_Umbrella)
+
+// heavy out of the ledge above the gate then
+// immediately roll back
+Crow-Lockstone_West_Locked:
+    ORIG | Lockstone_Central + (Reaper's_Sword | Rogue_Daggers | Reaper's_Greatsword | Discarded_Umbrella)
+
+// up-right heavy + roll from above the Lord of Doors poster
+// by the staircase near the Bomb Avarice chest
+Soul_Orb-Hookshot_Secret:
+    ORIG |
+    (
+        lvl_hallofdoors[avarice_hod_anc_forest] |
+        lvl_hallofdoors[hod_anc_forest] |
+        Hall_of_Doors_Lobby + Lever-Bomb_Exit
+    ) + Bomb + Rogue_Daggers
+
+Modern_Door_Scale_Model:
+    ORIG |
+    (
+        lvl_hallofdoors[avarice_hod_anc_forest] |
+        lvl_hallofdoors[hod_anc_forest] |
+        Hall_of_Doors_Lobby + Lever-Bomb_Exit
+    ) + Bomb + Rogue_Daggers
