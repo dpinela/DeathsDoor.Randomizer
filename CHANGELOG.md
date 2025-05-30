@@ -1,6 +1,7 @@
 # 1.4.1 (30 May 2025)
 
-Fixes a bug 
+Fixes a bug where AlternativeGameModes wasn't listed in the Randomizer plugin's
+metadata, and thus not reported as missing when not present.
 
 # 1.4 (29 September 2024)
 
