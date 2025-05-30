@@ -6,6 +6,21 @@ For a room/transition randomizer, see [Spr3AD's DD_Randomizer][ddr].
 
 # How to use
 
+## Automatic installation
+
+The easiest way to install this mod is by using the [Raven][] mod installer.
+Once you download it, launch it and then enter these commands:
+
+  setup
+  install modlist randomizer recentitemsdisplay
+
+(ModList and RecentItemsDisplay are not required to use the randomizer,
+but are recommended.)
+
+[Raven]: https://github.com/dpinela/Raven
+
+## Manual installation
+
 To use this mod, you will need:
 
 - [BepInEx 5.4.22][bie] or later 5.x versions
@@ -14,6 +29,7 @@ To use this mod, you will need:
 - [RandomizerCore][RC-r]
 - [RandomizerCore.Json][RCJ]
 - [MultiWorldLib][MWL]
+- [MagicUI][MUI]
 
 [bie]: https://docs.bepinex.dev/articles/user_guide/installation/index.html
 [AGM]: https://github.com/dpinela/DeathsDoor.AlternativeGameModes/releases
@@ -21,8 +37,9 @@ To use this mod, you will need:
 [RC-r]: https://github.com/homothetyhk/RandomizerCore/releases
 [RCJ]: https://github.com/homothetyhk/RandomizerCore.Json/releases
 [MWL]: https://github.com/Shadudev/HollowKnight.MultiWorld/releases/tag/common-files-is263-mw122
+[MUI]: https://github.com/dpinela/DeathsDoor.MagicUI/releases
 
-After installing BepInEx, install this mod, ItemChanger, RandomizerCore, RandomizerCore.Json and MultiWorldLib
+After installing BepInEx, install this mod and the above-listed dependencies
 onto the BepInEx plugins directory. Then launch the game, select an empty save slot, and press
 left or right while the "Start" option is selected until it reads "Start Rando". Select that to start
 a randomized game.
@@ -65,6 +82,7 @@ This randomizer includes optional logic for the following skip types:
 - Gate Rolls: skips that require rolling into a room transition to bypass locked gates.
 - Early Night: the skip that uses a bomb fired from a railing to hit the belltower's bell,
   bypassing the need for the Rusty Belltower Key.
+- Roll Buffers: tricks that involve rolling in mid-air out of a heavy attack.
 
 For more details on which specific tricks are included in each of these categories, see the
 corresponding `.addon.txt` files in your randomizer installation.
