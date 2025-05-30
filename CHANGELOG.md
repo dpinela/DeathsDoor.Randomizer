@@ -1,3 +1,7 @@
+# 1.4.1 (30 May 2025)
+
+Fixes a bug 
+
 # 1.4 (29 September 2024)
 
 New features:
