@@ -11,8 +11,8 @@ For a room/transition randomizer, see [Spr3AD's DD_Randomizer][ddr].
 The easiest way to install this mod is by using the [Raven][] mod installer.
 Once you download it, launch it and then enter these commands:
 
-  setup
-  install modlist randomizer recentitemsdisplay
+    setup
+    install modlist randomizer recentitemsdisplay
 
 (ModList and RecentItemsDisplay are not required to use the randomizer,
 but are recommended.)
