@@ -162,7 +162,7 @@ belong to other players, to their respective owners.
 If you need to change your server, nickname or room name during the setup, press Disconnect, adjust 
 your settings, then press Ready again.
 
-[hkmw]: https://github.com/Shadudev/HollowKnight.MultiWorld/blob/master/MultiWorldMod/README.md
+[hkmw]: https://github.com/dpinela/HollowKnight.MultiWorld/blob/master/MultiWorldMod/README.md
 
 # Hash
 
